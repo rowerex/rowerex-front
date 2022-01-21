@@ -1,0 +1,16 @@
+.header {
+  margin: 0;
+  padding: 4rem 0 0 2rem;
+  font-weight: 900;
+  font-size: 32px;
+  color: #ffffff;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -10;
+  height: 120px;
+  overflow: hidden;
+}

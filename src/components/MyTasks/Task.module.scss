@@ -1,0 +1,7 @@
+.partType {
+  composes: label_green from "../../common.scss";
+}
+.card {
+  display: flex;
+  flex-direction: row-reverse;
+}

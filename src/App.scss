@@ -2,8 +2,10 @@
 
 .App {
   display: block;
-  width: 450px;
-  height: 930px;
+  position: relative;
+  max-width: 450px;
+  min-width: 320px;
+  height: 100vh;
   margin: auto;
   font-family: "Roboto", sans-serif;
 }

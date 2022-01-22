@@ -6,10 +6,9 @@ const Header = (props) => {
     <>
       <header>
         <h1 className={classes.header}>{props.children}</h1>
+        <img className={classes.image} src={props.image} alt={props.alt} />
       </header>
-      <div className={classes.image}>
-        <img src={props.image} alt={props.alt} />
-      </div>
+      <div className={classes.image}></div>
     </>
   );
 };

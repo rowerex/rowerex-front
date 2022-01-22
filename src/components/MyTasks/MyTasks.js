@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Layout/Header/Header";
-import Image from "../../assets/images/myTaskHeader.png";
+import Image from "../../assets/images/vector.png";
 import Task from "./Task";
 
 const DUMMY_TASKS = [

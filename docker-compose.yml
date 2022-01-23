@@ -3,7 +3,7 @@ version: "3.8"
 services:
   app:
     container_name: rowerex-front
-    image: rowerex-front
+    image: rowerex-front:dev-latest
     build:
       context: .
       target: development
@@ -13,7 +13,7 @@ services:
       - 3000:3000
   app-prod:
     container_name: rowerex-front-prod
-    image: rowerex-front
+    image: rowerex-front:prod-latest
     build:
       context: .
       target: prod

@@ -5,9 +5,10 @@
   align-items: center;
   padding: 0px;
   margin: auto;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 450px;
   height: 69px;
 
   /* M3/read-only/light/surface2 */

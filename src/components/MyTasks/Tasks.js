@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../Layout/Header/Header";
-import Image from "../../assets/images/vector.png";
 import Task from "./Task";
 
 const DUMMY_TASKS = [
@@ -39,7 +37,7 @@ const DUMMY_TASKS = [
     location: "Kellys Spider",
   },
 ];
-const MyTasks = () => {
+const Tasks = () => {
   const tasksList = DUMMY_TASKS.map((task) => (
     <Task
       id={task.id}
@@ -51,13 +49,6 @@ const MyTasks = () => {
     />
   ));
 
-  return (
-    <>
-      <Header image={Image} alt="cat looking at the bike.">
-        My Tasks
-      </Header>
-      <ul>{tasksList}</ul>
-    </>
-  );
+  return <ul>{tasksList}</ul>;
 };
-export default MyTasks;
+export default Tasks;

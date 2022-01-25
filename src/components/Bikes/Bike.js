@@ -15,12 +15,12 @@ const Bike = (props) => {
         <h3>{props.bikeName}</h3>
         <div className={classes.stats}>
           <div>
-            <p className={classes.label}>total distance</p>
-            <p className={classes.value}>{props.totalDistance}</p>
+            <p className={classes.statsLabel}>total distance</p>
+            <p className={classes.statsValue}>{props.totalDistance}</p>
           </div>
           <div>
-            <p className={classes.label}>total ride time</p>
-            <p className={classes.value}>{props.totalRideTime}</p>
+            <p className={classes.statsLabel}>total ride time</p>
+            <p className={classes.statsValue}>{props.totalRideTime}</p>
           </div>
         </div>
       </div>

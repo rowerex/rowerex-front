@@ -1,6 +1,5 @@
 import React from "react";
 import Bike from "./Bike.js";
-import Card from "../UI/Card.js";
 
 const DUMMY_BIKES = [
   {

@@ -1,6 +1,5 @@
 import React from "react";
 import Task from "./Task";
-import Card from "../UI/Card";
 
 const DUMMY_TASKS = [
   {

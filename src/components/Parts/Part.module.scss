@@ -1,11 +1,22 @@
 @import "../../common.scss";
 
+.bikeName {
+  @extend .label;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
 .card {
   display: flex;
   flex-direction: row;
 }
 
-.name {
+.partType {
   @extend .label_green;
 }
 

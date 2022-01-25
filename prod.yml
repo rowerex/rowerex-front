@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: rowerex-front-prod
+    image: "ghcr.io/rowerex/frontend:${TAG:-latest}"
+    build:
+      context: .
+      target: prod
+    ports:
+      - "8889:80"

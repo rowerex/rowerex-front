@@ -1,30 +1,4 @@
-# Rowerex Frontend
-
-## TLDR
-
-Use docker compose for development.  
-Your local node version may differ from the container and ~unleash the wrath of deamons~ cause minor issues .
-
-```shell
-docker-compose build
-docker-compose up -d
-docker-compose exec app your command goes here
-
-# alternatively, for interactive shell:
-docker-compose exec app sh
-```
-
-To build minimal, production image tagged "latest", run:
-```shell
-docker-compose -f prod.yml build
-```
-
-for custom tag, use:
-```shell
-TAG=yourtag && docker-compose -f prod.yml build
-```
-
----
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

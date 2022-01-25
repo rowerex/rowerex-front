@@ -8,6 +8,14 @@ services:
       context: .
       target: development
     volumes:
-      - .:/app
+      - ./src:/app/src
     ports:
       - 3000:3000
+  app-prod:
+    container_name: rowerex-front-prod
+    image: rowerex-front:prod-latest
+    build:
+      context: .
+      target: prod
+    ports:
+      - "8889:80"

@@ -11,7 +11,6 @@ const Task = (props) => {
     <Card className={classes.card}>
       {props.taskType === "retire" && <TrashIcon className={classes.icon} />}
       {props.taskType === "service" && <ServiceIcon className={classes.icon} />}
-
       <div className={classes.wrapper}>
         <p className={classes.partType}>{props.partType}</p>
         <h3>{props.partModel}</h3>

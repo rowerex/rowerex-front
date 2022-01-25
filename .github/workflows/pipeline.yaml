@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build production image
-        run: docker-compose -f prod.yml
+        run: docker-compose -f prod.yml build
       -
         name: Push to registry
         run: docker-compose -f prod.yml push app

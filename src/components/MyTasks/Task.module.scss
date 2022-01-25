@@ -1,7 +1,29 @@
+@import "../../common.scss";
+
 .partType {
-  composes: label_green from "../../common.scss";
+  @extend .label_green;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 12px;
 }
 .card {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+}
+
+.icon {
+  width: 46px;
+  padding: 2px 0 0 0;
+}
+.location {
+  @extend .label;
+}
+
+.wrapper {
+  padding-left: 16px;
+  width: calc(100% - 62px);
 }

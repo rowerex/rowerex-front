@@ -1,9 +1,11 @@
+@import "/src/common.scss";
+
 .header {
   margin: 0;
   padding: 4rem 0 0 2rem;
   font-weight: 900;
   font-size: 32px;
-  color: #ffffff;
+  color: $text-color-light;
 }
 
 .image {

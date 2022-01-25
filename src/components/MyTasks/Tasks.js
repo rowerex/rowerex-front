@@ -1,5 +1,6 @@
 import React from "react";
 import Task from "./Task";
+import Card from "../UI/Card";
 
 const DUMMY_TASKS = [
   {
@@ -27,7 +28,8 @@ const DUMMY_TASKS = [
     id: "t4",
     partType: "crank set",
     partModel: "FSA SL-K Modular BB386EVO",
-    taskType: "Merida",
+    taskType: "retire",
+    location: "Merida",
   },
   {
     id: "t5",

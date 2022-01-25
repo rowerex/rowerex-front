@@ -1,8 +1,8 @@
 import React from "react";
-import { ReactComponent as TaskIcon } from "../../../assets/icons/taskIcon.svg";
-import { ReactComponent as BikeIcon } from "../../../assets/icons/bikeIcon.svg";
-import { ReactComponent as PartIcon } from "../../../assets/icons/partIcon.svg";
-import { ReactComponent as UserIcon } from "../../../assets/icons/userIcon.svg";
+import { ReactComponent as TaskIcon } from "../../../assets/icons/menu-task.svg";
+import { ReactComponent as BikeIcon } from "../../../assets/icons/menu-bike.svg";
+import { ReactComponent as PartIcon } from "../../../assets/icons/menu-part.svg";
+import { ReactComponent as UserIcon } from "../../../assets/icons/menu-user.svg";
 
 import classes from "./Navigation.module.scss";
 

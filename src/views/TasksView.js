@@ -1,5 +1,5 @@
 import React from "react";
-import Tasks from "../components/MyTasks/Tasks";
+import Tasks from "../components/Tasks/Tasks";
 import Header from "../components/Layout/Header/Header";
 import Image from "../assets/images/vector.png";
 

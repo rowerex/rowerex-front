@@ -1,10 +1,9 @@
 import React from "react";
 import classes from "./Task.module.scss";
 import Card from "../UI/Card";
+import Button from "../UI/Button/Button";
 import { ReactComponent as ServiceIcon } from "../../assets/icons/task-service.svg";
 import { ReactComponent as TrashIcon } from "../../assets/icons/task-trash.svg";
-
-import Button from "../UI/Button/Button";
 
 const Task = (props) => {
   return (

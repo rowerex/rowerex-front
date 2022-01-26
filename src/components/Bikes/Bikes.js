@@ -38,21 +38,21 @@ const DUMMY_BIKES = [
 
 const Bikes = () => {
   const bikesList = DUMMY_BIKES.map((bike) => (
-      <ListElement
-        id={bike.id}
-        key={bike.id}
-        image = {image}
-        title={bike.bikeName}
-        stats={[{
-          label: 'Total distance',
-          value: bike.totalDistance,
-        },
-          {
+    <ListElement
+      id={bike.id}
+      key={bike.id}
+      image={image}
+      title={bike.bikeName}
+      stats={[{
+        label: 'Total distance',
+        value: bike.totalDistance,
+      },
+        {
           label: 'Total ride time',
           value: bike.totalRideTime,
         },]}
-        buttons={[<Button variant="service">Service</Button>]}
-      />
+      buttons={[<Button variant="service">Service</Button>]}
+    />
   ));
 
   return <ul>{bikesList}</ul>;

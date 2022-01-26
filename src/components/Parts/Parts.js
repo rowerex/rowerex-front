@@ -47,10 +47,11 @@ const Parts = () => {
       image={image}
       title={part.partName}
       label={part.partType}
-      stats={[{
-        label: 'Ride time to service',
-        value: part.rideTimeToService,
-      },
+      stats={[
+        {
+          label: 'Ride time to service',
+          value: part.rideTimeToService,
+        },
         {
           label: 'Distance to service',
           value: part.distanceToService,

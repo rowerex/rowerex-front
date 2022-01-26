@@ -36,17 +36,22 @@ const DUMMY_BIKES = [
   },
 ];
 
-const Bikes = () => {
-  const bikesList = DUMMY_BIKES.map((bike) => (
+const Bikes = (props) => {
+  let bikes = DUMMY_BIKES;
+  if (props.bikes) {
+    bikes = props.bikes;
+  }
+  const bikesList = bikes.map((bike) => (
     <ListElement
       id={bike.id}
       key={bike.id}
       image={image}
       title={bike.bikeName}
-      stats={[{
-        label: 'Total distance',
-        value: bike.totalDistance,
-      },
+      stats={[
+        {
+          label: 'Total distance',
+          value: bike.totalDistance,
+        },
         {
           label: 'Total ride time',
           value: bike.totalRideTime,

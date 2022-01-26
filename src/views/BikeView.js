@@ -5,8 +5,8 @@ import partImage from "../assets/images/sram-X1X-horizon-rear-dereailleur.png";
 import ListElement from "../components/UI/ListElement/ListElement";
 import Button from "../components/UI/Button/Button";
 import Card from "../components/UI/Card";
-import StatItem from "../components/UI/Stats/StatItem";
 import Stats from "../components/UI/Stats/Stats";
+import {useParams} from "react-router-dom";
 
 const DUMMY_BIKE = {
   bikeName: "Wilier Filante SLR",
@@ -41,20 +41,22 @@ const DUMMY_BIKE = {
 };
 
 const BikeView = () => {
+  const { bikeId } = useParams();
   return (
     <>
       <HeaderBig image={Image} alt="image of a bike">
         Wilier Filante SLR
       </HeaderBig>
       <Card>
-        <Stats>
-          <StatItem label='Total distance' value={DUMMY_BIKE.totalDistance} />
-          <StatItem label='Total ride time' value={DUMMY_BIKE.totalRideTime} />
-          <StatItem label='Last Ride Distance' value={DUMMY_BIKE.lastRide} />
-          <StatItem label='Last Ride Date' value={DUMMY_BIKE.lastRideDate} />
-          <StatItem label='Ride count' value={DUMMY_BIKE.rideCount} />
-          <StatItem label='First ride' value={DUMMY_BIKE.firstRide} />
-        </Stats>
+        <h3>Bicycle stats</h3>
+        <Stats stats={[
+          { label:'Total distance', value: DUMMY_BIKE.totalDistance},
+          { label:'Total ride time', value: DUMMY_BIKE.totalRideTime},
+          { label:'Last Ride Distance', value: DUMMY_BIKE.lastRide},
+          { label:'Last Ride Date', value: DUMMY_BIKE.lastRideDate},
+          { label:'Ride count', value: DUMMY_BIKE.rideCount},
+          { label:'First ride', value: DUMMY_BIKE.firstRide},
+        ]} />
       </Card>
       <ul>
         {

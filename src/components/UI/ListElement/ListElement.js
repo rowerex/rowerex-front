@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./ListElement.module.scss";
 import Card from "../Card";
+import Stats from "../Stats/Stats";
 
 const ListElement = (props) => {
   return (
@@ -14,16 +15,7 @@ const ListElement = (props) => {
         <p className={classes.label}>{props.label}</p>
         <h3>{props.title}</h3>
         <p className={classes.subtitle}>{props.subtitle}</p>
-        <div className={classes.stats}>
-          {
-            props.stats ? props.stats.map((stat) => (
-              <div className={classes.statItem}>
-                <p className={classes.statsLabel}>{stat.label}</p>
-                <p className={classes.statsValue}>{stat.value}</p>
-              </div>
-            )) : null
-          }
-        </div>
+        <Stats stats={props.stats}/>
         <div className={classes.buttons}>
           {props.buttons}
         </div>

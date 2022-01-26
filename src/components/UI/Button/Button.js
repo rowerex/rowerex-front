@@ -10,7 +10,6 @@ const Button = (props) => {
       buttonClasses += " " + `${classes.button_secondary}`;
   }
 
-  console.log(buttonClasses);
   return (
     <button
       type={props.type || "button"}

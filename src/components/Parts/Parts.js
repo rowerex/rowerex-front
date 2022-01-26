@@ -1,5 +1,7 @@
 import React from "react";
-import Part from "./Part.js";
+import ListElement from "../UI/ListElement/ListElement";
+import image from "../../assets/images/sram-X1X-horizon-rear-dereailleur.png";
+import Button from "../UI/Button/Button";
 
 const DUMMY_PARTS = [
   {
@@ -37,16 +39,25 @@ const DUMMY_PARTS = [
 ];
 
 const Parts = () => {
+
   const partList = DUMMY_PARTS.map((part) => (
-    <Part
+    <ListElement
+      id={part.id}
       key={part.id}
-      partName={part.partName}
-      partType={part.partType}
-      rideTimeToService={part.rideTimeToService}
-      distanceToService={part.distanceToService}
+      image={image}
+      title={part.partName}
+      label={part.partType}
+      stats={[{
+        label: 'Ride time to service',
+        value: part.rideTimeToService,
+      },
+        {
+          label: 'Distance to service',
+          value: part.distanceToService,
+        },]}
+      buttons={[<Button variant="service">Service</Button>]}
     />
   ));
-
   return <ul>{partList}</ul>;
 };
 export default Parts;

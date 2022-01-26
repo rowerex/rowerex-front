@@ -1,0 +1,20 @@
+@import "../../../common.scss";
+
+.stats {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  flex: 50%;
+}
+
+.statsLabel {
+  @extend .label_small;
+}
+
+.statsValue {
+  @extend .value;
+}

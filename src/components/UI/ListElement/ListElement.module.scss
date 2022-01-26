@@ -14,7 +14,6 @@
   object-fit: cover;
 }
 
-
 .subtitle {
   @extend .label;
 }
@@ -39,7 +38,11 @@
   margin-top: 15px;
   display: flex;
   justify-content: flex-start;
-  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  flex: 50%;
 }
 
 .statsLabel {

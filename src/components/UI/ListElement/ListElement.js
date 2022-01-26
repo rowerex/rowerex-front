@@ -1,15 +1,14 @@
 import React from "react";
 import classes from "./ListElement.module.scss";
 import Card from "../Card";
-import image from "../../../assets/images/sram-X1X-horizon-rear-dereailleur.png";
 
 const ListElement = (props) => {
   return (
     <Card className={classes.card}>
       <img
         className={classes.photo}
-        src={image}
-        alt={`photo of ${props.partName}`}
+        src={props.image}
+        alt={`photo of ${props.title}`}
       />
       <div className={classes.content}>
         <p className={classes.label}>{props.label}</p>

@@ -1,5 +1,7 @@
 import React from "react";
-import Bike from "./Bike.js";
+import ListElement from "../UI/ListElement/ListElement";
+import Button from "../UI/Button/Button";
+import image from "../../assets/images/Wilier-Filante-SLR.jpg";
 
 const DUMMY_BIKES = [
   {
@@ -36,13 +38,21 @@ const DUMMY_BIKES = [
 
 const Bikes = () => {
   const bikesList = DUMMY_BIKES.map((bike) => (
-    <Bike
-      id={bike.id}
-      key={bike.id}
-      bikeName={bike.bikeName}
-      totalDistance={bike.totalDistance}
-      totalRideTime={bike.totalRideTime}
-    />
+      <ListElement
+        id={bike.id}
+        key={bike.id}
+        image = {image}
+        title={bike.bikeName}
+        stats={[{
+          label: 'Total distance',
+          value: bike.totalDistance,
+        },
+          {
+          label: 'Total ride time',
+          value: bike.totalRideTime,
+        },]}
+        buttons={[<Button variant="service">Service</Button>]}
+      />
   ));
 
   return <ul>{bikesList}</ul>;

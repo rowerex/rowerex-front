@@ -1,0 +1,51 @@
+@import "../../../common.scss";
+
+.card {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.photo {
+  margin-top: 8px;
+  width: 76px;
+  height: 76px;
+  border-radius: 40px;
+  object-fit: cover;
+}
+
+
+.subtitle {
+  @extend .label;
+}
+
+.label {
+  @extend .label_green;
+}
+
+.content {
+  padding-left: 16px;
+  width: calc(100% - 90px);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.stats {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.statsLabel {
+  @extend .label_small;
+}
+
+.statsValue {
+  @extend .value;
+}

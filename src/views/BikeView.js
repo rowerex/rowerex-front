@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
 import Image from "../assets/images/Wilier-Filante-SLR.jpg";
+import partImage from "../assets/images/sram-X1X-horizon-rear-dereailleur.png";
 import ListElement from "../components/UI/ListElement/ListElement";
 import Button from "../components/UI/Button/Button";
 
@@ -46,6 +47,7 @@ const BikeView = () => {
         {
           DUMMY_BIKE.parts.map((part) => (
             <ListElement
+              image={partImage}
               key={part.id}
               title={part.partName}
               label={part.partType}

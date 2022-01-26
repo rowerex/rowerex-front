@@ -4,6 +4,7 @@ import Navigation from "./components/Layout/Navigation/Navigation";
 import TasksView from "./views/TasksView";
 import BikesView from "./views/BikesView";
 import PartsView from "./views/PartsView";
+import BikeView from "./views/BikeView";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<TasksView />} />
         <Route path="/bikes" element={<BikesView />} />
         <Route path="/parts" element={<PartsView />} />
+        <Route path="/bike" element={<BikeView />} />
       </Routes>
       <Navigation />
     </div>

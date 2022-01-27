@@ -2,16 +2,14 @@ import React from "react";
 import ListElement from "../UI/ListElement/ListElement";
 import Button from "../UI/Button/Button";
 import image from "../../assets/images/Wilier-Filante-SLR.jpg";
-import useBikes from "./useBikes";
 
-const Bikes = () => {
-  const [bikes, error] = useBikes();
+const Bikes = (props) => {
+
 
   return (
     <>
-      {error !== null
-        ? <p>Error fetching bikes: {error}</p>
-        : bikes.map((bike) => (
+      {
+        props.bikes.map((bike) => (
           <ListElement
             id={bike.id}
             key={bike.id}
@@ -30,7 +28,8 @@ const Bikes = () => {
               },]}
             buttons={[<Button variant="service">Service</Button>]}
           />
-        ))}
+        ))
+      }
     </>
   );
 };

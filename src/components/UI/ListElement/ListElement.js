@@ -15,7 +15,7 @@ const ListElement = (props) => {
         <p className={classes.label}>{props.label}</p>
         <h3>{props.title}</h3>
         <p className={classes.subtitle}>{props.subtitle}</p>
-        <Stats stats={props.stats}/>
+        <Stats key={props.key + '-stats'} stats={props.stats}/>
         <div className={classes.buttons}>
           {props.buttons}
         </div>

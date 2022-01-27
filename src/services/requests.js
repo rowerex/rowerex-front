@@ -8,3 +8,10 @@ export const getBikes = () => [
     method: "GET",
   }
 ];
+
+export const getParts = () => [
+  createUrl(BASE_URL, "/parts/karol"),
+  {
+    method: "GET",
+  }
+];

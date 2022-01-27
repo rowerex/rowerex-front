@@ -5,7 +5,7 @@ const useApiResult = (request) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(request)
+    fetch(...request)
       .then(async (response) => {
         if (response.ok) {
           setResults(await response.json());

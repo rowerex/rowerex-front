@@ -1,9 +1,10 @@
 @import "/src/common.scss";
 
 .header {
-  margin: 0;
+  margin: 0 0 16px 0;
   padding: 4rem 0 0 2rem;
   font-weight: 900;
+  height: 120px;
   font-size: 32px;
   color: $text-color-light;
 }

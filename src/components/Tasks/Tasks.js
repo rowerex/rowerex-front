@@ -28,13 +28,13 @@ const DUMMY_TASKS = [
     partType: "crank set",
     partModel: "FSA SL-K Modular BB386EVO",
     taskType: "retire",
-    location: "Merida",
+    location: "on shelf",
   },
   {
     id: "t5",
     partType: "pedals",
     partModel: "tęczowe pedały",
-    taskType: "service",
+    taskType: "retire",
     location: "Kellys Spider",
   },
 ];

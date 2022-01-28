@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import {getBikes} from "../../services/requests";
-import useApiResult from "../../services/useApiResult";
+import { getBikes } from "./requests";
+import useApiResult from "./useApiResult";
 
 const useBikes = () => {
   const request = useMemo(() => getBikes(), []);

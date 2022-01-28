@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { ReactComponent as TaskIcon } from "../../../assets/icons/menu-task.svg";
 import { ReactComponent as BikeIcon } from "../../../assets/icons/menu-bike.svg";
 import { ReactComponent as PartIcon } from "../../../assets/icons/menu-part.svg";
@@ -8,28 +9,57 @@ import classes from "./Navigation.module.scss";
 
 const Navigation = () => {
   return (
-    <div>
+    <nav>
       <ul className={classes.Navigation}>
-        <div className={classes.navigationItem}>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${classes.navigationItem_active}`
+              : `${classes.navigationItem}`
+          }
+          exact="true"
+          to="/"
+        >
           <TaskIcon />
-          <p className={classes.navigationItem__label}>Tasks</p>
-        </div>
-        <div
-          className={`${classes.navigationItem_active} ${classes.navigationItem}`}
+          <p>Tasks</p>
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${classes.navigationItem_active}`
+              : `${classes.navigationItem}`
+          }
+          to="/bikes"
         >
           <BikeIcon />
-          <p className={classes.navigationItem__label}>Bikes</p>
-        </div>
-        <div className={classes.navigationItem}>
-          <PartIcon />
-          <p className={classes.navigationItem__label}>Parts</p>
-        </div>
-        <div className={classes.navigationItem}>
+          <p>Bikes</p>
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${classes.navigationItem_active}`
+              : `${classes.navigationItem}`
+          }
+          to="/parts"
+        >
+          <PartIcon /> <p>Parts</p>
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${classes.navigationItem_active}`
+              : `${classes.navigationItem}`
+          }
+          to="/user"
+        >
           <UserIcon />
-          <p className={classes.navigationItem__label}>User</p>
-        </div>
+          <p>User</p>
+        </NavLink>
       </ul>
-    </div>
+    </nav>
   );
 };
 

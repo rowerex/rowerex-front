@@ -9,6 +9,10 @@ const Button = (props) => {
     case "secondary":
       buttonClasses += " " + `${classes.button_secondary}`;
   }
+  switch (props.size) {
+    case "big":
+      buttonClasses += " " + `${classes.button_big}`;
+  }
 
   return (
     <button
@@ -19,6 +23,7 @@ const Button = (props) => {
     >
       {props.variant === "service" && <ServiceIcon className={classes.icon} />}
       {props.variant === "detach" && <DetachIcon className={classes.icon} />}
+
       {props.children}
     </button>
   );

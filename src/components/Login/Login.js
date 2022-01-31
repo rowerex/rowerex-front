@@ -13,6 +13,8 @@ export default function Login({ setToken }) {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
+    console.log(username);
+    console.log(password);
     e.preventDefault();
     const token = await loginUser({
       username,
@@ -20,6 +22,16 @@ export default function Login({ setToken }) {
     });
     setToken(token);
   };
+
+  const usernameChangeHandler = (e) => {
+    setUsername(e.target.value);
+    console.log(username);
+  };
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
+    console.log(password);
+  };
+
   return (
     <>
       <h1>Please Log In</h1>
@@ -27,13 +39,13 @@ export default function Login({ setToken }) {
         <Input
           name="username"
           value={username.value}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={usernameChangeHandler}
         />
         <Input
           name="password"
           type="password"
           value={password.value}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={passwordChangeHandler}
         />
         <div>
           <Button type="submit" size="big">

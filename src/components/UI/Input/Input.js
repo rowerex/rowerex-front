@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classes from "./Input.module.scss";
 
-const Input = ({ ...props }) => {
+const Input = (props) => {
   return (
     <label className={classes.label} htmlFor={props.name}>
       <p>{props.name}</p>
@@ -13,15 +13,16 @@ const Input = ({ ...props }) => {
         id={props.name}
         placeholder={props.placeholder || ""}
         maxLength={props.maxLength}
+        value={props.value}
+        onChange={props.onChange}
       />
     </label>
   );
 
   Input.propTypes = {
-    tag: PropTypes.string,
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
     maxLength: PropTypes.number,
+    placeholder: PropTypes.string,
   };
 
   Input.defaultProps = {

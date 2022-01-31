@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { postLogin } from "../../services/requests";
 import Button from "../UI/Button/Button";
+import Input from "../UI/Input/Input";
 import classes from "./Login.module.scss";
 
 async function loginUser(credentials) {
@@ -23,17 +24,17 @@ export default function Login({ setToken }) {
     <>
       <h1>Please Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          <p>Username</p>
-          <input type="text" onChange={(e) => setUsername(e.target.value)} />
-        </label>
-        <label>
-          <p>Password</p>
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+        <Input
+          name="username"
+          value={username.value}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input
+          name="password"
+          type="password"
+          value={password.value}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <div>
           <Button type="submit" size="big">
             Login

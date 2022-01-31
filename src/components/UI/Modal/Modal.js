@@ -10,11 +10,9 @@ const Modal = (props) => {
       <div className={classes.container}>
         <Card className={classes.modal}>
           <header>
-            <h2>{props.title}</h2>
+            <h2 className={classes.title}>{props.title}</h2>
           </header>
-          <div>
-            <p>{props.message}</p>
-          </div>
+          <div className={classes.content}>{props.children}</div>
           <footer>
             <Button size="big">{props.button}</Button>
           </footer>

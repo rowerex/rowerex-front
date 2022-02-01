@@ -4,8 +4,10 @@ import classes from "./Input.module.scss";
 
 const Input = (props) => {
   return (
-    <label className={classes.label} htmlFor={props.name}>
-      <p>{props.name}</p>
+    <div className={classes.wrapper}>
+      <label className={classes.label} htmlFor={props.name}>
+        {props.name}
+      </label>
       <input
         className={classes.input}
         type={props.type || "text"}
@@ -16,7 +18,7 @@ const Input = (props) => {
         value={props.value}
         onChange={props.onChange}
       />
-    </label>
+    </div>
   );
 
   Input.propTypes = {

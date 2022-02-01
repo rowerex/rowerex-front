@@ -16,7 +16,7 @@ const Modal = (props) => {
         </header>
         <div className={classes.content}>{props.children}</div>
         <footer>
-          <Button size="big" onClick={props.onConfirm}>
+          <Button size="big" type={props.type} onClick={props.onConfirm}>
             {props.button}
           </Button>
         </footer>

@@ -2,6 +2,7 @@ import React from "react";
 import { ReactComponent as ServiceIcon } from "../../../assets/icons/button-service.svg";
 import classes from "./Button.module.scss";
 import { ReactComponent as DetachIcon } from "../../../assets/icons/button-detach.svg";
+import { ReactComponent as AddIcon } from "../../../assets/icons/button-add.svg";
 
 const Button = (props) => {
   let buttonClasses = `${classes.button}`;
@@ -9,9 +10,14 @@ const Button = (props) => {
     case "secondary":
       buttonClasses += " " + `${classes.button_secondary}`;
   }
+
   switch (props.size) {
     case "big":
       buttonClasses += " " + `${classes.button_big}`;
+      break;
+    case "fab":
+      buttonClasses += " " + `${classes.button_fab}`;
+      break;
   }
 
   return (
@@ -23,6 +29,7 @@ const Button = (props) => {
     >
       {props.variant === "service" && <ServiceIcon className={classes.icon} />}
       {props.variant === "detach" && <DetachIcon className={classes.icon} />}
+      {props.variant === "add" && <AddIcon className={classes.icon} />}
 
       {props.children}
     </button>

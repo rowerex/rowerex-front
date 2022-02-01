@@ -1,1 +1,28 @@
 @import "../../../common.scss";
+
+.input {
+  @extend .content;
+  padding: 0 8px;
+  height: 42px;
+  min-width: 240px;
+  border: 1px solid $outline-color;
+  border-radius: 4px;
+  &:focus {
+    border: 2px solid $primary-color;
+    outline: none;
+  }
+}
+
+.label {
+  @extend .label_medium;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  background: $background-color;
+  padding: 0 2px;
+}
+
+.wrapper {
+  position: relative;
+  padding: 16px 0;
+}

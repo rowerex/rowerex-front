@@ -1,6 +1,7 @@
 $primary-color: #006b5c;
 $secondary-color: #cde9e1;
 $background-color: #ffffff;
+$outline-color: #6f7976;
 $secondary-background: linear-gradient(
     0deg,
     rgba(0, 107, 92, 0.08),
@@ -43,6 +44,11 @@ h3 {
     line-height: 14px;
     color: #4a635e;
   }
+  &_medium {
+    @extend .label;
+    text-transform: none;
+    color: $outline-color;
+  }
 }
 
 .value {
@@ -50,4 +56,16 @@ h3 {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.5px;
+}
+
+.content {
+  font-size: 16px;
+  line-height: 24px;
+  color: $text-color;
+  &_medium {
+    @extend .content;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+  }
 }

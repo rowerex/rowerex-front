@@ -15,7 +15,7 @@ const BikesView = () => {
     }
   }, [bikes]);
 
-  const modalHandler = () => {
+  const modalHandler = (e) => {
     setModalIsOpen(false);
   };
   return (

@@ -38,7 +38,7 @@ const BikesView = () => {
       )}
 
       {error !== null ? (
-        <p>Error fetching bikes: {error}></p>
+        <p>Error fetching bikes: {error}</p>
       ) : (
         <Bikes bikes={bikes} />
       )}

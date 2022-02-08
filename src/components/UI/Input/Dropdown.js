@@ -27,18 +27,13 @@ const customStyles = {
     position: "absolute",
     top: 10,
   }),
-  // singleValue: () => ({
-  //   fontSize: 16,
-  //   letterSpacing: 0.5,
-  //   position: "absolute",
-  //   top: 10,
-  // }),
 
   input: () => ({
     fontSize: 16,
     letterSpacing: 0.5,
-    top: 20,
-    overflow: "hidden",
+    position: 'absolute',
+    top: 0,
+    minWidth: 200,
   }),
 
   menu: (state) => ({

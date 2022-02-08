@@ -5,7 +5,7 @@ WORKDIR /app
 # Cache and Install dependencies
 COPY package.json .
 COPY package-lock.json .
-RUN npm install
+RUN npm ci
 # Copy app files
 COPY . .
 # Expose port
@@ -21,6 +21,7 @@ FROM nginx:stable-alpine as prod
 WORKDIR /usr/share/nginx/html
 
 COPY --from=build /app/build /usr/share/nginx/html
+COPY deployment/rowerex.conf /etc/nginx/conf.d/rowerex.conf
 # TODO: nginx config with sane static file caching etc
 
 CMD ["nginx", "-g", "daemon off;"]

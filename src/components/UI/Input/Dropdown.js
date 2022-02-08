@@ -21,12 +21,18 @@ const customStyles = {
     borderRadius: "4px",
   }),
 
-  singleValue: () => ({
+  valueContainer: () => ({
     fontSize: 16,
     letterSpacing: 0.5,
     position: "absolute",
     top: 10,
   }),
+  // singleValue: () => ({
+  //   fontSize: 16,
+  //   letterSpacing: 0.5,
+  //   position: "absolute",
+  //   top: 10,
+  // }),
 
   input: () => ({
     fontSize: 16,

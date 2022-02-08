@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import useToken from "./useToken";
 
 const useApiResult = (request) => {
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const token = useToken();
 
   useEffect(() => {
@@ -21,14 +22,16 @@ const useApiResult = (request) => {
         } else {
           setError(await response.text());
         }
+        setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
         console.log(err.message);
+        setLoading(false);
       });
-  }, [request]);
+  }, [request, token.token]);
 
-  return [results, error];
+  return [results, error, loading];
 };
 
 export default useApiResult;

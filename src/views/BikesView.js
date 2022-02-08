@@ -6,14 +6,14 @@ import useBikes from "../services/useBikes";
 import Modal from "../components/UI/Modal/Modal";
 
 const BikesView = () => {
-  const [bikes, error] = useBikes();
+  const [bikes, error, loading] = useBikes();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    if (bikes.length === 0) {
+    if (bikes.length === 0 && loading === false) {
       setModalIsOpen(true);
     }
-  }, [bikes]);
+  }, [bikes, loading]);
 
   const modalHandler = (e) => {
     setModalIsOpen(false);

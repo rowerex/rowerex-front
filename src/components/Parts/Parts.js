@@ -1,11 +1,16 @@
 import React from "react";
+import useParts from "./useParts";
 import ListElement from "../UI/ListElement/ListElement";
 import image from "../../assets/images/sram-X1X-horizon-rear-dereailleur.png";
 import Button from "../UI/Button/Button";
 
 const Parts = (props) => {
+  const [parts, error] = useParts();
 
-  const partList = props.parts.map((part) => (
+  if (error !== null) {
+    return <p>Error fetching parts: {error}</p>;
+  }
+  const partList = parts.map((part) => (
     <ListElement
       id={part.id}
       key={part.id}
@@ -14,13 +19,14 @@ const Parts = (props) => {
       label={part.partType}
       stats={[
         {
-          label: 'Ride time to service',
+          label: "Ride time to service",
           value: part.rideTimeToService,
         },
         {
-          label: 'Distance to service',
+          label: "Distance to service",
           value: part.distanceToService,
-        },]}
+        },
+      ]}
       buttons={[<Button variant="service">Service</Button>]}
     />
   ));

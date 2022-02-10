@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import Header from "../components/Layout/Header/Header";
 import Image from "../assets/images/vector.png";
 import Parts from "../components/Parts/Parts";
-import useParts from "../components/Parts/useParts";
 import Modal from "../components/UI/Modal/Modal";
 import Button from "../components/UI/Button/Button";
-import CreateNewPartForm from "../components/Forms/CreateNewPartForm/CreateNewPartForm";
+import CreateNewPart from "../components/Forms/CreateNewPart/CreateNewPart";
 
 const PartsView = () => {
-  const [parts, error] = useParts();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const modalHandler = () => {
@@ -26,20 +24,14 @@ const PartsView = () => {
       {modalIsOpen === true && (
         <Modal
           title="Create new Part"
-          button="Create"
-          type="submit"
           onConfirm={modalHandler}
           onClose={modalHandler}
         >
-          <CreateNewPartForm />
+          <CreateNewPart />
         </Modal>
       )}
+      <Parts />
 
-      {error !== null ? (
-        <p>Error fetching parts: {error}</p>
-      ) : (
-        <Parts parts={parts} />
-      )}
       <Button size="fab" variant="add" onClick={openModalHandler}>
         Create part
       </Button>

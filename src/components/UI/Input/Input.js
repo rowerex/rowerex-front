@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classes from "./Input.module.scss";
 
-const Input = (props) => {
+const Input = React.forwardRef((props, ref) => {
   return (
     <div className={classes.wrapper}>
       <label className={classes.label} htmlFor={props.name}>
@@ -17,6 +17,7 @@ const Input = (props) => {
         maxLength={props.maxLength}
         value={props.value}
         onChange={props.onChange}
+        ref={ref}
       />
     </div>
   );
@@ -30,6 +31,6 @@ const Input = (props) => {
   Input.defaultProps = {
     maxLength: 200,
   };
-};
+});
 
 export default Input;

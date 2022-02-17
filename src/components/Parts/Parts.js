@@ -27,7 +27,7 @@ const Parts = (props) => {
           value: part.distanceToService,
         },
       ]}
-      buttons={[<Button variant="service">Service</Button>]}
+      buttons={[<Button key={`service-button-{$part.id}`} variant="service">Service</Button>]}
     />
   ));
   return <ul>{partList}</ul>;

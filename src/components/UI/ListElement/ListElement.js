@@ -5,7 +5,7 @@ import Stats from "../Stats/Stats";
 
 const ListElement = (props) => {
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} >
       <img
         className={classes.photo}
         src={props.image}
@@ -15,7 +15,7 @@ const ListElement = (props) => {
         <p className={classes.label}>{props.label}</p>
         <h3>{props.title}</h3>
         <p className={classes.subtitle}>{props.subtitle}</p>
-        <Stats key={props.key + '-stats'} stats={props.stats}/>
+        <Stats  stats={props.stats}/>
         <div className={classes.buttons}>
           {props.buttons}
         </div>

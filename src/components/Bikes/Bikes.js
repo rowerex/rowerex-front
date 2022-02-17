@@ -26,7 +26,7 @@ const Bikes = (props) => {
                 label: 'Total ride time',
                 value: bike.totalRideTime,
               },]}
-            buttons={[<Button variant="service">Service</Button>]}
+            buttons={[]}
           />
         ))
       }

@@ -26,3 +26,14 @@ export const postLogin = (credentials) => [
     body: JSON.stringify(credentials),
   }
 ];
+
+export const postPart = (newPart) => [
+  createUrl(BASE_URL, "/parts"),
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newPart),
+  }
+];

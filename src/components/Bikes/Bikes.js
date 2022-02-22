@@ -1,11 +1,8 @@
 import React from "react";
 import ListElement from "../UI/ListElement/ListElement";
-import Button from "../UI/Button/Button";
 import image from "../../assets/images/Wilier-Filante-SLR.jpg";
 
 const Bikes = (props) => {
-
-
   return (
     <>
       {

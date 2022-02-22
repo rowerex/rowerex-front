@@ -15,7 +15,7 @@ const Parts = (props) => {
       id={part.id}
       key={part.id}
       image={image}
-      title={part.partName}
+      title={part.modelName}
       label={part.partType}
       stats={[
         {

@@ -9,7 +9,7 @@ const Input = React.forwardRef((props, ref) => {
         {props.name}
       </label>
       <input
-          required={props.isRequired || false}
+        required={props.isRequired || false}
         className={classes.input}
         type={props.type || "text"}
         name={props.name}

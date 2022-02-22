@@ -16,6 +16,20 @@ export const getParts = () => [
   }
 ];
 
+export const getTypes = () => [
+  createUrl(BASE_URL, "/types"),
+  {
+    method: "GET",
+  }
+];
+
+export const getModels = () => [
+  createUrl(BASE_URL, "/models?type="),
+  {
+    method: "GET",
+  }
+];
+
 export const postLogin = (credentials) => [
   createUrl(BASE_URL, "/login"),
   {

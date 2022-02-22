@@ -1,4 +1,4 @@
-import React, { useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Dropdown from "../../UI/Input/Dropdown";
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
@@ -36,8 +36,6 @@ const CreateNewPart = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    console.log("derp");
-
     const newPart = {
       name: nameRef.current.value,
       modelId: modelRef.current.value,
@@ -48,6 +46,26 @@ const CreateNewPart = (props) => {
     addPart(newPart);
   };
 
+  useEffect(()=> {
+    async function getModels(selectedType) {
+      const token = getToken();
+      console.log(token);
+      const response = await fetch("http://localhost:8080/api/models?type="+ selectedType, {
+        method: "GET",
+        headers: {
+          'X-AUTH-TOKEN': token,
+          "Content-Type": "application/json",
+        },
+
+      });
+      const data = await response.json();
+      console.log(data);
+      setModels(data);
+    }
+    getModels(selectedType)
+
+
+  },[selectedType])
   async function addPart(part) {
     const token = getToken();
     console.log(token);
@@ -66,7 +84,7 @@ const CreateNewPart = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <Dropdown value={selectedType} name="Type" options={typeOptions} ref={typeRef} onChange={event => setSelectedType(event.target.value)}/>
+      <Dropdown value={selectedType} name="Type" options={typeOptions} ref={typeRef} onChange={event => setSelectedType(event.value)}/>
       <Dropdown isRequired={true} options={modelOptions} name="Model" ref={modelRef}/>
       <Input isRequired={true} name="Name" ref={nameRef}/>
       <Input isRequired={true} name="Purchase date" type="date" ref={productionDateRef}/>

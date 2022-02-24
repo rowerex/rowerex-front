@@ -9,12 +9,13 @@ import CreateNewPart from "../components/Forms/CreateNewPart/CreateNewPart";
 const PartsView = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const modalHandler = () => {
+  const closeModalHandler = () => {
     setModalIsOpen(false);
   };
   const openModalHandler = () => {
     setModalIsOpen(true);
   };
+
 
   return (
     <>
@@ -24,8 +25,8 @@ const PartsView = () => {
       {modalIsOpen === true && (
         <Modal
           title="Create new Part"
-          onConfirm={modalHandler}
-          onClose={modalHandler}
+          onConfirm={closeModalHandler}
+          onClose={closeModalHandler}
         >
           <CreateNewPart />
         </Modal>

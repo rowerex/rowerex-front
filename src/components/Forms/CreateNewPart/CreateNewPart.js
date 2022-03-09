@@ -4,11 +4,14 @@ import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 import useTypes from "../../../services/useTypes";
 import classes from "./Form.module.scss";
+import button from "../../UI/Button/Button";
 
 const CreateNewPart = (props) => {
 
     const [selectedType, setSelectedType] = useState("");
     const [selectedModel, setSelectedModel] = useState("");
+    const [isSending, setIsSending] = useState(false);
+    const [sendingError, setSendingError] = useState(false);
 
     const nameRef = useRef(null);
     const [models, setModels] = useState([]);
@@ -49,7 +52,7 @@ const CreateNewPart = (props) => {
     useEffect(() => {
         async function getModels(selectedType) {
             const token = getToken();
-            console.log(token);
+            // console.log(token);
             const response = await fetch("http://localhost:8080/api/models?type=" + selectedType, {
                 method: "GET",
                 headers: {
@@ -59,7 +62,6 @@ const CreateNewPart = (props) => {
 
             });
             const data = await response.json();
-            console.log(data);
             setModels(data);
         }
 
@@ -68,19 +70,45 @@ const CreateNewPart = (props) => {
     }, [selectedType])
 
     async function addPart(part) {
+        setIsSending(true);
+        setSendingError(null);
         const token = getToken();
         console.log(token);
-        const response = await fetch("http://localhost:8080/api/parts", {
-            method: "POST",
-            body: JSON.stringify(part),
-            headers: {
-                'X-AUTH-TOKEN': token,
-                "Content-Type": "application/json",
-            },
+        try {
+            const response = await fetch("http://localhost:8080/api/parts", {
+                method: "POST",
+                body: JSON.stringify(part),
+                headers: {
+                    'X-AUTH-TOKEN': token,
+                    "Content-Type": "application/json",
+                },
 
-        });
-        const data = await response.json();
-        console.log(data);
+            });
+            const data = await response.json();
+            const status = response.status;
+            if (status === 200) {
+                setIsSending(false);
+                props.onSuccess();
+            } else {
+                setSendingError(data.message);
+                console.log(data.message);
+            }
+
+        } catch (error) {
+            setSendingError(error.message);
+            console.log(error.message);
+        }
+    }
+
+    let buttonClasses = classes.button; //@todo change button class to error when error occurs
+    let buttonContent = "Create New Part";
+
+    if (isSending) {
+        buttonContent = "Sending...";
+    }
+    if (sendingError) {
+        buttonContent = "Something went wrong :(";
+        console.log(buttonContent);
     }
 
     return (
@@ -92,8 +120,8 @@ const CreateNewPart = (props) => {
             <Input isRequired={true} name="Name" ref={nameRef}/>
             <Input isRequired={true} name="Purchase date" type="date" ref={productionDateRef}/>
 
-            <Button classes={classes.button} size="big" type="submit" onClick={props.onConfirm}>
-                Create New Part
+            <Button classes={buttonClasses} size="big" type="submit" >
+                {buttonContent}
             </Button>
         </form>
     );

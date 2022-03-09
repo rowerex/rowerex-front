@@ -25,10 +25,9 @@ const PartsView = () => {
       {modalIsOpen === true && (
         <Modal
           title="Create new Part"
-          onConfirm={closeModalHandler}
           onClose={closeModalHandler}
         >
-          <CreateNewPart />
+          <CreateNewPart onSuccess={closeModalHandler} />
         </Modal>
       )}
       <Parts />

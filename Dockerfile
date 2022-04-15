@@ -19,7 +19,7 @@ RUN npm run build
 
 FROM nginx:stable-alpine as prod
 WORKDIR /usr/share/nginx/html
-ARG REACT_APP_BACKENDURL=http://app.velog.cc
+ARG REACT_APP_BACKENDURL=http://app.velog.cc/api
 
 COPY --from=build /app/build /usr/share/nginx/html
 COPY deployment/rowerex.conf /etc/nginx/conf.d/rowerex.conf

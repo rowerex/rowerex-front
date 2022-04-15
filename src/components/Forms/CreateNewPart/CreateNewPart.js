@@ -4,7 +4,6 @@ import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 import useTypes from "../../../services/useTypes";
 import classes from "./Form.module.scss";
-import button from "../../UI/Button/Button";
 
 const CreateNewPart = (props) => {
 

@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:stable-alpine as prod
 WORKDIR /usr/share/nginx/html
 ARG REACT_APP_BACKENDURL={{{BACKEND_URL}}}
-ENV BACKEND_URL=http://api.velog.cc
+ENV BACKEND_URL=http://api.velog.cc/api
 
 COPY --from=build /app/build /usr/share/nginx/html
 # TODO: nginx config with sane static file caching etc

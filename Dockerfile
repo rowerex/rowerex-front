@@ -14,12 +14,12 @@ EXPOSE 3000
 CMD [ "npm", "start" ]
 
 FROM development AS build
+ARG REACT_APP_BACKENDURL={{{BACKEND_URL}}}
 ENV NODE_ENV production
 RUN npm run build
 
 FROM nginx:stable-alpine as prod
 WORKDIR /usr/share/nginx/html
-ARG REACT_APP_BACKENDURL={{{BACKEND_URL}}}
 ENV BACKEND_URL=http://api.velog.cc/api
 
 COPY --from=build /app/build /usr/share/nginx/html

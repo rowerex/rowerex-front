@@ -14,7 +14,7 @@ const Parts = () => {
     useEffect(() => {
         const fetchParts = () => {
             partsDispatcher({type: "START_FETCH_PARTS"});
-            fetch("http://localhost:8080/api/parts", {
+            fetch(process.env.REACT_APP_BACKENDURL + "/parts", {
                 method: 'GET',
                 headers: {
                     'X-AUTH-TOKEN': token.token,

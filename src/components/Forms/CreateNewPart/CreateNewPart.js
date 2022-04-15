@@ -53,7 +53,8 @@ const CreateNewPart = (props) => {
         async function getModels(selectedType) {
             const token = getToken();
             // console.log(token);
-            const response = await fetch("http://localhost:8080/api/models?type=" + selectedType, {
+
+            const response = await fetch( process.env.REACT_APP_BACKENDURL +"/models?type=" + selectedType, {
                 method: "GET",
                 headers: {
                     'X-AUTH-TOKEN': token,
@@ -75,7 +76,7 @@ const CreateNewPart = (props) => {
         const token = getToken();
         console.log(token);
         try {
-            const response = await fetch("http://localhost:8080/api/parts", {
+            const response = await fetch(process.env.REACT_APP_BACKENDURL +"/parts", {
                 method: "POST",
                 body: JSON.stringify(part),
                 headers: {

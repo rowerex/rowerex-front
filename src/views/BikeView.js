@@ -19,22 +19,22 @@ const DUMMY_BIKE = {
   parts: [
     {
       id: "p1",
-      partName: "Shimano Dura-ace FC-R9100",
+      modelName: "Shimano Dura-ace FC-R9100",
       partType: "Crankset",
     },
     {
       id: "p2",
-      partName: "SRAM Eagle X01 CN-EAGL-X01-A1",
+      modelName: "SRAM Eagle X01 CN-EAGL-X01-A1",
       partType: "Chain",
     },
     {
       id: "p3",
-      partName: "Marzocchi Bomber MX Comp ETA 120 mm",
+      modelName: "Marzocchi Bomber MX Comp ETA 120 mm",
       partType: "Front Fork",
     },
     {
       id: "p4",
-      partName: "Shimano Deore XT CN-HG93",
+      modelName: "Shimano Deore XT CN-HG93",
       partType: "chain",
     },
   ]

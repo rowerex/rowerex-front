@@ -60,15 +60,15 @@ const customStyles = {
   }),
 };
 
-const Dropdown = (props) => {
+const Dropdown = React.forwardRef((props, ref) => {
   return (
     <div className={classes.wrapper}>
       <label className={classes.label} htmlFor={props.name}>
         {props.name}
       </label>
-      <Select styles={customStyles} options={aquaticCreatures} />
+      <Select selectedValue={props.value} onChange={props.onChange} styles={customStyles} options={props.options} ref={ref}/>
     </div>
   );
-};
+});
 
 export default Dropdown;

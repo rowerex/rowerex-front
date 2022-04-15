@@ -18,8 +18,7 @@
 
 .modal {
   position: fixed;
-  top: 30vh;
-  margin: 16px;
+  margin: auto;
   z-index: 100;
   overflow: hidden;
   border-radius: 20px;
@@ -47,3 +46,4 @@
   text-align: center;
   margin: 0;
 }
+

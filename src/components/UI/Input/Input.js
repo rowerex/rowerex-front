@@ -9,6 +9,7 @@ const Input = React.forwardRef((props, ref) => {
         {props.name}
       </label>
       <input
+        required={props.isRequired || false}
         className={classes.input}
         type={props.type || "text"}
         name={props.name}
@@ -22,15 +23,15 @@ const Input = React.forwardRef((props, ref) => {
     </div>
   );
 
-  Input.propTypes = {
+
+});
+Input.propTypes = {
     name: PropTypes.string.isRequired,
     maxLength: PropTypes.number,
     placeholder: PropTypes.string,
-  };
+};
 
-  Input.defaultProps = {
+Input.defaultProps = {
     maxLength: 200,
-  };
-});
-
+};
 export default Input;

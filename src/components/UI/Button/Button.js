@@ -5,7 +5,7 @@ import { ReactComponent as DetachIcon } from "../../../assets/icons/button-detac
 import { ReactComponent as AddIcon } from "../../../assets/icons/button-add.svg";
 
 const Button = (props) => {
-  let buttonClasses = `${classes.button}`;
+  let buttonClasses = `${classes.button}`+ " " +`${props.classes}` ;
   switch (props.priority) {
     case "secondary":
       buttonClasses += " " + `${classes.button_secondary}`;

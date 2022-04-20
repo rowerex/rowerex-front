@@ -24,9 +24,12 @@ const Parts = () => {
       )
     }
   }, [parts])
-  // if (err !== null) {
-  //     return <p>Error fetching parts: {error}</p>;
-  // }
+  if (error) {
+      return <p>Error fetching parts: {error}</p>;
+  }
+    if (isLoading) {
+        return <p>Loading parts...</p>;
+    }
   const partList = parts.partsList.map((part) => (
     <ListElement
       id={part.id}

@@ -1,14 +1,15 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import Dropdown from "../../UI/Input/Dropdown";
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 import useTypes from "../../../services/useTypes";
 import classes from "./Form.module.scss";
 import useHttp from "../../../hooks/useHttp";
+import PartsContext from "../../../store/PartsContext";
 
 const CreateNewPart = (props) => {
   const {isLoading, error, sendRequest: sendNewPartRequest} = useHttp();
-
+  const {parts, partsDispatcher} = useContext(PartsContext)
   const [selectedType, setSelectedType] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
 
@@ -70,7 +71,8 @@ const CreateNewPart = (props) => {
   }, [selectedType])
 
   const addPartHandler = (partRequestData) => {
-      props.onSuccess();
+    partsDispatcher({type: "INVALIDATE_PARTS"});
+    props.onSuccess();
   }
 
   async function addPart(part) {

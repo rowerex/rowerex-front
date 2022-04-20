@@ -9,38 +9,21 @@ import useHttp from "../../hooks/useHttp";
 const Parts = () => {
   const {parts, partsDispatcher} = useContext(PartsContext)
   const token = useToken();
-
-
   const {isLoading, error, sendRequest} = useHttp();
-  // useEffect(() => {
-  //     const fetchParts = () => {
-  //         partsDispatcher({type: "START_FETCH_PARTS"});
-  //         fetch(process.env.REACT_APP_BACKENDURL + "/parts", {
-  //             method: 'GET',
-  //             headers: {
-  //                 'X-AUTH-TOKEN': token.token,
-  //             },
-  //         })
-  //             .then(res => res.json())
-  //             .then(data => {
-  //                 console.log(data);
-  //                 partsDispatcher({type: "FETCH_PARTS_SUCCESS", parts: data})
-  //             })
-  //             .catch(error => partsDispatcher({type: "START_FETCH_ERROR"}))
-  //     }
-  //     fetchParts()
-  // }, [])
+
   useEffect(() => {
     const updatePartList = parts => {
       partsDispatcher({type: "FETCH_PARTS_SUCCESS", parts: parts})
     }
-    sendRequest({
-        path: '/parts',
-        headers: {'X-AUTH-TOKEN': token.token},
-      },
-      updatePartList
-    )
-  }, [])
+    if (parts.invalidated) {
+      sendRequest({
+          path: '/parts',
+          headers: {'X-AUTH-TOKEN': token.token},
+        },
+        updatePartList
+      )
+    }
+  }, [parts])
   // if (err !== null) {
   //     return <p>Error fetching parts: {error}</p>;
   // }
@@ -49,7 +32,7 @@ const Parts = () => {
       id={part.id}
       key={part.id}
       image={image}
-      title={part.modelName}
+      title={part.id + ' | ' + part.modelName}
       label={part.partType}
       stats={[
         {
@@ -65,9 +48,6 @@ const Parts = () => {
     />
   ));
   return <ul>{partList}</ul>;
-
-
 }
-
 
 export default Parts;

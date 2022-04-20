@@ -2,7 +2,7 @@ import partsReducer from "./partsReducer";
 import PartsContext from "./PartsContext";
 import {useReducer} from "react";
 
-const initialState = { parts: { success: false, loading: false, error: false, partsList: []}}
+const initialState = { parts: {invalidated: true,  success: false, loading: false, error: false, partsList: []}}
 
 const PartsProvider = ({ children }) => {
     const [state, partsDispatcher] = useReducer(partsReducer, initialState)

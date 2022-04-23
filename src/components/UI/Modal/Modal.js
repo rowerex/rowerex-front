@@ -15,11 +15,6 @@ const Modal = (props) => {
           <h2 className={classes.title}>{props.title}</h2>
         </header>
         <div className={classes.content}>{props.children}</div>
-        {/* <footer>
-          <Button size="big" type={props.type} onClick={props.onConfirm}>
-            {props.button}
-          </Button>
-        </footer> */}
       </Card>
     </div>
   );

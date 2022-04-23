@@ -75,13 +75,8 @@ const CreateNewPart = (props) => {
   }
 
   async function addPart(part) {
-    const token = getToken();
     sendNewPartRequest({
-      path: "/parts", method: "POST", body: part,
-      headers: {
-        'X-AUTH-TOKEN': token,
-        "Content-Type": "application/json",
-      },
+      path: "/parts", method: "POST", body: part
     }, addPartHandler);
   }
 

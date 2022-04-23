@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
-import classes from "./Login.module.scss";
 import useHttp from "../../hooks/useHttp";
 
 const Login = ({setToken}) => {

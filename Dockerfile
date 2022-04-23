@@ -24,7 +24,7 @@ ENV BACKEND_URL=http://api.velog.cc/api
 
 COPY --from=build /app/build /usr/share/nginx/html
 # TODO: nginx config with sane static file caching etc
-COPY deployment/rowerex.conf /etc/nginx/conf.d/rowerex.conf
+COPY deployment/rowerex.conf /etc/nginx/conf.d/default.conf
 COPY deployment/40-replace-backend-url.sh /docker-entrypoint.d/40-replace-backend-url.sh
 
 CMD ["nginx", "-g", "daemon off;"]

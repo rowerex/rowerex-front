@@ -3,12 +3,10 @@ import ListElement from "../UI/ListElement/ListElement";
 import image from "../../assets/images/sram-X1X-horizon-rear-dereailleur.png";
 import Button from "../UI/Button/Button";
 import PartsContext from "../../store/PartsContext";
-import useToken from "../../services/useToken";
 import useHttp from "../../hooks/useHttp";
 
 const Parts = () => {
   const {parts, partsDispatcher} = useContext(PartsContext)
-  const token = useToken();
   const {isLoading, error, sendRequest} = useHttp();
 
   useEffect(() => {
@@ -16,10 +14,7 @@ const Parts = () => {
       partsDispatcher({type: "FETCH_PARTS_SUCCESS", parts: parts})
     }
     if (parts.invalidated) {
-      sendRequest({
-          path: '/parts',
-          headers: {'X-AUTH-TOKEN': token.token},
-        },
+      sendRequest({path: '/parts'},
         updatePartList
       )
     }

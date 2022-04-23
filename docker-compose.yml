@@ -33,6 +33,7 @@ services:
     image: ghcr.io/rowerex/rowerex:latest
     environment:
       SERVER_NAME: api.velog.local
+      STRAVA_REDIRECT_URI: http://app.velog.local/connected
 
   rowerex-database:
     container_name: rowerex-database

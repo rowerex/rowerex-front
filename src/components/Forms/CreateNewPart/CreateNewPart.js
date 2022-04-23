@@ -8,9 +8,9 @@ import useHttp from "../../../hooks/useHttp";
 import PartsContext from "../../../store/PartsContext";
 
 const CreateNewPart = (props) => {
-  const {isLoading, error, sendRequest: sendNewPartRequest} = useHttp();
+  const {isLoading, error, sendRequest} = useHttp();
   const {parts, partsDispatcher} = useContext(PartsContext)
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState(null);
   const [selectedModel, setSelectedModel] = useState("");
 
   const nameRef = useRef(null);
@@ -30,11 +30,10 @@ const CreateNewPart = (props) => {
     return option;
   })
 
-  const getToken = () => {
-    const tokenString = sessionStorage.getItem('token');
-    const userToken = JSON.parse(tokenString);
-    return userToken?.token
-  };
+  const addPartHandler = (partRequestData) => {
+    partsDispatcher({type: "INVALIDATE_PARTS"});
+    props.onSuccess();
+  }
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -45,40 +44,16 @@ const CreateNewPart = (props) => {
       productionDate: productionDateRef.current.value,
     };
 
-    addPart(newPart);
+    sendRequest({
+      path: "/parts", method: "POST", body: newPart
+    }, addPartHandler);
   };
 
   useEffect(() => {
-    async function getModels(selectedType) {
-      const token = getToken();
-      // console.log(token);
-
-      const response = await fetch(process.env.REACT_APP_BACKENDURL + "/models?type=" + selectedType, {
-        method: "GET",
-        headers: {
-          'X-AUTH-TOKEN': token,
-          "Content-Type": "application/json",
-        },
-
-      });
-      const data = await response.json();
-      setModels(data);
+    if (selectedType !== null) {
+      sendRequest({path: "/models?type=" + selectedType}, setModels);
     }
-
-    getModels(selectedType)
-
   }, [selectedType])
-
-  const addPartHandler = (partRequestData) => {
-    partsDispatcher({type: "INVALIDATE_PARTS"});
-    props.onSuccess();
-  }
-
-  async function addPart(part) {
-    sendNewPartRequest({
-      path: "/parts", method: "POST", body: part
-    }, addPartHandler);
-  }
 
   let buttonClasses = classes.button; //@todo change button class to error when error occurs
   let buttonContent = "Create New Part";

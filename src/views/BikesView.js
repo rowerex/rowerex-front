@@ -5,6 +5,7 @@ import Bikes from "../components/Bikes/Bikes";
 import useBikes from "../services/useBikes";
 import Modal from "../components/UI/Modal/Modal";
 import Button from "../components/UI/Button/Button";
+import ConnectWithStrava from "../components/Modals/ConnectWithStrava/ConnectWithStrava";
 
 const BikesView = () => {
   const [bikes, error, loading] = useBikes();
@@ -26,15 +27,10 @@ const BikesView = () => {
       </Header>
       {modalIsOpen === true && (
         <Modal
-          title="No bikes found"
+          title="Connect with Strava"
           button="Connect"
           onClose={modalHandler}>
-
-          <p>
-            It looks like you don’t have any bikes. Connect to Strava to import
-            your bikes.
-          </p>
-          <Button size="big" onClick={()=>window.open(process.env.REACT_APP_BACKENDURL +"/strava/connect", "_blank")}>Connect with Strava </Button>
+  <ConnectWithStrava onSuccess={modalHandler}/>
         </Modal>
       )}
 

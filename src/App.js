@@ -10,6 +10,7 @@ import useToken from "./services/useToken";
 import {useContext, useEffect} from "react";
 import UserContext from "./store/UserContext";
 import useHttp from "./hooks/useHttp";
+import ConnectedView from "./views/ConnectedView";
 
 function App() {
   const {token, setToken} = useToken();
@@ -29,7 +30,6 @@ function App() {
       )
     }
   }, [user, token])
-
   if (!token) {
     return <Login setToken={setToken}/>
   }
@@ -41,6 +41,7 @@ function App() {
         <Route exact path="/bikes" element={<BikesView/>}/>
         <Route exact path="/parts" element={<PartsView/>}/>
         <Route exact path="/bikes/:bikeId" element={<BikeView/>}/>
+        <Route exact path="/connected" element={<ConnectedView/>}/>
       </Routes>
       <Navigation/>
     </div>

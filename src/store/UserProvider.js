@@ -6,7 +6,6 @@ const initialState = { user: {invalidated: true,  success: false, loading: false
 
 const UserProvider = ({ children }) => {
     const [state, userDispatcher] = useReducer(userReducer, initialState)
-    console.log(state);
     return <UserContext.Provider value={{ ...state, userDispatcher }}>
       {children}
     </UserContext.Provider>

@@ -14,8 +14,6 @@ const Login = ({setToken}) => {
     }
 
     const handleSubmit = async (e) => {
-        console.log(username);
-        console.log(password);
         e.preventDefault();
         sendLoginRequest({
             path: "/login", method: "POST", body: {
@@ -30,11 +28,9 @@ const Login = ({setToken}) => {
 
     const usernameChangeHandler = (e) => {
         setUsername(e.target.value);
-        console.log(username);
     };
     const passwordChangeHandler = (e) => {
         setPassword(e.target.value);
-        console.log(password);
     };
 
     if (error) {

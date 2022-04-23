@@ -12,7 +12,6 @@ const useHttp = () => {
         method: requestConfig.method ?? 'GET',
         body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       });
-      console.log(response)
       if (!response.ok) {
         console.log(response.error)
         throw new Error('request failed!')

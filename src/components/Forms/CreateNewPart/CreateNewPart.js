@@ -45,7 +45,6 @@ const CreateNewPart = (props) => {
       productionDate: productionDateRef.current.value,
     };
 
-    console.log(newPart);
     addPart(newPart);
   };
 

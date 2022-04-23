@@ -6,7 +6,6 @@ const initialState = { parts: {invalidated: true,  success: false, loading: fals
 
 const PartsProvider = ({ children }) => {
     const [state, partsDispatcher] = useReducer(partsReducer, initialState)
-    console.log(state);
     return <PartsContext.Provider value={{ ...state, partsDispatcher }}>
       {children}
     </PartsContext.Provider>

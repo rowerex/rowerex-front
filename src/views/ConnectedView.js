@@ -6,12 +6,12 @@ import useQuery from "../hooks/useQuery";
 
 const ConnectedView = () => {
     const {isLoading, error, sendRequest} = useHttp();
-    const {token} = useToken();
     const [connected, setConnected] = useState(false);
 
+    let code = null;
     let queryParams = useQuery();
-    let code = queryParams.get('code');
-console.info(connected);
+    code = queryParams.get('code');
+
     useEffect(() => {
         const submitStravaCode = () => {
             console.log("set connected")
@@ -20,10 +20,6 @@ console.info(connected);
         sendRequest({
             method: "POST",
             path: "/strava/authorize",
-            headers: {
-                "Content-Type": "application/json",
-                'X-AUTH-TOKEN': token,
-            },
             body: {
                 "code": code
             }

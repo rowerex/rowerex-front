@@ -1,0 +1,16 @@
+@import "../../common.scss";
+
+.bike {
+  @extend .content;
+  list-style: none;
+  padding: 0 8px;
+  height: 42px;
+  min-width: 240px;
+  border: 1px solid $outline-color;
+  border-radius: 4px;
+  margin: 16px;
+  &:hover {
+    border: 2px solid $primary-color;
+    outline: none;
+  }
+}

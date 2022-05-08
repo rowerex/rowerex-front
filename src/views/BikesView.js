@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import Header from "../components/Layout/Header/Header";
 import Image from "../assets/images/vector.png";
 import Bikes from "../components/Bikes/Bikes";
@@ -6,32 +6,57 @@ import useBikes from "../services/useBikes";
 import Modal from "../components/UI/Modal/Modal";
 import Button from "../components/UI/Button/Button";
 import ConnectWithStrava from "../components/Modals/ConnectWithStrava/ConnectWithStrava";
+import UserContext from "../store/UserContext";
+import StravaBikes from "../components/Modals/StravaBikes";
 
 const BikesView = () => {
   const [bikes, error, loading] = useBikes();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [connectModalIsOpen, setConnectModalIsOpen] = useState(false);
+  const [bikesListModalIsOpen, setBikesListModalIsOpen] = useState(false);
+  const {user, userDispatcher} = useContext(UserContext);
 
+
+  // useEffect(() => {
+  //   if (bikes.length === 0 && loading === false) {
+  //     setModalIsOpen(true);
+  //   }
+  // }, [bikes, loading]);
+  console.log(user);
   useEffect(() => {
-    if (bikes.length === 0 && loading === false) {
-      setModalIsOpen(true);
+    if (user.user && user.user.connectedWithStrava === false) {
+      setConnectModalIsOpen(true);
     }
-  }, [bikes, loading]);
+    if (user.user && user.user.connectedWithStrava === true) {
+      setBikesListModalIsOpen(true);
+    }
+  }, [user]);
 
-  const modalHandler = (e) => {
-    setModalIsOpen(false);
+  const connectModalHandler = (e) => {
+    setConnectModalIsOpen(false);
+  };
+  const bikesListModalHandler = (e) => {
+    setBikesListModalIsOpen(false);
   };
   return (
     <>
       <Header image={Image} alt="cat looking at the bike.">
         My Bikes
       </Header>
-      {modalIsOpen === true && (
+      {connectModalIsOpen === true && (
         <Modal
           title="Connect with Strava"
-          button="Connect"
-          onClose={modalHandler}>
-  <ConnectWithStrava onSuccess={modalHandler}/>
+          onClose={connectModalHandler}>
+  <ConnectWithStrava onSuccess={connectModalHandler}/>
         </Modal>
+      )}
+
+      {bikesListModalIsOpen === true && (
+          <Modal
+              title="Add a bike from Strava"
+              button="Connect"
+              onClose={bikesListModalHandler}>
+              <StravaBikes onClose={bikesListModalHandler}/>
+          </Modal>
       )}
 
       {error !== null ? (

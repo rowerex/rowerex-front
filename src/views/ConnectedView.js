@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useMemo} from "react";
-import {useLocation} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
-import useToken from "../services/useToken";
 import useQuery from "../hooks/useQuery";
+import Button from "../components/UI/Button/Button";
 
 const ConnectedView = () => {
     const {isLoading, error, sendRequest} = useHttp();
@@ -29,7 +29,12 @@ const ConnectedView = () => {
 
     return (
         <>
-            {!connected ? <p>Loading...</p> : <p>Successfully connected with Strava!</p> }
+            {!connected ? <p>Loading...</p> : <>
+            <p>Successfully connected with Strava!</p>
+            <NavLink to="/bikes">
+                <Button sixe="big">Ok</Button>
+            </NavLink>
+            </> }
         </>
     );
 }

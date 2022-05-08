@@ -10,7 +10,13 @@ const Button = (props) => {
     case "secondary":
       buttonClasses += " " + `${classes.button_secondary}`;
   }
-
+  switch (props.state) {
+    case "disabled":
+      buttonClasses += " " + `${classes.button_disabled}`;
+      break;
+    case "error":
+      buttonClasses += " " + `${classes.button_error}`;
+  }
   switch (props.size) {
     case "big":
       buttonClasses += " " + `${classes.button_big}`;

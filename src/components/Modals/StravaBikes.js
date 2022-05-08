@@ -1,61 +1,55 @@
 import Button from "../UI/Button/Button";
-import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
-import useToken from "../../services/useToken";
-import UserContext from "../../store/UserContext";
+import React, { useEffect, useState} from "react";
 import useHttp from "../../hooks/useHttp";
 
 import classes from "./StravaBikes.module.scss";
 
 const StravaBikes = (props) => {
-    const {isLoading, error, sendRequest} = useHttp();
-    const [buttonClicked, setButtonClicked] = useState(false);
-    const [bikes, setBikes] = useState([]);
+    const {isLoading: loadingBikes, error: bikesError, sendRequest: getBikes} = useHttp();
+    const {isLoading: loadingAddBike, error: addBikeError, sendRequest: addBike} = useHttp();
+
+    const [bikes, setBikes] = useState({});
+    const [pendingChanges, setPendingChanges] = useState(false);
   let bikesList = <p> It seems like you don't have any bikes added to Strava. Add your bikes in Strava app.</p>
-
-
 
 
     useEffect(() => {
         const loadBikes = (loadedBikes)  => {
+            console.log(loadedBikes)
            setBikes(loadedBikes);
-            console.log(bikes);
         }
-        sendRequest({
+        getBikes({
             method: "GET",
             path: "/strava/bikes",
         }, loadBikes);
+        setPendingChanges(false);
+    }, [getBikes, pendingChanges])
 
-    }, [sendRequest])
+    const handleAddClick = (bikeId) => {
+        addBike({
+                method: "POST",
+                path: "/strava/bikes/" + bikeId + '/import',
+            }, bikeAdded
+        );
+    }
+
+        const bikeAdded = () => {
+            setPendingChanges(true);
+        }
+
 
     if (bikes.length > 0) {
         bikesList = (
-
             <ul>
                 {bikes.map((bike) => (
-                    <li className={classes.bike} key={bike.id}>{bike.name}</li>
+                    <li className={classes.bike} key={bike.id}>{bike.name}
+                        {bike.alreadyImported && <Button state="disabled"  value={bike.id} onClick={() => handleAddClick(bike.id)}>Added</Button>}
+                        {!bike.alreadyImported && <Button variant="add" value={bike.id} onClick={() => handleAddClick(bike.id)}>Add</Button>}
+                        </li>
                     ))}
             </ul>
         )
     }
-
-    const handleButtonClick = () => {
-        setButtonClicked(true);
-    }
-
-    // let buttonContent = "Connect with Strava"
-    // let buttonState;
-    // if (isLoading) {
-    //     buttonContent = "Loading...";
-    // }
-    // if (error) {
-    //     buttonContent = "Something went wrong :(";
-    //     buttonState = "error";
-    //     console.log(buttonContent);
-    // }
-    // if (buttonClicked) {
-    //     buttonContent = "Connecting...";
-    //     buttonState = "disabled";
-    // }
 
     return (
         <>

@@ -19,6 +19,7 @@ const Parts = () => {
       )
     }
   }, [parts])
+
   if (error) {
       return <p>Error fetching parts: {error}</p>;
   }

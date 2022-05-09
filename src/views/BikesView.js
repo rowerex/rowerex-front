@@ -8,6 +8,7 @@ import UserContext from "../store/UserContext";
 import StravaBikes from "../components/Modals/StravaBikes";
 import BikesProvider from "../store/BikesProvider";
 import BikesContext from "../store/BikesContext";
+import Button from "../components/UI/Button/Button";
 
 const BikesView = () => {
   const {bikes} = useContext(BikesContext)
@@ -20,16 +21,19 @@ const BikesView = () => {
     if (user.user && user.user.connectedWithStrava === false) {
       setConnectModalIsOpen(true);
     }
-    if (user.user && user.user.connectedWithStrava === true && bikes.length===0) {
+    if (user.user && user.user.connectedWithStrava === true && bikes.bikesList.length===0) {
       setBikesListModalIsOpen(true);
     }
-  }, [user]);
+  }, [user, bikes]);
 
-  const connectModalHandler = () => {
+  const closeConnectModalHandler = () => {
     setConnectModalIsOpen(false);
   };
-  const bikesListModalHandler = () => {
+  const closeAddBikeModalHandler = () => {
     setBikesListModalIsOpen(false);
+  };
+  const openAddBikeModalHandler = () => {
+    setBikesListModalIsOpen(true);
   };
   return (
     <BikesProvider>
@@ -39,8 +43,8 @@ const BikesView = () => {
       {connectModalIsOpen === true && (
         <Modal
           title="Connect with Strava"
-          onClose={connectModalHandler}>
-  <ConnectWithStrava onSuccess={connectModalHandler}/>
+          onClose={closeConnectModalHandler}>
+  <ConnectWithStrava onSuccess={closeConnectModalHandler}/>
         </Modal>
       )}
 
@@ -48,11 +52,14 @@ const BikesView = () => {
           <Modal
               title="Add a bike from Strava"
               button="Connect"
-              onClose={bikesListModalHandler}>
-              <StravaBikes onClose={bikesListModalHandler}/>
+              onClose={closeAddBikeModalHandler}>
+              <StravaBikes onClose={closeAddBikeModalHandler}/>
           </Modal>
       )}
       <Bikes/>
+      <Button size="fab" variant="add" onClick={openAddBikeModalHandler}>
+        Add bike
+      </Button>
     </BikesProvider>
   );
 };

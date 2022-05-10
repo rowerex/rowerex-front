@@ -4,6 +4,7 @@ import Card from "../Card";
 import Stats from "../Stats/Stats";
 
 const ListElement = (props) => {
+
   return (
     <Card className={classes.card} >
       <img
@@ -13,7 +14,7 @@ const ListElement = (props) => {
       />
       <div className={classes.content}>
         <p className={classes.label}>{props.label}</p>
-        <h3>{props.title}</h3>
+        <h3>{props.title}{props.id}</h3>
         <p className={classes.subtitle}>{props.subtitle}</p>
         <Stats  stats={props.stats}/>
         <div className={classes.buttons}>

@@ -1,12 +1,14 @@
 import Button from "../UI/Button/Button";
-import React, { useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import useHttp from "../../hooks/useHttp";
 
 import classes from "./StravaBikes.module.scss";
+import BikesContext from "../../store/BikesContext";
 
 const StravaBikes = (props) => {
     const {isLoading: loadingBikes, error: bikesError, sendRequest: getBikes} = useHttp();
     const {isLoading: loadingAddBike, error: addBikeError, sendRequest: addBike} = useHttp();
+    const {bikesDispatcher} = useContext(BikesContext);
 
     const [bikes, setBikes] = useState({});
     const [pendingChanges, setPendingChanges] = useState(false);
@@ -35,6 +37,8 @@ const StravaBikes = (props) => {
 
         const bikeAdded = () => {
             setPendingChanges(true);
+            bikesDispatcher({type: "INVALIDATE_BIKES"});
+
         }
 
 

@@ -41,7 +41,6 @@ const StravaBikes = (props) => {
 
         }
 
-
     if (bikes.length > 0) {
         bikesList = (
             <ul>
@@ -54,13 +53,17 @@ const StravaBikes = (props) => {
             </ul>
         )
     }
+    let content = bikesList;
+    if (loadingBikes) {
+        content = <p>Loading bikes</p>;
+    }
+    if (bikesError) {
+        content = <p>Something went wrong...</p>
+    }
 
     return (
         <>
-            <p>
-                Choose a bike to add:
-            </p>
-            {bikesList}
+            {content}
               <Button size="big"  onClick={props.onClose}> Close</Button>
         </>
     );

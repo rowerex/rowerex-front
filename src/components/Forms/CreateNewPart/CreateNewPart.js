@@ -16,7 +16,7 @@ const CreateNewPart = (props) => {
   const nameRef = useRef(null);
   const [models, setModels] = useState([]);
   const productionDateRef = useRef(null);
-  const [types, typesError, typesLoading] = useTypes();
+  const [types, typesError, typesLoading] = useTypes(); //todo ?? refactor to useHttp?
   const typeOptions = types.map((type) => {
     const option = {};
     option.label = type.name;
@@ -62,6 +62,7 @@ const CreateNewPart = (props) => {
     buttonContent = "Sending...";
   }
   if (error) {
+    console.log(error)
     buttonContent = "Something went wrong :(";
     console.log(buttonContent);
   }

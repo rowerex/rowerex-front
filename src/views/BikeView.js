@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
 import Image from "../assets/images/Wilier-Filante-SLR.jpg";
 import partImage from "../assets/images/sram-X1X-horizon-rear-dereailleur.png";
@@ -7,6 +7,7 @@ import Button from "../components/UI/Button/Button";
 import Card from "../components/UI/Card";
 import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";
+import useHttp from "../hooks/useHttp";
 
 const DUMMY_BIKE = {
   bikeName: "Wilier Filante SLR",
@@ -42,37 +43,61 @@ const DUMMY_BIKE = {
 
 const BikeView = () => {
   const { bikeId } = useParams();
-  return (
-    <>
-      <HeaderBig image={Image} alt="image of a bike">
-        Wilier Filante SLR
-      </HeaderBig>
-      <Card>
-        <h3>Bicycle stats</h3>
-        <Stats stats={[
-          { label:'Total distance', value: DUMMY_BIKE.totalDistance},
-          { label:'Total ride time', value: DUMMY_BIKE.totalRideTime},
-          { label:'Last Ride Distance', value: DUMMY_BIKE.lastRide},
-          { label:'Last Ride Date', value: DUMMY_BIKE.lastRideDate},
-          { label:'Ride count', value: DUMMY_BIKE.rideCount},
-          { label:'First ride', value: DUMMY_BIKE.firstRide},
-        ]} />
-      </Card>
-      <ul>
-        {
-          DUMMY_BIKE.parts.map((part) => (
-            <ListElement
-              image={partImage}
-              key={part.id}
-              title={part.partName}
-              label={part.partType}
-              buttons={[<Button variant="service">Service</Button>]}
-            />
-          ))
-        }
-      </ul>
-    </>
-  );
+  const {isLoading, error, sendRequest: getBike} = useHttp();
+  const [bike, setBike] = useState({});
+
+  useEffect(()=> {
+    console.log("useeffect");
+    const loadBike = (loadedbike) => {
+      console.log(bike);
+      setBike(loadedbike);
+    }
+    getBike({
+      method: "GET",
+      path: "/bikes/"+ bikeId,
+    }, loadBike)
+
+  }, [getBike])
+  // if (isLoading) {
+  //   return <p> Loading bike</p>
+  // }
+
+  if (bike.parts) {
+    return (
+        <>
+          <HeaderBig image={Image} alt="image of a bike">
+            {bike.name}
+          </HeaderBig>
+          <Card>
+            <h3>Bicycle stats</h3>
+            <Stats stats={[
+              { label:'Total distance', value: bike.totalDistance},
+              { label:'Total ride time', value: bike.totalRideTime},
+              { label:'Last Ride Distance', value: DUMMY_BIKE.lastRide}, //todo get actual data
+              { label:'Last Ride Date', value: DUMMY_BIKE.lastRideDate}, //todo get actual data
+              { label:'Ride count', value: DUMMY_BIKE.rideCount}, //todo get actual data
+              { label:'First ride', value: DUMMY_BIKE.firstRide}, //todo get actual data
+            ]} />
+          </Card>
+          <ul>
+            {
+              bike.parts.map((part) => (
+                  <ListElement
+                      image={partImage}
+                      key={part.id}
+                      title={part.name}
+                      label={part.modelName}
+                      buttons={[<Button variant="service">Service</Button>]}
+                  />
+              ))
+            }
+          </ul>
+        </>
+    );
+  }
+ else {
+   return <p> something went wrong</p>
+  }
 };
 
 export default BikeView;

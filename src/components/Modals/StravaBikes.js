@@ -38,7 +38,6 @@ const StravaBikes = (props) => {
         const bikeAdded = () => {
             setPendingChanges(true);
             bikesDispatcher({type: "INVALIDATE_BIKES"});
-
         }
 
     if (bikes.length > 0) {

@@ -9,10 +9,9 @@ const InstallPart = (props) => {
     const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
     const {parts, partsDispatcher} = useContext(PartsContext)
     const [selectedPartId, setSelectedPartId] = useState("");
-
-
     const [partsList, setPartsList] = useState([]);
 
+    //TODO: refresh dropdown options after creating new part
     useEffect(() => {
         const loadParts = (loadedParts) => {
             console.log(loadedParts)

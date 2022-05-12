@@ -11,6 +11,7 @@ import useHttp from "../hooks/useHttp";
 import Modal from "../components/UI/Modal/Modal";
 import InstallPart from "../components/Modals/InstallPart";
 import CreateNewPart from "../components/Forms/CreateNewPart/CreateNewPart";
+import DetachPart from "../components/Modals/DetachPart";
 
 const DUMMY_BIKE = {
     bikeName: "Wilier Filante SLR",
@@ -50,7 +51,8 @@ const BikeView = () => {
     const [bike, setBike] = useState({});
     const [installPartModalIsOpen, setInstallPartModalIsOpen] = useState(false);
     const [createNewPartModalIsOpen, setCreateNewPartModalIsOpen] = useState(false);
-
+    const [detachPartModalIsOpen, setDetachPartModalIsOpen] = useState(false);
+    const [selectedPart, setSelectedPart] = useState({});
 
     useEffect(() => {
         const loadBike = (loadedbike) => {
@@ -75,8 +77,23 @@ const BikeView = () => {
     const closeCreateNewPartModalHandler = () => {
         setCreateNewPartModalIsOpen(false);
     }
+
+    const openDetachPartModalHandler = () => {
+        setDetachPartModalIsOpen(true);
+    }
+    const closeDetachPartModalHandler = () => {
+        setDetachPartModalIsOpen(false);
+    }
     // if (isLoading) {
     //   return <p> Loading bike</p>
+    // }
+
+    // const detachButtonClickHandler = () => {
+    //     setSelectedPart({
+    //         id: part.id,
+    //         name: part.name
+    //     })
+    //     openDetachPartModalHandler();
     // }
 
     if (bike.parts) {
@@ -104,7 +121,11 @@ const BikeView = () => {
                                 key={part.id}
                                 title={part.name}
                                 label={part.modelName}
-                                buttons={[<Button variant="service">Service</Button>]}
+                                buttons={[<Button variant="service">Service</Button>,<Button variant="detach" priority="secondary" onClick={()=>{        setSelectedPart({
+            id: part.id,
+            name: part.name
+        })
+        openDetachPartModalHandler();}}>Detach</Button>]}
                             />
                         ))
                     }
@@ -124,6 +145,14 @@ const BikeView = () => {
                         onClose={closeCreateNewPartModalHandler}
                     >
                         <CreateNewPart onSuccess={closeCreateNewPartModalHandler}/>
+                    </Modal>
+                )}
+                {detachPartModalIsOpen === true && (
+                    <Modal
+                        title="Detach part"
+                        onClose={closeDetachPartModalHandler}
+                    >t
+                        <DetachPart partId={selectedPart.id} partName={selectedPart.name} onSuccess={closeCreateNewPartModalHandler}/>
                     </Modal>
                 )}
                 <Button size="fab" variant="add" onClick={openInstallPartModalHandler}>Install part</Button>

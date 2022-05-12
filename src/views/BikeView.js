@@ -10,7 +10,6 @@ import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
 import Modal from "../components/UI/Modal/Modal";
 import InstallPart from "../components/Modals/InstallPart";
-import CreateNewPart from "../components/Forms/CreateNewPart/CreateNewPart";
 import DetachPart from "../components/Modals/DetachPart";
 
 const DUMMY_BIKE = {
@@ -52,22 +51,29 @@ const BikeView = () => {
     const [installPartModalIsOpen, setInstallPartModalIsOpen] = useState(false);
     const [detachPartModalIsOpen, setDetachPartModalIsOpen] = useState(false);
     const [selectedPart, setSelectedPart] = useState({});
+    const [bikeIsValid, setBikeIsValid] = useState(false);
+
+
 
     useEffect(() => {
-        const loadBike = (loadedbike) => {
-            setBike(loadedbike);
+        if (!bikeIsValid) {
+            const loadBike = (loadedbike) => {
+                setBike(loadedbike);
+                setBikeIsValid(true);
+            }
+            getBike({
+                method: "GET",
+                path: "/bikes/" + bikeId,
+            }, loadBike)
         }
-        getBike({
-            method: "GET",
-            path: "/bikes/" + bikeId,
-        }, loadBike)
+    }, [getBike, bikeIsValid])
 
-    }, [getBike])
     const openInstallPartModalHandler = () => {
         setInstallPartModalIsOpen(true);
     }
     const closeInstallPartModalHandler = () => {
         setInstallPartModalIsOpen(false);
+        setBikeIsValid(false);
     }
 
     const openDetachPartModalHandler = () => {

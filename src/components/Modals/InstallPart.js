@@ -3,6 +3,8 @@ import Button from "../UI/Button/Button";
 import Dropdown from "../UI/Input/Dropdown";
 import useHttp from "../../hooks/useHttp";
 import PartsContext from "../../store/PartsContext";
+import Modal from "../UI/Modal/Modal";
+import CreateNewPart from "../Forms/CreateNewPart/CreateNewPart";
 
 const InstallPart = (props) => {
     const {partsListIsLoading, partsListIsError, sendRequest: getPartsList} = useHttp();
@@ -10,20 +12,24 @@ const InstallPart = (props) => {
     const {parts, partsDispatcher} = useContext(PartsContext)
     const [selectedPartId, setSelectedPartId] = useState("");
     const [partsList, setPartsList] = useState([]);
+    const [partsListIsValid, setPartsListIsValid] = useState(false);
 
-    //TODO: refresh dropdown options after creating new part
+    const [createNewPartModalIsOpen, setCreateNewPartModalIsOpen] = useState(false);
+
     useEffect(() => {
-        const loadParts = (loadedParts) => {
-            console.log(loadedParts)
-            setPartsList(loadedParts);
+        if (!partsListIsValid) {
+            const loadParts = (loadedParts) => {
+                console.log(loadedParts)
+                setPartsList(loadedParts);
+                setPartsListIsValid(true);
+            }
+
+            getPartsList({
+                method: "GET",
+                path: "/parts",
+            }, loadParts);
         }
-
-        getPartsList({
-            method: "GET",
-            path: "/parts",
-        }, loadParts);
-
-    }, [getPartsList])
+    }, [getPartsList, partsListIsValid])
 
     const partOptions = partsList.map((part) => {
         const option = {};
@@ -41,6 +47,15 @@ const InstallPart = (props) => {
         }, installPartHandler);
     }
 
+    const openCreateNewPartModalHandler = () => {
+        setCreateNewPartModalIsOpen(true);
+    }
+    const closeCreateNewPartModalHandler = () => {
+        setCreateNewPartModalIsOpen(false);
+        setPartsListIsValid(false);
+
+    }
+
     const installPartHandler = () => {
         console.log("installparthandler")
         partsDispatcher({type: "INVALIDATE_PARTS"});
@@ -50,11 +65,19 @@ const InstallPart = (props) => {
     return (
         <>
             <p>Select a part to install to {props.bikeName} </p>
-            <Button priority="secondary" size="big" onClick={props.onClick}>Create new part </Button>
+            <Button priority="secondary" size="big" onClick={openCreateNewPartModalHandler}>Create new part </Button>
             <p>or</p>
             <Dropdown name="Select part" isRequired="true" options={partOptions}
                       onChange={event => setSelectedPartId(event.value)}/>
             <Button size="big" type="submit" onClick={submitHandler}>Install</Button>
+            {createNewPartModalIsOpen === true && (
+                <Modal
+                    title="Create new Part"
+                    onClose={closeCreateNewPartModalHandler}
+                >
+                    <CreateNewPart onSuccess={closeCreateNewPartModalHandler}/>
+                </Modal>
+            )}
         </>
     );
 }

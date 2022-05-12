@@ -18,10 +18,10 @@ const BikesView = () => {
   const {user} = useContext(UserContext);
 
   useEffect(() => {
-    if (user.user && user.user.connectedWithStrava === false) {
+    if (user.user && !user.user.connectedWithStrava) {
       setConnectModalIsOpen(true);
     }
-    if (user.user && user.user.connectedWithStrava === true && bikes.bikesList.length===0) {
+    if (user.user && user.user.connectedWithStrava && bikes.success && bikes.bikesList.length===0) {
       setBikesListModalIsOpen(true);
     }
   }, [user, bikes]);

@@ -12,13 +12,13 @@ const StravaBikes = (props) => {
 
     const [bikes, setBikes] = useState({});
     const [pendingChanges, setPendingChanges] = useState(false);
-  let bikesList = <p> It seems like you don't have any bikes added to Strava. Add your bikes in Strava app.</p>
+    let bikesList = <p> It seems like you don't have any bikes added to Strava. Add your bikes in Strava app.</p>
 
 
     useEffect(() => {
-        const loadBikes = (loadedBikes)  => {
+        const loadBikes = (loadedBikes) => {
             console.log(loadedBikes)
-           setBikes(loadedBikes);
+            setBikes(loadedBikes);
         }
         getBikes({
             method: "GET",
@@ -35,20 +35,22 @@ const StravaBikes = (props) => {
         );
     }
 
-        const bikeAdded = () => {
-            setPendingChanges(true);
-            bikesDispatcher({type: "INVALIDATE_BIKES"});
-        }
+    const bikeAdded = () => {
+        setPendingChanges(true);
+        bikesDispatcher({type: "INVALIDATE_BIKES"});
+    }
 
     if (bikes.length > 0) {
         bikesList = (
             <ul>
                 {bikes.map((bike) => (
                     <li className={classes.bike} key={bike.id}>{bike.name}
-                        {bike.alreadyImported && <Button state="disabled"  value={bike.id} onClick={() => handleAddClick(bike.id)}>Added</Button>}
-                        {!bike.alreadyImported && <Button variant="add" value={bike.id} onClick={() => handleAddClick(bike.id)}>Add</Button>}
-                        </li>
-                    ))}
+                        {bike.alreadyImported && <Button state="disabled" value={bike.id}
+                                                         onClick={() => handleAddClick(bike.id)}>Added</Button>}
+                        {!bike.alreadyImported &&
+                            <Button variant="add" value={bike.id} onClick={() => handleAddClick(bike.id)}>Add</Button>}
+                    </li>
+                ))}
             </ul>
         )
     }
@@ -63,7 +65,7 @@ const StravaBikes = (props) => {
     return (
         <>
             {content}
-              <Button size="big"  onClick={props.onClose}> Close</Button>
+            <Button size="big" onClick={props.onClose}> Close</Button>
         </>
     );
 }

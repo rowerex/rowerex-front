@@ -1,0 +1,7 @@
+// todo: move to common module
+.sideBySideWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 12px;
+}

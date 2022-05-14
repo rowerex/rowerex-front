@@ -81,6 +81,8 @@ const BikeView = () => {
     }
     const closeDetachPartModalHandler = () => {
         setDetachPartModalIsOpen(false);
+        setBikeIsValid(false);
+
     }
     // if (isLoading) {
     //   return <p> Loading bike</p>
@@ -145,7 +147,7 @@ const BikeView = () => {
                     <Modal
                         title="Detach part"
                         onClose={closeDetachPartModalHandler}
-                    >t
+                    >
                         <DetachPart partId={selectedPart.id} partName={selectedPart.name}
                                     onSuccess={closeDetachPartModalHandler}/>
                     </Modal>

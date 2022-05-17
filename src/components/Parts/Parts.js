@@ -21,30 +21,31 @@ const Parts = () => {
   }, [parts])
 
   if (error) {
-      return <p>Error fetching parts: {error}</p>;
+    return <p>Error fetching parts: {error}</p>;
   }
-    if (isLoading) {
-        return <p>Loading parts...</p>;
-    }
+  if (isLoading) {
+    return <p>Loading parts...</p>;
+  }
   const partList = parts.partsList.map((part) => (
-    <ListElement
-      id={part.id}
-      key={part.id}
-      image={image}
-      title={part.id + ' | ' + part.modelName}
-      label={part.partType}
-      stats={[
-        {
-          label: "Ride time to service",
-          value: part.rideTimeToService,
-        },
-        {
-          label: "Distance to service",
-          value: part.distanceToService,
-        },
-      ]}
-      buttons={[<Button key={`service-button-{$part.id}`} variant="service">Service</Button>]}
-    />
+      <ListElement
+        link={`/parts/${part.id}`}
+        id={part.id}
+        key={part.id}
+        image={image}
+        title={part.modelName}
+        label={part.partType}
+        stats={[
+          {
+            label: "Ride time to service",
+            value: part.rideTimeToService,
+          },
+          {
+            label: "Distance to service",
+            value: part.distanceToService,
+          },
+        ]}
+        buttons={[<Button key={`service-button-{$part.id}`} variant="service">Service</Button>]}
+      />
   ));
   return <ul>{partList}</ul>;
 }

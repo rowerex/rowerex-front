@@ -3,7 +3,6 @@ import ListElement from "../UI/ListElement/ListElement";
 import image from "../../assets/images/Wilier-Filante-SLR.jpg";
 import BikesContext from "../../store/BikesContext";
 import useHttp from "../../hooks/useHttp";
-import {NavLink} from "react-router-dom";
 
 const Bikes = () => {
     const {bikes, bikesDispatcher} = useContext(BikesContext)
@@ -28,12 +27,9 @@ const Bikes = () => {
     }
     console.log(bikes);
     const bikeList = bikes.bikesList.map((bike) => (
-        <NavLink
-            exact="true"
-            to={`/bikes/${bike.id}`}
-        >
             <ListElement
-                id={bike.id}
+              link={`/bikes/${bike.id}`}
+              id={bike.id}
                 key={bike.id}
                 image={image}
                 title={bike.bikeName}
@@ -50,7 +46,6 @@ const Bikes = () => {
                     },]}
                 buttons={[]}
             />
-        </NavLink>
     ))
 
     return (

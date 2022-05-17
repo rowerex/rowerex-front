@@ -21,7 +21,7 @@ const BikesView = () => {
     if (user.user && !user.user.connectedWithStrava) {
       setConnectModalIsOpen(true);
     }
-    if (user.user && user.user.connectedWithStrava && bikes.success && bikes.bikesList.length===0) {
+    if (user.user && user.user.connectedWithStrava && bikes.success && bikes.bikesList.length === 0) {
       setBikesListModalIsOpen(true);
     }
   }, [user, bikes]);
@@ -44,17 +44,17 @@ const BikesView = () => {
         <Modal
           title="Connect with Strava"
           onClose={closeConnectModalHandler}>
-  <ConnectWithStrava onSuccess={closeConnectModalHandler}/>
+          <ConnectWithStrava onSuccess={closeConnectModalHandler}/>
         </Modal>
       )}
 
       {bikesListModalIsOpen === true && (
-          <Modal
-              title="Add a bike from Strava"
-              button="Connect"
-              onClose={closeAddBikeModalHandler}>
-              <StravaBikes onClose={closeAddBikeModalHandler}/>
-          </Modal>
+        <Modal
+          title="Add a bike from Strava"
+          button="Connect"
+          onClose={closeAddBikeModalHandler}>
+          <StravaBikes onClose={closeAddBikeModalHandler}/>
+        </Modal>
       )}
       <Bikes/>
       <Button size="fab" variant="add" onClick={openAddBikeModalHandler}>

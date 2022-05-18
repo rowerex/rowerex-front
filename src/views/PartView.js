@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
 import Image from "../assets/images/Wilier-Filante-SLR.jpg";
 import Card from "../components/UI/Card";
@@ -8,68 +8,93 @@ import useHttp from "../hooks/useHttp";
 import Button from "../components/UI/Button/Button";
 import Modal from "../components/UI/Modal/Modal";
 import ServicePart from "../components/Forms/ServicePart";
+import PartsContext from "../store/PartsContext";
 
 const PartView = () => {
-  const {partId} = useParams();
-  const {isLoading, error, sendRequest: getPart} = useHttp();
-  const [part, setPart] = useState({});
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+    const {partId} = useParams();
+    const {isLoading, error, sendRequest: getPart} = useHttp();
+    const [part, setPart] = useState({});
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
+    const {partsDispatcher} = useContext(PartsContext)
+    const [isRetired, setIsRetired] = useState(false);
 
-  const closeModalHandler = () => {
-    setModalIsOpen(false);
-  };
-  const openModalHandler = () => {
-    setModalIsOpen(true);
-  };
+    const closeModalHandler = () => {
+        setModalIsOpen(false);
+    };
+    const openModalHandler = () => {
+        setModalIsOpen(true);
+    };
 
-  useEffect(() => {
-    const loadPart = (loadedPart) => {
-      setPart(loadedPart);
+    useEffect(() => {
+        const loadPart = (loadedPart) => {
+            setPart(loadedPart);
+        }
+        getPart({
+            method: "GET",
+            path: "/parts/" + partId,
+        }, loadPart)
+    }, [getPart])
+
+    const retire = () => {
+        sendPart({
+            path: "/parts/" + partId + "/retire",
+            method: "POST",
+        }, retirePartHandler);
     }
-    getPart({
-      method: "GET",
-      path: "/parts/" + partId,
-    }, loadPart)
-  }, [getPart])
 
-  if (part) {
-    return (
-      <>
-        <HeaderBig image={Image} alt="image of a part" label={part.partType} description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`}>
-          {part.modelName}
-        </HeaderBig>
-        <Card>
-          <h3>Wear stats</h3>
-          <Stats stats={[
-            {label: 'Distance', value: part.totalDistance + ' / ' + (part.distanceDurability ?? '-')},
-            {label: 'Ride time', value: part.totalRideTime + ' / ' + (part.rideTimeDurability ?? '-')},
-            {label: 'Age', value: part.totalTime + ' / ' + (part.timeDurability ?? '-')},
-          ]}/>
-        </Card>
-        <Card>
-          <h3>Service stats</h3>
-          <Stats stats={[
-            {label: 'Distance', value: part.distanceSinceService + ' / ' + (part.distanceServiceInterval ?? '-')},
-            {label: 'Ride time', value: part.rideTimeSinceService + ' / ' + (part.rideTimeServiceInterval ?? '-')},
-            {label: 'Age', value: part.timeSinceLastService + ' / ' + (part.timeServiceInterval ?? '-')},
-          ]}/>
-          <Button size="big" variant="service" onClick={openModalHandler}>
-            Service
-          </Button>
-        </Card>
-        {modalIsOpen === true && (
-          <Modal
-            title="Service Part"
-            onClose={closeModalHandler}
-          >
-            <ServicePart partId={part.id} onSuccess={closeModalHandler}/>
-          </Modal>
-        )}
-      </>
-    );
-  } else {
-    return <p> something went wrong</p>
-  }
+    const retirePartHandler = () => {
+        partsDispatcher({type: "INVALIDATE_PARTS"});
+        setIsRetired(true);
+    }
+
+    if (part) {
+        return (
+            <>
+                <HeaderBig image={Image} alt="image of a part" label={part.partType}
+                           description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`}>
+                    {part.modelName}
+                </HeaderBig>
+                <Card>
+                    <h3>Wear stats</h3>
+                    <Stats stats={[
+                        {label: 'Distance', value: part.totalDistance + ' / ' + (part.distanceDurability ?? '-')},
+                        {label: 'Ride time', value: part.totalRideTime + ' / ' + (part.rideTimeDurability ?? '-')},
+                        {label: 'Age', value: part.totalTime + ' / ' + (part.timeDurability ?? '-')},
+                    ]}/>
+                    <Button size="big" onClick={retire}>{isRetired ? "Retired" :"Retire"}</Button>
+
+                </Card>
+                <Card>
+                    <h3>Service stats</h3>
+                    <Stats stats={[
+                        {
+                            label: 'Distance',
+                            value: part.distanceSinceService + ' / ' + (part.distanceServiceInterval ?? '-')
+                        },
+                        {
+                            label: 'Ride time',
+                            value: part.rideTimeSinceService + ' / ' + (part.rideTimeServiceInterval ?? '-')
+                        },
+                        {label: 'Age', value: part.timeSinceLastService + ' / ' + (part.timeServiceInterval ?? '-')},
+                    ]}/>
+                    <Button size="big" variant="service" onClick={openModalHandler}>
+                        Service
+                    </Button>
+                </Card>
+                {modalIsOpen === true && (
+                    <Modal
+                        title="Service Part"
+                        onClose={closeModalHandler}
+                    >
+                        <ServicePart partId={part.id} onSuccess={closeModalHandler}/>
+                    </Modal>
+                )}
+            </>
+        );
+    } else {
+        return <p> something went wrong</p>
+    }
 };
 
 export default PartView;

@@ -8,7 +8,16 @@ const Input = React.forwardRef((props, ref) => {
       <label className={classes.label} htmlFor={props.name}>
         {props.name}
       </label>
-      <input
+      {props.type === "textarea" ? <textarea rows={5} className={classes.textarea}
+        required={props.isRequired || false}
+        name={props.name}
+        id={props.name}
+        placeholder={props.placeholder || ""}
+        maxLength={props.maxLength}
+        value={props.value}
+        onChange={props.onChange}
+        ref={ref}
+      /> : <input
         required={props.isRequired || false}
         className={classes.input}
         type={props.type || "text"}
@@ -19,19 +28,20 @@ const Input = React.forwardRef((props, ref) => {
         value={props.value}
         onChange={props.onChange}
         ref={ref}
-      />
+      />}
+
     </div>
   );
 
 
 });
 Input.propTypes = {
-    name: PropTypes.string.isRequired,
-    maxLength: PropTypes.number,
-    placeholder: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  maxLength: PropTypes.number,
+  placeholder: PropTypes.string,
 };
 
 Input.defaultProps = {
-    maxLength: 200,
+  maxLength: 200,
 };
 export default Input;

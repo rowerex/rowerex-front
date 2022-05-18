@@ -4,7 +4,7 @@ import Image from "../assets/images/vector.png";
 import Parts from "../components/Parts/Parts";
 import Modal from "../components/UI/Modal/Modal";
 import Button from "../components/UI/Button/Button";
-import CreateNewPart from "../components/Forms/CreateNewPart/CreateNewPart";
+import CreateNewPart from "../components/Forms/CreateNewPart";
 
 const PartsView = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);

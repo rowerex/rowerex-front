@@ -13,6 +13,11 @@
   }
 }
 
+.textarea {
+  @extend .input;
+  height: inherit;
+}
+
 .label {
   @extend .label_medium;
   position: absolute;

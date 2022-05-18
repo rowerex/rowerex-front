@@ -4,7 +4,7 @@ import Dropdown from "../UI/Input/Dropdown";
 import useHttp from "../../hooks/useHttp";
 import PartsContext from "../../store/PartsContext";
 import Modal from "../UI/Modal/Modal";
-import CreateNewPart from "../Forms/CreateNewPart/CreateNewPart";
+import CreateNewPart from "../Forms/CreateNewPart";
 
 const InstallPart = (props) => {
     const {partsListIsLoading, partsListIsError, sendRequest: getPartsList} = useHttp();

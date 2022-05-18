@@ -5,11 +5,22 @@ import Card from "../components/UI/Card";
 import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
+import Button from "../components/UI/Button/Button";
+import Modal from "../components/UI/Modal/Modal";
+import ServicePart from "../components/Forms/ServicePart";
 
 const PartView = () => {
   const {partId} = useParams();
   const {isLoading, error, sendRequest: getPart} = useHttp();
   const [part, setPart] = useState({});
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const closeModalHandler = () => {
+    setModalIsOpen(false);
+  };
+  const openModalHandler = () => {
+    setModalIsOpen(true);
+  };
 
   useEffect(() => {
     const loadPart = (loadedPart) => {
@@ -42,7 +53,18 @@ const PartView = () => {
             {label: 'Ride time', value: part.rideTimeSinceService + ' / ' + (part.rideTimeServiceInterval ?? '-')},
             {label: 'Age', value: part.timeSinceLastService + ' / ' + (part.timeServiceInterval ?? '-')},
           ]}/>
+          <Button size="big" variant="service" onClick={openModalHandler}>
+            Service
+          </Button>
         </Card>
+        {modalIsOpen === true && (
+          <Modal
+            title="Service Part"
+            onClose={closeModalHandler}
+          >
+            <ServicePart partId={part.id} onSuccess={closeModalHandler}/>
+          </Modal>
+        )}
       </>
     );
   } else {

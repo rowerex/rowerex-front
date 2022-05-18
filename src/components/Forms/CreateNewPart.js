@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
-import Dropdown from "../../UI/Input/Dropdown";
-import Input from "../../UI/Input/Input";
-import Button from "../../UI/Button/Button";
-import useTypes from "../../../services/useTypes";
+import Dropdown from "../UI/Input/Dropdown";
+import Input from "../UI/Input/Input";
+import Button from "../UI/Button/Button";
+import useTypes from "../../services/useTypes";
 import classes from "./Form.module.scss";
-import useHttp from "../../../hooks/useHttp";
-import PartsContext from "../../../store/PartsContext";
+import useHttp from "../../hooks/useHttp";
+import PartsContext from "../../store/PartsContext";
 
 const CreateNewPart = (props) => {
   const {isLoading, error, sendRequest} = useHttp();

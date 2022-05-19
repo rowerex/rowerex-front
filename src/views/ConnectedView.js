@@ -32,7 +32,7 @@ const ConnectedView = () => {
             {!connected ? <p>Loading...</p> : <>
             <p>Successfully connected with Strava!</p>
             <NavLink to="/bikes">
-                <Button sixe="big">Ok</Button>
+                <Button size="big">Ok</Button>
             </NavLink>
             </> }
         </>

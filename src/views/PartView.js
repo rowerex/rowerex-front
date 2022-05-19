@@ -13,14 +13,17 @@ import PartsContext from "../store/PartsContext";
 const PartView = () => {
     const {partId} = useParams();
     const {isLoading, error, sendRequest: getPart} = useHttp();
-    const [part, setPart] = useState({});
+    const [part, setPart] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [partIsInvalidated, setPartIsInvalidated] = useState(false);
+
     const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
     const {partsDispatcher} = useContext(PartsContext)
     const [isRetired, setIsRetired] = useState(false);
 
     const closeModalHandler = () => {
         setModalIsOpen(false);
+        setPartIsInvalidated(true);
     };
     const openModalHandler = () => {
         setModalIsOpen(true);
@@ -29,12 +32,13 @@ const PartView = () => {
     useEffect(() => {
         const loadPart = (loadedPart) => {
             setPart(loadedPart);
+            setPartIsInvalidated(false);
         }
         getPart({
             method: "GET",
             path: "/parts/" + partId,
         }, loadPart)
-    }, [getPart])
+    }, [getPart, partIsInvalidated])
 
     const retire = () => {
         sendPart({
@@ -47,8 +51,14 @@ const PartView = () => {
         partsDispatcher({type: "INVALIDATE_PARTS"});
         setIsRetired(true);
     }
-
     if (part) {
+        console.log(part)
+        const history = part.history.map((event) => (
+            <> <p>{event.date}</p>
+                <p>{event.type}</p>
+                <p>{event.description}</p>
+            </>
+        ))
         return (
             <>
                 <HeaderBig image={Image} alt="image of a part" label={part.partType}
@@ -62,8 +72,7 @@ const PartView = () => {
                         {label: 'Ride time', value: part.totalRideTime + ' / ' + (part.rideTimeDurability ?? '-')},
                         {label: 'Age', value: part.totalTime + ' / ' + (part.timeDurability ?? '-')},
                     ]}/>
-                    <Button size="big" onClick={retire}>{isRetired ? "Retired" :"Retire"}</Button>
-
+                    <Button size="big" onClick={retire}>{isRetired ? "Retired" : "Retire"}</Button>
                 </Card>
                 <Card>
                     <h3>Service stats</h3>
@@ -81,6 +90,11 @@ const PartView = () => {
                     <Button size="big" variant="service" onClick={openModalHandler}>
                         Service
                     </Button>
+                </Card>
+                <Card>
+                    <h3>Part history</h3>
+                    {history}
+                    <Button size="big" onClick={retire}>{isRetired ? "Retired" : "Retire"}</Button>
                 </Card>
                 {modalIsOpen === true && (
                     <Modal

@@ -59,12 +59,28 @@ const PartView = () => {
                 <p>{event.description}</p>
             </>
         ))
+        let problems = <p>No problems found.</p>
+        if (part.problems.length > 0) {
+            problems = part.problems.map((type) => (
+                <>
+                    <h4>{type === "wear" ? "wear limit exceeded" : "service interval exceeded"}</h4>
+                    {type.exceptions.map((exception)=> (
+                        <p>{`${exception.type}: ${exception.text}`}</p>
+                        ))
+                    }
+                </>))
+
+        }
         return (
             <>
                 <HeaderBig image={Image} alt="image of a part" label={part.partType}
                            description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`}>
                     {part.modelName}
                 </HeaderBig>
+                    <Card>
+                        <h3>Problems</h3>
+                        {problems}
+                    </Card>
                 <Card>
                     <h3>Wear stats</h3>
                     <Stats stats={[

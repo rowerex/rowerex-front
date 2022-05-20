@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as TaskIcon } from "../../../assets/icons/menu-task.svg";
 import { ReactComponent as BikeIcon } from "../../../assets/icons/menu-bike.svg";
 import { ReactComponent as PartIcon } from "../../../assets/icons/menu-part.svg";
 import { ReactComponent as UserIcon } from "../../../assets/icons/menu-user.svg";
@@ -17,20 +16,7 @@ const Navigation = () => {
               ? `${classes.navigationItem_active}`
               : `${classes.navigationItem}`
           }
-          exact="true"
           to="/"
-        >
-          <TaskIcon />
-          <p>Tasks</p>
-        </NavLink>
-
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? `${classes.navigationItem_active}`
-              : `${classes.navigationItem}`
-          }
-          to="/bikes"
         >
           <BikeIcon />
           <p>Bikes</p>

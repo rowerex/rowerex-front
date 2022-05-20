@@ -11,6 +11,7 @@ import ConnectedView from "./views/ConnectedView";
 import PartView from "./views/PartView";
 import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
+import UserVIew from "./views/UserView";
 
 function App() {
     const {token, setToken} = useToken();
@@ -34,12 +35,14 @@ function App() {
     return (
         <div className="App">
             <Routes>
-                <Route exact path="/login" element={token ? <Navigate to={"/"} replace={true}/> : <LoginView setToken={setToken}/>}/>
+                <Route exact path="/login" element={<LoginView setToken={setToken}/>}/>
                 <Route exact path="/register" element={token ? <Navigate to={"/"} replace={true}/> : <RegisterView />}/>
 
                 {/*<Route exact path="/" element={!token ? <Navigate to={"/login"} replace={true}/> : <TasksView/>}/>*/}
                 <Route exact path="/" element={!token ? <Navigate to={"/login"} replace={true}/> : <BikesView/>}/>
                 <Route exact path="/parts" element={!token ? <Navigate to={"/login"} replace={true}/> : <PartsView/>}/>
+                <Route exact path="/user" element={!token ? <Navigate to={"/login"} replace={true}/> : <UserVIew/>}/>
+
                 <Route exact path="/bikes/:bikeId"
                        element={!token ? <Navigate to={"/login"} replace={true}/> : <BikeView/>}/>
                 <Route exact path="/parts/:partId"

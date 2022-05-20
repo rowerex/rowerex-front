@@ -13,6 +13,7 @@ const LoginView = ({setToken}) => {
 
     const loginUserHandler = (token) => {
         setToken(token);
+        navigate("/");
     }
 
     const handleSubmit = async (e) => {

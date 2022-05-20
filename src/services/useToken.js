@@ -10,6 +10,11 @@ export default function useToken() {
   const [token, setToken] = useState(getToken());
 
   const saveToken = userToken => {
+    if (!userToken ) {
+      localStorage.removeItem('token');
+      setToken(false);
+      return;
+    }
     localStorage.setItem('token', JSON.stringify(userToken));
     setToken(userToken.token);
   };

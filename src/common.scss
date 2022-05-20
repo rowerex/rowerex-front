@@ -11,6 +11,11 @@ $secondary-background: linear-gradient(
 $text-color: #000000;
 $text-color-light: #ffffff;
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 h3 {
   font-style: normal;
   font-weight: 900;

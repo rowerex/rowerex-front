@@ -3,6 +3,7 @@ import useHttp from "../hooks/useHttp";
 import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Button/Button";
 import {useNavigate} from "react-router-dom";
+import classes from "./view.module.scss";
 
 const RegisterView = () => {
     const {isLoading, error, sendRequest: sendRegisterRequest} = useHttp();
@@ -54,7 +55,7 @@ const RegisterView = () => {
     }
 
     return (
-        <>
+      <div className={classes.formContainer}>
             <h1>Register:</h1>
             <form onSubmit={handleSubmit}>
                 <Input
@@ -79,7 +80,7 @@ const RegisterView = () => {
                     onChange={passwordCheckChangeHandler}
                 />
                 {passwordsDontMatch && <p>Entered passwords don't match.</p>}
-                <div>
+                <div className={classes.buttonContainer}>
                     <Button type="submit" size="big">
                         Register
                     </Button>
@@ -88,7 +89,7 @@ const RegisterView = () => {
                     </Button>
                 </div>
             </form>
-        </>
+        </div>
     );
 }
 export default RegisterView;

@@ -3,6 +3,7 @@ import useHttp from "../hooks/useHttp";
 import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Button/Button";
 import {useNavigate} from "react-router-dom";
+import classes from "./view.module.scss";
 
 const LoginView = ({setToken}) => {
     const {isLoading, error, sendRequest: sendLoginRequest} = useHttp();
@@ -48,8 +49,8 @@ const LoginView = ({setToken}) => {
     }
 
     return (
-        <>
-            <h1>Please Log In</h1>
+        <div className={classes.formContainer}>
+            <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
                 <Input
                     isRequired={true}
@@ -64,7 +65,7 @@ const LoginView = ({setToken}) => {
                     value={password.value}
                     onChange={passwordChangeHandler}
                 />
-                <div>
+                <div className={classes.buttonContainer}>
                     <Button type="submit" size="big">
                         Login
                     </Button>
@@ -73,7 +74,7 @@ const LoginView = ({setToken}) => {
                     </Button>
                 </div>
             </form>
-        </>
+        </div>
     );
 }
 export default LoginView;

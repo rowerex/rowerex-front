@@ -1,4 +1,7 @@
 import React from "react";
+import {ReactComponent as BellActive} from "../../../assets/icons/bell-active.svg";
+import {ReactComponent as BellInactive} from "../../../assets/icons/bell-inactive.svg";
+
 import classes from "./ListElement.module.scss";
 import Card from "../Card";
 import Stats from "../Stats/Stats";
@@ -18,6 +21,7 @@ const ListElement = (props) => {
           alt={`photo of ${props.title}`}
         />
       </NavLink>
+      {props.problem ? <BellActive/> : <BellInactive/>}
       <div className={classes.content}>
         <NavLink
           exact="true"

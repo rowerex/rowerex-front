@@ -34,6 +34,7 @@ const Parts = () => {
         image={image}
         title={part.modelName}
         label={part.partType}
+        problem={part.hasAProblem}
         stats={[
           {
             label: "Ride time to service",

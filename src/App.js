@@ -3,7 +3,6 @@ import "./App.scss";
 import Navigation from "./components/Layout/Navigation/Navigation";import BikesView from "./views/BikesView";
 import PartsView from "./views/PartsView";
 import BikeView from "./views/BikeView";
-import useToken from "./services/useToken";
 import {useContext, useEffect} from "react";
 import UserContext from "./store/UserContext";
 import useHttp from "./hooks/useHttp";
@@ -12,9 +11,11 @@ import PartView from "./views/PartView";
 import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
 import UserVIew from "./views/UserView";
+import TokenContext from "./store/TokenContext";
 
 function App() {
-    const {token, setToken} = useToken();
+    // const {token, setToken} = useToken();
+    const {token, setToken} = useContext(TokenContext)
     const {user, userDispatcher} = useContext(UserContext);
     const {isLoading, error, sendRequest} = useHttp();
 
@@ -37,12 +38,9 @@ function App() {
             <Routes>
                 <Route exact path="/login" element={<LoginView setToken={setToken}/>}/>
                 <Route exact path="/register" element={token ? <Navigate to={"/"} replace={true}/> : <RegisterView />}/>
-
-                {/*<Route exact path="/" element={!token ? <Navigate to={"/login"} replace={true}/> : <TasksView/>}/>*/}
                 <Route exact path="/" element={!token ? <Navigate to={"/login"} replace={true}/> : <BikesView/>}/>
                 <Route exact path="/parts" element={!token ? <Navigate to={"/login"} replace={true}/> : <PartsView/>}/>
                 <Route exact path="/user" element={!token ? <Navigate to={"/login"} replace={true}/> : <UserVIew/>}/>
-
                 <Route exact path="/bikes/:bikeId"
                        element={!token ? <Navigate to={"/login"} replace={true}/> : <BikeView/>}/>
                 <Route exact path="/parts/:partId"

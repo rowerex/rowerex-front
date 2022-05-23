@@ -1,12 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import Header from "../components/Layout/Header/Header";
 import Image from "../assets/images/vector.png";
 import Button from "../components/UI/Button/Button";
 import {useNavigate} from "react-router-dom";
-import useToken from "../services/useToken";
+import TokenContext from "../store/TokenContext";
 
 const UserVIew = () => {
-    const {setToken} = useToken();
+  const {setToken} = useContext(TokenContext)
     const navigate = useNavigate();
 
     const handleLogoutClick = () => {

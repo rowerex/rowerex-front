@@ -48,8 +48,8 @@
     box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15),
     0 1px 3px rgba(0, 0, 0, 0.3);
     position: fixed;
-    bottom: 90px;
-    right: 8px;
+    bottom: 78px;
+    right: calc(50vw - 200px);
   }
 }
 

@@ -83,17 +83,6 @@ const BikeView = () => {
     setBikeIsValid(false);
 
   }
-  // if (isLoading) {
-  //   return <p> Loading bike</p>
-  // }
-
-  // const detachButtonClickHandler = () => {
-  //     setSelectedPart({
-  //         id: part.id,
-  //         name: part.name
-  //     })
-  //     openDetachPartModalHandler();
-  // }
 
   if (bike.parts) {
     return (
@@ -121,6 +110,7 @@ const BikeView = () => {
                   key={part.id}
                   title={part.name}
                   label={part.modelName}
+                  problem={part.hasAProblem}
                   buttons={[<Button variant="service">Service</Button>,
                     <Button variant="detach" priority="secondary" onClick={() => {
                       setSelectedPart({

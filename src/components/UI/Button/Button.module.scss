@@ -5,6 +5,7 @@
   background: $yellow;
   border-radius: 100px;
   padding: 3px 16px 1px;
+  margin: 24px;
   height: 30px;
   border: none;
   outline: none;
@@ -22,7 +23,9 @@
     font-size: 16px;
     line-height: 20px;
     text-align: center;
-    width: 312px;
+    width: 100%;
+    min-width: 312px;
+    max-width: 402px;
     height: 56px;
     background: $yellow;
   }
@@ -40,7 +43,6 @@
   }
   &_fab {
     @extend .button_big;
-    min-width: 140px;
     border-radius: 16px;
     text-transform: none;
     gap: 6px;

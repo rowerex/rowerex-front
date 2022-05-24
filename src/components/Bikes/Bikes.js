@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from "react";
-import ListElement from "../UI/ListElement/ListElement";
 import image from "../../assets/images/Wilier-Filante-SLR.jpg";
 import BikesContext from "../../store/BikesContext";
 import useHttp from "../../hooks/useHttp";
+import NewListElement from "../UI/ListElement/NewListElement";
 
 const Bikes = () => {
   const {bikes, bikesDispatcher} = useContext(BikesContext)
@@ -26,19 +26,14 @@ const Bikes = () => {
     return <> <p>Loading bikes...</p></>;
   }
   console.log(bikes);
-  const bikeList = bikes.bikesList.map((bike) => (<ListElement
+  const bikeList = bikes.bikesList.map((bike) => (<NewListElement
     link={`/bikes/${bike.id}`}
     id={bike.id}
     key={bike.id}
     image={image}
     title={bike.bikeName}
+    label={bike.totalDistance}
     problem={bike.hasAProblem}
-    stats={[{
-      key: bike.id + '-distance', label: 'Total distance', value: bike.totalDistance,
-    }, {
-      key: bike.id + '-ride-time', label: 'Total ride time', value: bike.totalRideTime,
-    },]}
-    buttons={[]}
   />))
 
   return (

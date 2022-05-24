@@ -3,7 +3,7 @@ import useHttp from "../hooks/useHttp";
 import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Button/Button";
 import {useNavigate} from "react-router-dom";
-import classes from "./view.module.scss";
+import classes from "./LoginView.module.scss";
 
 const LoginView = ({setToken}) => {
     const {isLoading, error, sendRequest: sendLoginRequest} = useHttp();

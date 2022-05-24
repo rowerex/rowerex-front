@@ -5,7 +5,7 @@ import Parts from "../components/Parts/Parts";
 import Modal from "../components/UI/Modal/Modal";
 import Button from "../components/UI/Button/Button";
 import CreateNewPart from "../components/Forms/CreateNewPart";
-import classes from "./view.module.scss";
+import classes from "./LoginView.module.scss";
 
 const PartsView = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);

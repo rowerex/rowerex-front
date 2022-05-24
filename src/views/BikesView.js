@@ -1,6 +1,4 @@
 import React, {useState, useEffect, useContext} from "react";
-import Header from "../components/Layout/Header/Header";
-import Image from "../assets/images/vector.png";
 import Bikes from "../components/Bikes/Bikes";
 import Modal from "../components/UI/Modal/Modal";
 import ConnectWithStrava from "../components/Modals/ConnectWithStrava/ConnectWithStrava";
@@ -9,6 +7,7 @@ import StravaBikes from "../components/Modals/StravaBikes";
 import BikesProvider from "../store/BikesProvider";
 import BikesContext from "../store/BikesContext";
 import Button from "../components/UI/Button/Button";
+import classes from './ListView.module.scss';
 
 const BikesView = () => {
   const {bikes} = useContext(BikesContext)
@@ -37,9 +36,13 @@ const BikesView = () => {
   };
   return (
     <BikesProvider>
-      <Header image={Image} alt="cat looking at the bike.">
+      <div className={classes.viewContainer}>
+      <h2>
         My Bikes
-      </Header>
+      </h2>
+      <Button size="big" variant="add" onClick={openAddBikeModalHandler}>
+        Add bike
+      </Button>
       {connectModalIsOpen === true && (
         <Modal
           title="Connect with Strava"
@@ -57,9 +60,7 @@ const BikesView = () => {
         </Modal>
       )}
       <Bikes/>
-      <Button size="fab" variant="add" onClick={openAddBikeModalHandler}>
-        Add bike
-      </Button>
+      </div>
     </BikesProvider>
   );
 };

@@ -111,8 +111,8 @@ const BikeView = () => {
                   title={part.name}
                   label={part.modelName}
                   problem={part.hasAProblem}
-                  buttons={[<Button variant="service">Service</Button>,
-                    <Button variant="detach" priority="secondary" onClick={() => {
+                  buttons={[
+                    <Button variant="detach" onClick={() => {
                       setSelectedPart({
                         id: part.id,
                         name: part.name

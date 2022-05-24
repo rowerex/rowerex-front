@@ -1,7 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import ListElement from "../UI/ListElement/ListElement";
 import image from "../../assets/images/sram-X1X-horizon-rear-dereailleur.png";
-import Button from "../UI/Button/Button";
 import PartsContext from "../../store/PartsContext";
 import useHttp from "../../hooks/useHttp";
 
@@ -45,7 +44,6 @@ const Parts = () => {
             value: part.distanceToService,
           },
         ]}
-        buttons={[<Button key={`service-button-{$part.id}`} variant="service">Service</Button>]}
       />
   ));
   return <ul>{partList}</ul>;

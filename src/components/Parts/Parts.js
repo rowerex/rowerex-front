@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from "react";
-import ListElement from "../UI/ListElement/ListElement";
 import image from "../../assets/images/sram-X1X-horizon-rear-dereailleur.png";
 import PartsContext from "../../store/PartsContext";
 import useHttp from "../../hooks/useHttp";
+import NewListElement from "../UI/ListElement/NewListElement";
 
 const Parts = () => {
   const {parts, partsDispatcher} = useContext(PartsContext)
@@ -26,7 +26,7 @@ const Parts = () => {
     return <p>Loading parts...</p>;
   }
   const partList = parts.partsList.map((part) => (
-      <ListElement
+      <NewListElement
         link={`/parts/${part.id}`}
         id={part.id}
         key={part.id}
@@ -34,16 +34,6 @@ const Parts = () => {
         title={part.modelName}
         label={part.partType}
         problem={part.hasAProblem}
-        stats={[
-          {
-            label: "Ride time to service",
-            value: part.rideTimeToService,
-          },
-          {
-            label: "Distance to service",
-            value: part.distanceToService,
-          },
-        ]}
       />
   ));
   return <ul>{partList}</ul>;

@@ -57,7 +57,8 @@ const RegisterView = () => {
     return (
       <div className={classes.formContainer}>
             <h1>Register:</h1>
-            <form onSubmit={handleSubmit}>
+          <p className={classes.content}>Never lose access to your gear<br/>and bike care reminders</p>
+              <form onSubmit={handleSubmit}>
                 <Input
                     isRequired={true}
                     type="email"

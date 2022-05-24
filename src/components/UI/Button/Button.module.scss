@@ -1,8 +1,8 @@
 @import "../../../common.scss";
 
 .button {
-  color: $text-color-light;
-  background: $primary-color;
+  color: $black;
+  background: $yellow;
   border-radius: 100px;
   padding: 3px 16px 1px;
   height: 30px;
@@ -15,26 +15,26 @@
   font-weight: 500;
   font-size: 11px;
   letter-spacing: 0.8px;
-  text-transform: uppercase;
   cursor: pointer;
-  &_secondary {
-    background-color: $secondary-color;
-    color: $primary-color;
-  }
   &_big {
-    letter-spacing: 0.1px;
-    text-transform: none;
-    font-weight: 500;
-    font-size: 14px;
-    height: 40px;
-    min-width: 112px;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    width: 312px;
+    height: 56px;
+    background: $yellow;
+  }
+  &_secondary {
+    background: $light-gray;
   }
   &_disabled {
-    background-color: rgba(31, 31, 31, 0.12);
+    background: rgba(31, 31, 31, 0.12);
     color: #636363;
   }
   &_error {
-        background-color:  #BA1B1B;
+        background:  #BA1B1B;
     color: white;
 
   }

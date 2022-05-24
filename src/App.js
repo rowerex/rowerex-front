@@ -12,9 +12,9 @@ import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
 import UserVIew from "./views/UserView";
 import TokenContext from "./store/TokenContext";
+import LogoHeader from "./components/Layout/LogoHeader/LogoHeader";
 
 function App() {
-    // const {token, setToken} = useToken();
     const {token, setToken} = useContext(TokenContext)
     const {user, userDispatcher} = useContext(UserContext);
     const {isLoading, error, sendRequest} = useHttp();
@@ -35,6 +35,7 @@ function App() {
 
     return (
         <div className="App">
+            <LogoHeader/>
             <Routes>
                 <Route exact path="/login" element={<LoginView setToken={setToken}/>}/>
                 <Route exact path="/register" element={token ? <Navigate to={"/"} replace={true}/> : <RegisterView />}/>

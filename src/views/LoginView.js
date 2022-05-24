@@ -51,9 +51,12 @@ const LoginView = ({setToken}) => {
     return (
         <div className={classes.formContainer}>
             <h1>Log In</h1>
+            <p className={classes.content}>Never lose access to your gear<br/>and bike care reminders
+            </p>
             <form onSubmit={handleSubmit}>
                 <Input
                     isRequired={true}
+                    autocomplete="username"
                     name="username"
                     value={username.value}
                     onChange={usernameChangeHandler}
@@ -62,6 +65,7 @@ const LoginView = ({setToken}) => {
                     isRequired={true}
                     name="password"
                     type="password"
+                    autocomplete="current-password"
                     value={password.value}
                     onChange={passwordChangeHandler}
                 />

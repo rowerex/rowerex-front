@@ -3,17 +3,30 @@ $secondary-color: #cde9e1;
 $background-color: #ffffff;
 $outline-color: #6f7976;
 $secondary-background: linear-gradient(
-    0deg,
-    rgba(0, 107, 92, 0.08),
-    rgba(0, 107, 92, 0.08)
-  ),
-  #fafdfa;
+                0deg,
+                rgba(0, 107, 92, 0.08),
+                rgba(0, 107, 92, 0.08)
+),
+#fafdfa;
 $text-color: #000000;
 $text-color-light: #ffffff;
+
+$black: #1D1D1B;
+$yellow: linear-gradient(97.66deg, #FFEB00 0%, #F3E100 100%);
+$white: #FFFFFF;
+$light-gray: #E1E1E1;
+$dark-gray: #696969;
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+h1 {
+  padding: 24px 0 8px 0;
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
 }
 
 h3 {
@@ -29,14 +42,14 @@ h3 {
 }
 
 .label {
-  font-weight: normal;
+  font-style: normal;
+  font-weight: 600;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 15px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   margin: 0;
+  color: $dark-gray;
 
-  color: $text-color;
   &_green {
     @extend .label;
     font-weight: 500;
@@ -47,8 +60,10 @@ h3 {
     @extend .label;
     font-size: 10px;
     line-height: 14px;
-    color: #4a635e;
+    text-transform: none;
+    color: $black;;
   }
+
   &_medium {
     @extend .label;
     text-transform: none;
@@ -64,9 +79,14 @@ h3 {
 }
 
 .content {
+  margin: 0;
+  padding: 0 0 24px 0;
+  font-style: normal;
+  font-weight: 600;
   font-size: 16px;
-  line-height: 24px;
-  color: $text-color;
+  line-height: 20px;
+  color: $black;
+
   &_medium {
     @extend .content;
     font-size: 14px;
@@ -79,6 +99,7 @@ h3 {
   display: inline-block;
   width: 80px;
   height: 80px;
+
   &:after {
     content: " ";
     display: block;
@@ -87,7 +108,7 @@ h3 {
     margin: 8px;
     border-radius: 50%;
     border: 6px solid $primary-color;
-    border-color: $primary-color transparent  $primary-color transparent;
+    border-color: $primary-color transparent $primary-color transparent;
     animation: loading 1.2s linear infinite;
   }
 }

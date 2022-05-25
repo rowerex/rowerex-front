@@ -5,14 +5,14 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding: 0;
+  padding: 0 0 16px;
   position: fixed;
   bottom: 0;
   width: 100%;
   max-width: 450px;
   height: 72px;
-  margin-bottom: 10px;
   background: $black;
+  margin:  0;
 }
 
 .navigationItem {

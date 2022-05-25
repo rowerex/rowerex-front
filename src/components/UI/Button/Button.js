@@ -24,6 +24,8 @@ const Button = (props) => {
     case "fab":
       buttonClasses += " " + `${classes.button_fab}`;
       break;
+    case "switch":
+      buttonClasses += " " + `${classes.button_switch}`;
   }
 
   return (

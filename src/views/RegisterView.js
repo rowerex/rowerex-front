@@ -81,14 +81,12 @@ const RegisterView = () => {
                     onChange={passwordCheckChangeHandler}
                 />
                 {passwordsDontMatch && <p>Entered passwords don't match.</p>}
-                <div className={classes.buttonContainer}>
                     <Button type="submit" size="big">
                         Register
                     </Button>
                     <Button size="big" priority="secondary" onClick={handleLoginClick}>
                         Login
                     </Button>
-                </div>
             </form>
         </div>
     );

@@ -5,6 +5,7 @@
   height: 250px;
   color: $text-color-light;
   position: relative;
+  z-index: 2;
 }
 
 .image {
@@ -12,7 +13,7 @@
   top: 0;
   width: 100%;
   z-index: -10;
-  height: 250px;
+  height: 208px;
   overflow: hidden;
   object-fit: cover;
   margin-bottom: 1rem;
@@ -23,28 +24,29 @@
   font-size: 24px;
   line-height: 32px;
   margin: 0;
+  text-align: left;
 }
 
 .titleLabel {
   @extend .label;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.1px;
-  color: $text-color-light;
+  color: $black;
 }
 
 .description {
-  margin: 0;
-  font-weight: 900;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.1px;
-  color: $text-color-light;
+ @extend .content;
 }
-
+.container {
+  display:flex;
+}
 .wrapper {
   position: absolute;
-  bottom: 0px;
-  padding: 0 16px 28px;
+  top: 136px;
+  padding: 16px 24px 24px;
+  width: 100%;
+  height: 132px;
+  background: $yellow;
+  border-radius: 48px;
+    color: $black;
+
+
 }

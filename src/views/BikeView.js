@@ -2,15 +2,15 @@ import React, {useEffect, useState} from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
 import Image from "../assets/images/Wilier-Filante-SLR.jpg";
 import partImage from "../assets/images/sram-X1X-horizon-rear-dereailleur.png";
-import ListElement from "../components/UI/ListElement/ListElement";
 import Button from "../components/UI/Button/Button";
-import Card from "../components/UI/Card";
 import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
 import Modal from "../components/UI/Modal/Modal";
 import InstallPart from "../components/Modals/InstallPart";
 import DetachPart from "../components/Modals/DetachPart";
+import NewListElement from "../components/UI/ListElement/NewListElement";
+import classes from "./ElementView.module.scss";
 
 const DUMMY_BIKE = {
   bikeName: "Wilier Filante SLR",
@@ -52,6 +52,7 @@ const BikeView = () => {
   const [detachPartModalIsOpen, setDetachPartModalIsOpen] = useState(false);
   const [selectedPart, setSelectedPart] = useState({});
   const [bikeIsValid, setBikeIsValid] = useState(false);
+  const [bikeDetailsSection, setBikeDetailsSection] = useState("parts");
 
 
   useEffect(() => {
@@ -84,45 +85,89 @@ const BikeView = () => {
 
   }
 
+  const handlePartsClick = () => {
+    setBikeDetailsSection("parts");
+  }
+  const handleInfoClick = () => {
+    setBikeDetailsSection("info");
+  }
+
   if (bike.parts) {
+    const partsWithProblems = bike.parts.filter((part) => (part.hasAProblem === true)).map((part) => (
+      <NewListElement
+        link={`/parts/${part.id}`}
+        image={partImage}
+        key={part.id}
+        title={part.name}
+        label={part.modelName}
+        problem={part.hasAProblem}
+        buttons={[
+          <Button variant="detach" onClick={() => {
+            setSelectedPart({
+              id: part.id,
+              name: part.name
+            })
+            openDetachPartModalHandler();
+          }}>Detach</Button>]}
+      />)
+    );
+
+    const parts = bike.parts.map((part) => (
+      <NewListElement
+        link={`/parts/${part.id}`}
+        image={partImage}
+        key={part.id}
+        title={part.name}
+        label={part.modelName}
+        problem={part.hasAProblem}
+        buttons={[
+          <Button variant="detach" onClick={() => {
+            setSelectedPart({
+              id: part.id,
+              name: part.name
+            })
+            openDetachPartModalHandler();
+          }}>Detach</Button>]}
+      />)
+    );
+
     return (
       <>
-        <HeaderBig image={Image} alt="image of a bike">
+        <HeaderBig image={Image} alt="image of a bike" label={bike.totalDistance} reminders={1}>
           {bike.name}
         </HeaderBig>
-        <Card>
-          <h3>Bicycle stats</h3>
-          <Stats stats={[
-            {label: 'Total distance', value: bike.totalDistance},
-            {label: 'Total ride time', value: bike.totalRideTime},
-            {label: 'Last Ride Distance', value: DUMMY_BIKE.lastRide}, //todo get actual data
-            {label: 'Last Ride Date', value: DUMMY_BIKE.lastRideDate}, //todo get actual data
-            {label: 'Ride count', value: DUMMY_BIKE.rideCount}, //todo get actual data
-            {label: 'First ride', value: DUMMY_BIKE.firstRide}, //todo get actual data
-          ]}/>
-        </Card>
-        <ul>
-          {
-            bike.parts.map((part) => (
-                <ListElement
-                  link={`/parts/${part.id}`}
-                  image={partImage}
-                  key={part.id}
-                  title={part.name}
-                  label={part.modelName}
-                  problem={part.hasAProblem}
-                  buttons={[
-                    <Button variant="detach" onClick={() => {
-                      setSelectedPart({
-                        id: part.id,
-                        name: part.name
-                      })
-                      openDetachPartModalHandler();
-                    }}>Detach</Button>]}
-                />
-              ))
-          }
-        </ul>
+        <div className={classes.container}>
+          <section id="partsWithProblems">
+            <ul>
+              {partsWithProblems}
+            </ul>
+          </section>
+          {/*todo: move to separate component*/}
+          <div className={classes.buttonContainer}>
+            <Button size="switch" onClick={handlePartsClick}>Parts</Button>
+            <Button size="switch" onClick={handleInfoClick}>Info</Button>
+          </div>
+          {bikeDetailsSection === "parts" && <section id="parts">
+            <Button size="big" variant="add" onClick={openInstallPartModalHandler}>Install part</Button>
+
+            <ul>
+              {parts}
+            </ul>
+          </section>}
+          {bikeDetailsSection === "info" &&
+            <section>
+              <h3>Bicycle stats</h3>
+              <Stats stats={[
+                {label: 'Total distance', value: bike.totalDistance},
+                {label: 'Total ride time', value: bike.totalRideTime},
+                {label: 'Last Ride Distance', value: DUMMY_BIKE.lastRide}, //todo get actual data
+                {label: 'Last Ride Date', value: DUMMY_BIKE.lastRideDate}, //todo get actual data
+                {label: 'Ride count', value: DUMMY_BIKE.rideCount}, //todo get actual data
+                {label: 'First ride', value: DUMMY_BIKE.firstRide}, //todo get actual data
+              ]}/>
+            </section>}
+        </div>
+
         {installPartModalIsOpen === true && (
           <Modal
             title="Install part"
@@ -142,7 +187,6 @@ const BikeView = () => {
                         onSuccess={closeDetachPartModalHandler}/>
           </Modal>
         )}
-        <Button size="fab" variant="add" onClick={openInstallPartModalHandler}>Install part</Button>
 
       </>
     );

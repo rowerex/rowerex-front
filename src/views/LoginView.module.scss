@@ -1,18 +1,10 @@
 @import "./../common.scss";
 
-.buttonContainer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  height: 132px;
-}
-
 .formContainer {
   margin: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   padding-top: 24px;
   background-color: $white;
   height: calc(100vh - 72px);

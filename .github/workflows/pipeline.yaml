@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 jobs:
   build:
     name: Build
@@ -27,3 +28,14 @@ jobs:
       -
         name: Push to registry
         run: docker-compose -f prod.yml push app
+      - 
+        name: Push tag to registry
+        run: >
+          if [ $(git tag --points-at) ] ; then
+            export TAG=$(git tag --points-at)
+            export IMAGE=ghcr.io/rowerex/frontend
+            docker tag $IMAGE:latest $IMAGE:$TAG
+            docker push $IMAGE:$TAG
+          else
+            echo "No git tag at current commit - do nothing"
+          fi

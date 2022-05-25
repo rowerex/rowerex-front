@@ -37,7 +37,7 @@ function App() {
         <div className="App">
             <LogoHeader/>
             <Routes>
-                <Route exact path="/login" element={<LoginView setToken={setToken}/>}/>
+                <Route exact path="/login" element={token ? <Navigate to={"/"} replace={true}/> : <LoginView setToken={setToken}/>}/>
                 <Route exact path="/register" element={token ? <Navigate to={"/"} replace={true}/> : <RegisterView />}/>
                 <Route exact path="/" element={!token ? <Navigate to={"/login"} replace={true}/> : <BikesView/>}/>
                 <Route exact path="/parts" element={!token ? <Navigate to={"/login"} replace={true}/> : <PartsView/>}/>

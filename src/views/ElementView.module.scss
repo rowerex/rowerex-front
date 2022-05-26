@@ -5,16 +5,8 @@
   border-radius: 0 0 48px 48px;
   position: relative;
   top: -30px;
-  padding: 48px 0;
+  padding: 56px 0 48px;
   min-height: calc(100vh - 375px);
   z-index: 0;
 }
 
-.buttonContainer {
-  display: flex;
-  width: calc(100% - 48px);
-  margin: 24px;
-height: 24px;
-background: $light-gray;
-border-radius: 16px;
-}

@@ -68,8 +68,11 @@ p {
   line-height: 15px;
   text-transform: uppercase;
   margin: 0;
-  color: $dark-gray;
+  &_gray {
+    @extend .label;
 
+    color: $dark-gray;
+  }
   &_green {
     @extend .label;
     font-weight: 500;

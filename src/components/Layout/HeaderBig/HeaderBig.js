@@ -5,15 +5,15 @@ import {ReactComponent as BellInactive} from "../../../assets/icons/bell-inactiv
 import classes from "./HeaderBig.module.scss";
 
 let description = "No active reminders";
-let icon = <BellInactive/>;
+let icon = <BellInactive className={classes.icon}/>;
 
 const Header = (props) => {
   if (props.reminders > 1) {
     description = `${props.reminders} active reminders`;
-    icon = <BellActive/>;
+    icon = <BellActive className={classes.icon}/>;
   } else if (props.reminders === 1) {
     description = `${props.reminders} active reminder`;
-    icon = <BellActive/>;
+    icon = <BellActive className={classes.icon}/>;
   }
   return (
     <header className={classes.header}>

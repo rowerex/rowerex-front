@@ -1,0 +1,33 @@
+@import "../../../common.scss";
+
+.button {
+  @extend .label;
+  text-transform: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  width: calc(100%);
+  border: 2px solid $light-gray;
+  height: 28px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  &_inactive {
+    @extend .button;
+    background: $light-gray;
+
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  width: calc(100% - 48px);
+  margin: 24px;
+  height: 28px;
+  background: $light-gray;
+  border-radius: 16px;
+}

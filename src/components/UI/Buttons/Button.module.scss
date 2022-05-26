@@ -16,6 +16,7 @@
   font-size: 11px;
   letter-spacing: 0.8px;
   cursor: pointer;
+
   &_big {
     margin: 24px;
 
@@ -28,18 +29,22 @@
     height: 56px;
     background: $yellow;
   }
+
   &_secondary {
     background: $light-gray;
   }
+
   &_disabled {
     background: rgba(31, 31, 31, 0.12);
     color: #636363;
   }
+
   &_error {
-        background:  #BA1B1B;
+    background: #BA1B1B;
     color: white;
 
   }
+
   &_fab {
     @extend .button_big;
     border-radius: 16px;
@@ -51,12 +56,6 @@
     position: fixed;
     bottom: 78px;
     right: calc(50vw - 200px);
-  }
-  &_switch {
-    width: 153px;
-height: 20px;
-background: #FFFFFF;
-border-radius: 16px;
   }
 }
 

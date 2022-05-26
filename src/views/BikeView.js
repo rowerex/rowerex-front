@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
 import Image from "../assets/images/Wilier-Filante-SLR.jpg";
 import partImage from "../assets/images/sram-X1X-horizon-rear-dereailleur.png";
-import Button from "../components/UI/Button/Button";
+import Button from "../components/UI/Buttons/Button";
 import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
@@ -11,6 +11,7 @@ import InstallPart from "../components/Modals/InstallPart";
 import DetachPart from "../components/Modals/DetachPart";
 import NewListElement from "../components/UI/ListElement/NewListElement";
 import classes from "./ElementView.module.scss";
+import SwitchButton from "../components/UI/Buttons/SwitchButton";
 
 const DUMMY_BIKE = {
   bikeName: "Wilier Filante SLR",
@@ -54,7 +55,6 @@ const BikeView = () => {
   const [bikeIsValid, setBikeIsValid] = useState(false);
   const [bikeDetailsSection, setBikeDetailsSection] = useState("parts");
 
-
   useEffect(() => {
     if (!bikeIsValid) {
       const loadBike = (loadedbike) => {
@@ -82,14 +82,17 @@ const BikeView = () => {
   const closeDetachPartModalHandler = () => {
     setDetachPartModalIsOpen(false);
     setBikeIsValid(false);
-
   }
 
   const handlePartsClick = () => {
     setBikeDetailsSection("parts");
+    // setPartsButtonSize("switch");
+    // setInfoButtonSize("switchInactive");
   }
   const handleInfoClick = () => {
     setBikeDetailsSection("info");
+    // setPartsButtonSize("switchInactive");
+    // setInfoButtonSize("switch");
   }
 
   if (bike.parts) {
@@ -142,11 +145,8 @@ const BikeView = () => {
               {partsWithProblems}
             </ul>
           </section>
-          {/*todo: move to separate component*/}
-          <div className={classes.buttonContainer}>
-            <Button size="switch" onClick={handlePartsClick}>Parts</Button>
-            <Button size="switch" onClick={handleInfoClick}>Info</Button>
-          </div>
+          <SwitchButton firstOption="Parts" secondOption="Info" onFirstClick={handlePartsClick}
+                        onSecondClick={handleInfoClick}/>
           {bikeDetailsSection === "parts" && <section id="parts">
             <Button size="big" variant="add" onClick={openInstallPartModalHandler}>Install part</Button>
 

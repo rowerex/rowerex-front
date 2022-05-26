@@ -8,7 +8,7 @@ import {NavLink} from "react-router-dom";
 const NewListElement = (props) => {
 
   return (
-    <div className={classes.card}>
+    <li className={classes.card}>
       <NavLink
         exact="true"
         to={props.link}
@@ -31,11 +31,11 @@ const NewListElement = (props) => {
 
           </NavLink>
         </div>
-        <div className={classes.buttons}>
-          {props.buttons}
-        </div>
       </div>
-    </div>
+      <div className={classes.buttons}>
+        {props.buttons}
+      </div>
+    </li>
   );
 };
 

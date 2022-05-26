@@ -34,6 +34,7 @@
 
 .description {
  @extend .content;
+  padding-top: 16px;
 }
 .container {
   display:flex;
@@ -47,6 +48,8 @@
   background: $yellow;
   border-radius: 48px;
     color: $black;
+}
 
-
+.icon {
+  margin: 14px 12px 0 0;
 }

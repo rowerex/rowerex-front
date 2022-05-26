@@ -9,6 +9,7 @@ const Stats = (props) => {
           <div key={`stat-item-${index}`} className={classes.statItem}>
             <p className={classes.statsLabel}>{stat.label}</p>
             <p className={classes.statsValue}>{stat.value}</p>
+            <p className={classes.statsDescription}>{stat.description}</p>
           </div>
         )) : null
       }

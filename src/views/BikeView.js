@@ -86,13 +86,9 @@ const BikeView = () => {
 
   const handlePartsClick = () => {
     setBikeDetailsSection("parts");
-    // setPartsButtonSize("switch");
-    // setInfoButtonSize("switchInactive");
   }
   const handleInfoClick = () => {
     setBikeDetailsSection("info");
-    // setPartsButtonSize("switchInactive");
-    // setInfoButtonSize("switch");
   }
 
   if (bike.parts) {

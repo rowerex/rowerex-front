@@ -3,7 +3,6 @@
 .header {
   margin: 0;
   height: 250px;
-  color: $text-color-light;
   position: relative;
   z-index: 2;
 }
@@ -29,12 +28,12 @@
 
 .titleLabel {
   @extend .label;
-  color: $black;
 }
 
 .description {
  @extend .content;
   padding-top: 16px;
+  color: inherit;
 }
 .container {
   display:flex;
@@ -48,8 +47,14 @@
   background: $yellow;
   border-radius: 48px;
     color: $black;
+  &_black {
+    @extend .wrapper;
+    background: $black;
+    color: $white;
+  }
 }
 
 .icon {
   margin: 14px 12px 0 0;
+  color: inherit;
 }

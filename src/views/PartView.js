@@ -9,122 +9,136 @@ import Button from "../components/UI/Buttons/Button";
 import Modal from "../components/UI/Modal/Modal";
 import ServicePart from "../components/Forms/ServicePart";
 import PartsContext from "../store/PartsContext";
+import classes from "./ElementView.module.scss";
+import SwitchButton from "../components/UI/Buttons/SwitchButton";
 
 const PartView = () => {
-    const {partId} = useParams();
-    const {isLoading, error, sendRequest: getPart} = useHttp();
-    const [part, setPart] = useState(false);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [partIsInvalidated, setPartIsInvalidated] = useState(false);
+  const {partId} = useParams();
+  const {isLoading, error, sendRequest: getPart} = useHttp();
+  const [part, setPart] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [partIsInvalidated, setPartIsInvalidated] = useState(false);
 
-    const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
-    const {partsDispatcher} = useContext(PartsContext)
-    const [isRetired, setIsRetired] = useState(false);
+  const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
+  const {partsDispatcher} = useContext(PartsContext)
+  const [isRetired, setIsRetired] = useState(false);
+  const [partDetailsSection, setPartDetailsSection] = useState("history");
 
-    const closeModalHandler = () => {
-        setModalIsOpen(false);
-        setPartIsInvalidated(true);
-    };
-    const openModalHandler = () => {
-        setModalIsOpen(true);
-    };
+  const closeModalHandler = () => {
+    setModalIsOpen(false);
+    setPartIsInvalidated(true);
+  };
+  const openModalHandler = () => {
+    setModalIsOpen(true);
+  };
 
-    useEffect(() => {
-        const loadPart = (loadedPart) => {
-            setPart(loadedPart);
-            setPartIsInvalidated(false);
-        }
-        getPart({
-            method: "GET",
-            path: "/parts/" + partId,
-        }, loadPart)
-    }, [getPart, partIsInvalidated])
-
-    const retire = () => {
-        sendPart({
-            path: "/parts/" + partId + "/retire",
-            method: "POST",
-        }, retirePartHandler);
+  useEffect(() => {
+    const loadPart = (loadedPart) => {
+      setPart(loadedPart);
+      setPartIsInvalidated(false);
     }
+    getPart({
+      method: "GET",
+      path: "/parts/" + partId,
+    }, loadPart)
+  }, [getPart, partIsInvalidated])
 
-    const retirePartHandler = () => {
-        partsDispatcher({type: "INVALIDATE_PARTS"});
-        setIsRetired(true);
-    }
-    if (part) {
-        console.log(part)
-        const history = part.history.map((event) => (
-            <> <p>{event.date}</p>
-                <p>{event.type}</p>
-                <p>{event.description}</p>
-            </>
-        ))
-        let problems = <p>No problems found.</p>
-        if (part.problems.length > 0) {
-            problems = part.problems.map((type) => (
-                <>
-                    <h4>{type === "wear" ? "wear limit exceeded" : "service interval exceeded"}</h4>
-                    {type.exceptions.map((exception)=> (
-                        <p>{`${exception.type}: ${exception.text}`}</p>
-                        ))
-                    }
-                </>))
+  const retire = () => {
+    sendPart({
+      path: "/parts/" + partId + "/retire",
+      method: "POST",
+    }, retirePartHandler);
+  }
 
-        }
-        return (
-            <>
-                <HeaderBig image={Image} alt="image of a part" label={part.partType}
-                           description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`}>
-                    {part.modelName}
-                </HeaderBig>
-                    <Card>
-                        <h3>Problems</h3>
-                        {problems}
-                    </Card>
-                <Card>
-                    <h3>Wear stats</h3>
-                    <Stats stats={[
-                        {label: 'Distance', value: part.totalDistance + ' / ' + (part.distanceDurability ?? '-')},
-                        {label: 'Ride time', value: part.totalRideTime + ' / ' + (part.rideTimeDurability ?? '-')},
-                        {label: 'Age', value: part.totalTime + ' / ' + (part.timeDurability ?? '-')},
-                    ]}/>
-                    <Button size="big" onClick={retire}>{isRetired ? "Retired" : "Retire"}</Button>
-                </Card>
-                <Card>
-                    <h3>Service stats</h3>
-                    <Stats stats={[
-                        {
-                            label: 'Distance',
-                            value: part.distanceSinceService + ' / ' + (part.distanceServiceInterval ?? '-')
-                        },
-                        {
-                            label: 'Ride time',
-                            value: part.rideTimeSinceService + ' / ' + (part.rideTimeServiceInterval ?? '-')
-                        },
-                        {label: 'Age', value: part.timeSinceLastService + ' / ' + (part.timeServiceInterval ?? '-')},
-                    ]}/>
-                    <Button size="big" variant="service" onClick={openModalHandler}>
-                        Service
-                    </Button>
-                </Card>
-                <Card>
-                    <h3>Part history</h3>
-                    {history}
-                    <Button size="big" onClick={retire}>{isRetired ? "Retired" : "Retire"}</Button>
-                </Card>
-                {modalIsOpen === true && (
-                    <Modal
-                        title="Service Part"
-                        onClose={closeModalHandler}
-                    >
-                        <ServicePart partId={part.id} onSuccess={closeModalHandler}/>
-                    </Modal>
-                )}
-            </>
-        );
-    } else {
-        return <p> something went wrong</p>
+  const retirePartHandler = () => {
+    partsDispatcher({type: "INVALIDATE_PARTS"});
+    setIsRetired(true);
+  }
+  const handleHistoryClick = () => {
+    setPartDetailsSection("history");
+  }
+  const handleInfoClick = () => {
+    setPartDetailsSection("info");
+  }
+
+  if (part) {
+    console.log(part)
+
+    const history = <Stats stats={part.history.map((event) => (
+      {label: event.date, value: event.type, description: event.description}
+    ))}/>
+
+    let problems = <p>No problems found.</p>
+    if (part.problems.length > 0) {
+      problems = part.problems.map((type) => (
+        <>
+          <h4>{type === "wear" ? "wear limit exceeded" : "service interval exceeded"}</h4>
+          {type.exceptions.map((exception) => (
+            <p>{`${exception.type}: ${exception.text}`}</p>
+          ))
+          }
+        </>))
+
     }
+    return (
+      <>
+        <HeaderBig color="black" image={Image} alt="image of a part" label={part.partType}
+                   description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`}>
+          {part.modelName}
+        </HeaderBig>
+        <div className={classes.container}>
+          <section id="problems">
+            {problems}
+          </section>
+          <Button size="big" variant="service" onClick={openModalHandler}>
+            Service
+          </Button>
+          <SwitchButton firstOption="History" secondOption="Info" onFirstClick={handleHistoryClick}
+                        onSecondClick={handleInfoClick}/>
+          {partDetailsSection === "history" &&
+            <section id="history">
+              {history} </section>}
+
+          {partDetailsSection === "info" &&
+            <section id="info">
+              <Stats stats={[
+                {
+                  label: 'Distance since service',
+                  value: part.distanceSinceService + ' / ' + (part.distanceServiceInterval ?? '-')
+                },
+                {
+                  label: 'Ride time since service',
+                  value: part.rideTimeSinceService + ' / ' + (part.rideTimeServiceInterval ?? '-')
+                },
+                {
+                  label: 'Time since service',
+                  value: part.timeSinceLastService + ' / ' + (part.timeServiceInterval ?? '-')
+                },
+              ]}/>
+              <Stats stats={[
+                {label: 'Total distance', value: part.totalDistance + ' / ' + (part.distanceDurability ?? '-')},
+                {label: 'Total ride time', value: part.totalRideTime + ' / ' + (part.rideTimeDurability ?? '-')},
+                {label: 'Age', value: part.totalTime + ' / ' + (part.timeDurability ?? '-')},
+              ]}/>
+              <Button size="big" onClick={retire}>{isRetired ? "Retired" : "Retire"}</Button>
+            </section>
+          }
+        </div>
+
+        {modalIsOpen === true && (
+          <Modal
+            title="Service Part"
+            onClose={closeModalHandler}
+          >
+            <ServicePart partId={part.id} onSuccess={closeModalHandler}/>
+          </Modal>
+
+        )}
+      </>
+    );
+  } else {
+    return <p> something went wrong</p>
+  }
 };
 
 export default PartView;

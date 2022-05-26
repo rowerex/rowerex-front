@@ -1,15 +1,13 @@
-import Button from "../../UI/Button/Button";
-import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
+import Button from "../../UI/Buttons/Button";
+import React, {useEffect, useState} from "react";
 import useToken from "../../../services/useToken";
-import UserContext from "../../../store/UserContext";
 import useHttp from "../../../hooks/useHttp";
 
 const ConnectWithStrava = () => {
     const {isLoading, error, sendRequest} = useHttp();
     const [authorizationUrl, setAuthorizationUrl] = useState("");
     const [buttonClicked, setButtonClicked] = useState(false);
-    const {user, userDispatcher} = useContext(UserContext);
-    const {token, setToken} = useToken();
+    const {token} = useToken();
 
     console.log(authorizationUrl)
 

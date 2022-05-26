@@ -1,8 +1,8 @@
-import React, {useEffect, useState, useMemo} from "react";
+import React, {useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
 import useQuery from "../hooks/useQuery";
-import Button from "../components/UI/Button/Button";
+import Button from "../components/UI/Buttons/Button";
 
 const ConnectedView = () => {
     const {isLoading, error, sendRequest} = useHttp();

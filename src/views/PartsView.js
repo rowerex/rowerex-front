@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Parts from "../components/Parts/Parts";
 import Modal from "../components/UI/Modal/Modal";
-import Button from "../components/UI/Button/Button";
+import Button from "../components/UI/Buttons/Button";
 import CreateNewPart from "../components/Forms/CreateNewPart";
 import classes from "./ListView.module.scss";
 

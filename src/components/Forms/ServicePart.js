@@ -1,6 +1,6 @@
-import React, {useEffect, useRef} from "react";
+import React, {useRef} from "react";
 import Input from "../UI/Input/Input";
-import Button from "../UI/Button/Button";
+import Button from "../UI/Buttons/Button";
 import classes from "./Form.module.scss";
 import useHttp from "../../hooks/useHttp";
 
@@ -10,7 +10,7 @@ const ServicePart = (props) => {
   const descriptionRef = useRef(null);
   const serviceDateRef = useRef(null);
 
-  const serviceHandler = (partRequestData) => {
+  const serviceHandler = () => {
     props.onSuccess();
   }
 

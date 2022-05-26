@@ -1,4 +1,4 @@
-import Button from "../UI/Button/Button";
+import Button from "../UI/Buttons/Button";
 import React, {useContext, useEffect, useState} from "react";
 import useHttp from "../../hooks/useHttp";
 

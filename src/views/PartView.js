@@ -5,7 +5,7 @@ import Card from "../components/UI/Card";
 import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
-import Button from "../components/UI/Button/Button";
+import Button from "../components/UI/Buttons/Button";
 import Modal from "../components/UI/Modal/Modal";
 import ServicePart from "../components/Forms/ServicePart";
 import PartsContext from "../store/PartsContext";

@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../Card";
-import Button from "../Button/Button";
 import classes from "./Modal.module.scss";
 
 const Modal = (props) => {

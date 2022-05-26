@@ -6,7 +6,7 @@ import UserContext from "../store/UserContext";
 import StravaBikes from "../components/Modals/StravaBikes";
 import BikesProvider from "../store/BikesProvider";
 import BikesContext from "../store/BikesContext";
-import Button from "../components/UI/Button/Button";
+import Button from "../components/UI/Buttons/Button";
 import classes from './ListView.module.scss';
 
 const BikesView = () => {

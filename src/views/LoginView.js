@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import useHttp from "../hooks/useHttp";
 import Input from "../components/UI/Input/Input";
-import Button from "../components/UI/Button/Button";
+import Button from "../components/UI/Buttons/Button";
 import {useNavigate} from "react-router-dom";
 import classes from "./LoginView.module.scss";
 

@@ -155,8 +155,7 @@ const BikeView = () => {
             </ul>
           </section>}
           {bikeDetailsSection === "info" &&
-            <section>
-              <h3>Bicycle stats</h3>
+            <section id="info">
               <Stats stats={[
                 {label: 'Total distance', value: bike.totalDistance},
                 {label: 'Total ride time', value: bike.totalRideTime},

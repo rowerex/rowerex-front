@@ -1,10 +1,10 @@
 @import "../../../common.scss";
 
 .stats {
-  margin-top: 15px;
+  margin: 48px;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  flex-wrap: wrap;
 }
 
 .statItem {
@@ -12,9 +12,10 @@
 }
 
 .statsLabel {
-  @extend .label_small;
+  @extend .label_gray;
+  padding-bottom: 6px;
 }
 
 .statsValue {
-  @extend .value;
+  @extend .content;
 }

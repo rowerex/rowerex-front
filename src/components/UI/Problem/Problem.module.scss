@@ -1,0 +1,12 @@
+@import "../../../common.scss";
+
+.problem {
+   margin: 0 24px 24px;
+   display: flex;
+   gap: 8px;
+}
+
+.exception {
+   @extend .label;
+   text-transform: none;
+}

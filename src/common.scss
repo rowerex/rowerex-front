@@ -57,6 +57,13 @@ h3 {
 
 }
 
+h4 {
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+}
+
 p {
   margin: 0;
 }
@@ -68,11 +75,13 @@ p {
   line-height: 15px;
   text-transform: uppercase;
   margin: 0;
+
   &_gray {
     @extend .label;
 
     color: $dark-gray;
   }
+
   &_green {
     @extend .label;
     font-weight: 500;

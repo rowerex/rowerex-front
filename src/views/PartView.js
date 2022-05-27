@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
 import Image from "../assets/images/Wilier-Filante-SLR.jpg";
-import Card from "../components/UI/Card";
 import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
@@ -11,6 +10,7 @@ import ServicePart from "../components/Forms/ServicePart";
 import PartsContext from "../store/PartsContext";
 import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
+import Problem from "../components/UI/Problem/Problem";
 
 const PartView = () => {
   const {partId} = useParams();
@@ -68,18 +68,14 @@ const PartView = () => {
       {label: event.date, value: event.type, description: event.description}
     ))}/>
 
-    let problems = <p>No problems found.</p>
+    let problems = <></>;
     if (part.problems.length > 0) {
-      problems = part.problems.map((type) => (
-        <>
-          <h4>{type === "wear" ? "wear limit exceeded" : "service interval exceeded"}</h4>
-          {type.exceptions.map((exception) => (
-            <p>{`${exception.type}: ${exception.text}`}</p>
-          ))
-          }
-        </>))
-
+      problems = <ul>{part.problems.map((type) => (
+        <Problem type={type === "wear" ? "Wear limit exceeded" : "Service interval exceeded"}
+                 exceptions={type.exceptions}/>))}
+      </ul>
     }
+
     return (
       <>
         <HeaderBig color="black" image={Image} alt="image of a part" label={part.partType}

@@ -1,9 +1,8 @@
 import React, {useContext} from "react";
-import Header from "../components/Layout/Header/Header";
-import Image from "../assets/images/vector.png";
 import Button from "../components/UI/Buttons/Button";
 import {useNavigate} from "react-router-dom";
 import TokenContext from "../store/TokenContext";
+import classes from './ListView.module.scss';
 
 const UserVIew = () => {
   const {setToken} = useContext(TokenContext)
@@ -15,12 +14,12 @@ const UserVIew = () => {
   }
 
   return (
-    <>
-      <Header image={Image} alt="cat looking at the bike.">
+    <div className={classes.viewContainer}>
+      <h2>
         User
-      </Header>
+      </h2>
       <Button size="big" onClick={handleLogoutClick}>Logout</Button>
-    </>
+    </div>
   );
 };
 

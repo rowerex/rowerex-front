@@ -31,7 +31,8 @@
   }
 
   &_secondary {
-    background: $light-gray;
+    background: none;
+    text-decoration: underline;
   }
 
   &_disabled {
@@ -42,7 +43,6 @@
   &_error {
     background: #BA1B1B;
     color: white;
-
   }
 
   &_fab {

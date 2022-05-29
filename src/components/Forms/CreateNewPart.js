@@ -3,7 +3,6 @@ import Dropdown from "../UI/Input/Dropdown";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Buttons/Button";
 import useTypes from "../../services/useTypes";
-import classes from "./Form.module.scss";
 import useHttp from "../../hooks/useHttp";
 import PartsContext from "../../store/PartsContext";
 
@@ -55,7 +54,6 @@ const CreateNewPart = (props) => {
     }
   }, [selectedType])
 
-  let buttonClasses = classes.button; //@todo change button class to error when error occurs
   let buttonContent = "Create New Part";
 
   if (isLoading) {
@@ -68,7 +66,7 @@ const CreateNewPart = (props) => {
   }
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <form onSubmit={submitHandler}>
       <Dropdown value={selectedType} name="Type" options={typeOptions}
                 onChange={event => setSelectedType(event.value)}/>
       <Dropdown value={selectedModel} isRequired={true} options={modelOptions} name="Model"
@@ -76,7 +74,7 @@ const CreateNewPart = (props) => {
       <Input isRequired={true} name="Name" ref={nameRef}/>
       <Input isRequired={true} name="Purchase date" type="date" ref={productionDateRef}/>
 
-      <Button classes={buttonClasses} size="big" type="submit">
+      <Button size="big" type="submit">
         {buttonContent}
       </Button>
     </form>

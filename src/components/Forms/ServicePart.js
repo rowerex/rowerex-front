@@ -1,7 +1,6 @@
 import React, {useRef} from "react";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Buttons/Button";
-import classes from "./Form.module.scss";
 import useHttp from "../../hooks/useHttp";
 
 const ServicePart = (props) => {
@@ -27,7 +26,6 @@ const ServicePart = (props) => {
     }, serviceHandler);
   };
 
-  let buttonClasses = classes.button; //@todo change button class to error when error occurs
   let buttonContent = "Add Service";
 
   if (isLoading) {
@@ -40,10 +38,10 @@ const ServicePart = (props) => {
   }
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <form onSubmit={submitHandler}>
       <Input isRequired={true} name="Service date" type="date" ref={serviceDateRef}/>
       <Input isRequired={true} name="Description" ref={descriptionRef} type="textarea"/>
-      <Button classes={buttonClasses} size="big" type="submit">
+      <Button size="big" type="submit">
         {buttonContent}
       </Button>
     </form>

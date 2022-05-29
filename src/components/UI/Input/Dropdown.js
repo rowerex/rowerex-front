@@ -3,59 +3,59 @@ import Select from "react-select";
 import classes from "./Input.module.scss";
 import "../../../common.scss";
 
-const aquaticCreatures = [
-  { label: "Shark", value: "Shark" },
-  { label: "Dolphin", value: "Dolphin" },
-  { label: "Whale", value: "Whale" },
-  { label: "Octopus", value: "Octopus" },
-  { label: "Crab", value: "Crab" },
-  { label: "Lobster", value: "Lobster" },
-];
-
 const customStyles = {
   control: (provided, state) => ({
+    margin: "0 24px",
     padding: "0 8px",
     height: "42px",
-    minWidth: 240,
-    border: state.isFocused ? "2px solid #006b5c" : "1px solid #6f7976",
+    border: state.isFocused ? "2px solid #696969" : "1px solid #696969",
+
     borderRadius: "4px",
+    fontWeight: 400
   }),
 
   valueContainer: () => ({
     fontSize: 16,
-    letterSpacing: 0.5,
+    fontWeight: 400,
     position: "absolute",
     top: 10,
   }),
 
   input: () => ({
     fontSize: 16,
-    letterSpacing: 0.5,
+    letterSpacing: 0,
     position: 'absolute',
     top: 0,
-    minWidth: 200,
+    minWidth: 350,
   }),
 
-  menu: (state) => ({
-    position: "fixed",
+  menu: () => ({
+    position: "absolute",
+    top: "39px",
     zIndex: 100,
     fontSize: 16,
-    letterSpacing: 0.5,
-    width: 240,
+    fontWeight: 400,
+    margin: "0 24px",
+    width: "min(calc(100% - 48px),402px)",
+    border: "2px solid #696969",
+    borderTop: "none",
+    background: "#FFFFFF",
+    borderRadius: "0 0 4px 4px",
   }),
   indicatorsContainer: () => ({
     position: "absolute",
     top: 2,
-    right: 0,
+    right: 24,
   }),
   option: (provided, state) => ({
-    background: state.isFocused ? "#CAE1DC" : "#E6F1ED",
+    background: state.isFocused ? "#F2F2F2" : "#FFFFFF",
     lineHeight: 2,
-    paddingLeft: 20,
+    paddingLeft: 8,
+    fontWeight: 400,
   }),
   placeholder: () => ({
     fontSize: 16,
-    letterSpacing: 0.5,
+    fontWeight: 400,
     top: 20,
   }),
 };

@@ -13,38 +13,6 @@ import NewListElement from "../components/UI/ListElement/NewListElement";
 import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
 
-const DUMMY_BIKE = {
-  bikeName: "Wilier Filante SLR",
-  totalDistance: "213700 km",
-  totalRideTime: "213 h",
-  lastRide: "69 km",
-  lastRideDate: "2.01.2022",
-  rideCount: "455",
-  firstRide: "10.05.2010",
-  parts: [
-    {
-      id: "p1",
-      modelName: "Shimano Dura-ace FC-R9100",
-      partType: "Crankset",
-    },
-    {
-      id: "p2",
-      modelName: "SRAM Eagle X01 CN-EAGL-X01-A1",
-      partType: "Chain",
-    },
-    {
-      id: "p3",
-      modelName: "Marzocchi Bomber MX Comp ETA 120 mm",
-      partType: "Front Fork",
-    },
-    {
-      id: "p4",
-      modelName: "Shimano Deore XT CN-HG93",
-      partType: "chain",
-    },
-  ]
-};
-
 const BikeView = () => {
   const {bikeId} = useParams();
   const {isLoading, error, sendRequest: getBike} = useHttp();

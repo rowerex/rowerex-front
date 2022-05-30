@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
 import Image from "../assets/images/photo-bike.svg";
-import partImage from "../assets/images/sram-X1X-horizon-rear-dereailleur.png";
+import partImage from "../assets/icons/list-element-part.svg";
 import Button from "../components/UI/Buttons/Button";
 import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";

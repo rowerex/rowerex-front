@@ -70,9 +70,9 @@ const PartView = () => {
 
     let problems = <></>;
     if (part.problems.length > 0) {
-      problems = <ul>{part.problems.map((type) => (
-        <Problem type={type === "wear" ? "Wear limit exceeded" : "Service interval exceeded"}
-                 exceptions={type.exceptions}/>))}
+      problems = <ul>{part.problems.map((problem) => (
+        <Problem type={problem.type === "wear" ? "Wear limit exceeded" : "Service interval exceeded"}
+                 exceptions={problem.exceptions}/>))}
       </ul>
     }
 

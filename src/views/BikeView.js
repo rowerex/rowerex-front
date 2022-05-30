@@ -155,10 +155,8 @@ const BikeView = () => {
               <Stats stats={[
                 {label: 'Total distance', value: bike.totalDistance},
                 {label: 'Total ride time', value: bike.totalRideTime},
-                {label: 'Last Ride Distance', value: DUMMY_BIKE.lastRide}, //todo get actual data
-                {label: 'Last Ride Date', value: DUMMY_BIKE.lastRideDate}, //todo get actual data
-                {label: 'Ride count', value: DUMMY_BIKE.rideCount}, //todo get actual data
-                {label: 'First ride', value: DUMMY_BIKE.firstRide}, //todo get actual data
+                {label: 'Ride count', value: bike.totalRides},
+                {label: 'First ride', value: bike.productionDate},
               ]}/>
             </section>}
         </div>

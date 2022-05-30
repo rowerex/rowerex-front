@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import image from "../../assets/images/sram-X1X-horizon-rear-dereailleur.png";
+import image from "../../assets/icons/list-element-part.svg";
 import PartsContext from "../../store/PartsContext";
 import useHttp from "../../hooks/useHttp";
 import NewListElement from "../UI/ListElement/NewListElement";

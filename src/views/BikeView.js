@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
-import Image from "../assets/images/Wilier-Filante-SLR.jpg";
+import Image from "../assets/images/photo-bike.svg";
 import partImage from "../assets/images/sram-X1X-horizon-rear-dereailleur.png";
 import Button from "../components/UI/Buttons/Button";
 import Stats from "../components/UI/Stats/Stats";

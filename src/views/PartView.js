@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import HeaderBig from "../components/Layout/HeaderBig/HeaderBig";
-import Image from "../assets/images/Wilier-Filante-SLR.jpg";
+import Image from "../assets/images/photo-part.svg";
 import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";

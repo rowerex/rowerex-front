@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import image from "../../assets/images/Wilier-Filante-SLR.jpg";
+import image from "../../assets/icons/list-element-bike.svg";
 import BikesContext from "../../store/BikesContext";
 import useHttp from "../../hooks/useHttp";
 import NewListElement from "../UI/ListElement/NewListElement";

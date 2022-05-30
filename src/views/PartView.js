@@ -79,7 +79,7 @@ const PartView = () => {
     return (
       <>
         <HeaderBig color="black" image={Image} alt="image of a part" label={part.partType}
-                   description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`}>
+                   description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`} reminders={part.problems.length}>
           {part.modelName}
         </HeaderBig>
         <div className={classes.container}>

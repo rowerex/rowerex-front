@@ -132,7 +132,7 @@ const BikeView = () => {
 
     return (
       <>
-        <HeaderBig image={Image} alt="image of a bike" label={bike.totalDistance} reminders={1}>
+        <HeaderBig image={Image} alt="image of a bike" label={bike.totalDistance} reminders={partsWithProblems.length}>
           {bike.name}
         </HeaderBig>
         <div className={classes.container}>

@@ -1,8 +1,9 @@
 import React from "react";
 import { ReactComponent as ServiceIcon } from "../../../assets/icons/button-service.svg";
-import classes from "./Button.module.scss";
 import { ReactComponent as DetachIcon } from "../../../assets/icons/button-detach.svg";
 import { ReactComponent as AddIcon } from "../../../assets/icons/button-add.svg";
+import { ReactComponent as RetireIcon } from "../../../assets/icons/button-retire.svg";
+import classes from "./Button.module.scss";
 
 const Button = (props) => {
   let buttonClasses = `${classes.button}`+ " " +`${props.classes}` ;
@@ -36,6 +37,7 @@ const Button = (props) => {
       {props.variant === "service" && <ServiceIcon className={classes.icon} />}
       {props.variant === "detach" && <DetachIcon className={classes.icon} />}
       {props.variant === "add" && <AddIcon className={classes.icon} />}
+      {props.variant === "retire" && <RetireIcon className={classes.icon} />}
 
       {props.children}
     </button>

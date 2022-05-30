@@ -37,7 +37,7 @@ const DetachPart = (props) => {
     <>
       <p>Part to detach: <strong>{props.partName} </strong></p>
       <div className={classes.sideBySideWrapper}>
-        <Button size="big" priority="secondary" onClick={retire}>Retire</Button>
+        <Button size="big" priority="secondary" variant="retire" onClick={retire}>Retire</Button>
         <Button size="big" onClick={putOnShelf}>Put on shelf</Button>
       </div>
     </>

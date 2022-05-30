@@ -22,6 +22,7 @@ const Header = (props) => {
       <div className={wrapperClass}>
         <h2 className={classes.title}>{props.children}</h2>
         <p className={classes.titleLabel}>{props.label}</p>
+        <p className={classes.titleLabel}>{props.description}</p>
         <div className={classes.container}>
           {icon}
           <p className={classes.description}>{description}</p>

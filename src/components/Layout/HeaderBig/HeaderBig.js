@@ -3,6 +3,7 @@ import {ReactComponent as BellActive} from "../../../assets/icons/bell-active-bi
 import {ReactComponent as BellInactive} from "../../../assets/icons/bell-inactive-big.svg";
 
 import classes from "./HeaderBig.module.scss";
+import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
   let description = "No active reminders";
@@ -22,7 +23,12 @@ const Header = (props) => {
       <div className={wrapperClass}>
         <h2 className={classes.title}>{props.children}</h2>
         <p className={classes.titleLabel}>{props.label}</p>
-        <p className={classes.titleLabel}>{props.description}</p>
+        {props.link && <NavLink
+          exact="true"
+          to={props.link}
+        >
+          <p className={classes.titleLabel}>{props.description}</p></NavLink>}
+
         <div className={classes.container}>
           {icon}
           <p className={classes.description}>{description}</p>

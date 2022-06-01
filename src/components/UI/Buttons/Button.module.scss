@@ -20,6 +20,7 @@
     background: #FFF46F;
     color: $dark-gray;
   }
+
   &:active {
     color: $black;
     background: $yellow;
@@ -42,6 +43,7 @@
     background: none;
     text-decoration: underline;
     filter: none;
+
     &:hover, :active {
       background: none;
     }
@@ -69,6 +71,22 @@
     bottom: 78px;
     right: calc(50vw - 200px);
   }
+
+  &_icon {
+    background: none;
+    filter: none;
+
+    &:hover, :active {
+      background: none;
+    }
+  }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin: 0 6px 0 -6px;
+  color: inherit;
 }
 
 .icon {

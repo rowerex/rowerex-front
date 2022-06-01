@@ -3,6 +3,8 @@ import { ReactComponent as ServiceIcon } from "../../../assets/icons/button-serv
 import { ReactComponent as DetachIcon } from "../../../assets/icons/button-detach.svg";
 import { ReactComponent as AddIcon } from "../../../assets/icons/button-add.svg";
 import { ReactComponent as RetireIcon } from "../../../assets/icons/button-retire.svg";
+import {ReactComponent as CloseIcon} from "../../../assets/icons/close.svg";
+
 import classes from "./Button.module.scss";
 
 const Button = (props) => {
@@ -25,6 +27,9 @@ const Button = (props) => {
     case "fab":
       buttonClasses += " " + `${classes.button_fab}`;
       break;
+    case "icon":
+      buttonClasses += " " + `${classes.button_icon}`;
+
   }
 
   return (
@@ -38,6 +43,8 @@ const Button = (props) => {
       {props.variant === "detach" && <DetachIcon className={classes.icon} />}
       {props.variant === "add" && <AddIcon className={classes.icon} />}
       {props.variant === "retire" && <RetireIcon className={classes.icon} />}
+      {props.variant === "close" && <CloseIcon />}
+
 
       {props.children}
     </button>

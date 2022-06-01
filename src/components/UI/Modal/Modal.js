@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Modal.module.scss";
+import Button from "../Buttons/Button";
 
 const Modal = (props) => {
   const handleChildClick = (e) => {
@@ -11,6 +12,7 @@ const Modal = (props) => {
       <div className={classes.modal} onClick={handleChildClick}>
         <header>
           <h2 className={classes.title}>{props.title}</h2>
+          <Button size="icon" variant="close" classes={classes.closeButton} onClick={props.onClose}/>
         </header>
         <div className={classes.modalContent}>{props.children}</div>
       </div>

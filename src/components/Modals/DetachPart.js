@@ -1,17 +1,24 @@
 import Button from "../UI/Buttons/Button";
-import React, {useContext} from "react";
+import React, {useContext, useRef} from "react";
 import useHttp from "../../hooks/useHttp";
 import PartsContext from "../../store/PartsContext";
 import classes from "./DetachPart.module.scss";
+import Input from "../UI/Input/Input";
 
 const DetachPart = (props) => {
   const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
   const {partsDispatcher} = useContext(PartsContext)
+  const dateRef = useRef(null);
 
-  const putOnShelf = () => {
+  const putOnShelf = (e) => {
+    e.preventDefault();
+
     sendPart({
       path: "/parts/" + props.partId + "/remove",
       method: "POST",
+      body: {
+        detachTime: dateRef.current.value
+      }
     }, detachPartHandler);
   }
 
@@ -21,10 +28,15 @@ const DetachPart = (props) => {
     props.onSuccess();
   }
 
-  const retire = () => {
+  const retire = (e) => {
+    e.preventDefault();
+
     sendPart({
       path: "/parts/" + props.partId + "/retire",
       method: "POST",
+      body: {
+        removeTime: dateRef.current.value
+      }
     }, retirePartHandler);
   }
 
@@ -36,10 +48,13 @@ const DetachPart = (props) => {
   return (
     <>
       <p>Part to detach: <strong>{props.partName} </strong></p>
-      <div className={classes.sideBySideWrapper}>
-        <Button size="big" priority="secondary" variant="retire" onClick={retire}>Retire</Button>
-        <Button size="big" onClick={putOnShelf}>Put on shelf</Button>
-      </div>
+      <form>
+        <Input isRequired={true} name="select date" type="date" ref={dateRef}/>
+        <div className={classes.sideBySideWrapper}>
+          <Button size="big" type="submit" priority="secondary" variant="retire" onClick={retire}>Retire</Button>
+          <Button size="big" type="submit" onClick={putOnShelf}>Put on shelf</Button>
+        </div>
+      </form>
     </>
   );
 };

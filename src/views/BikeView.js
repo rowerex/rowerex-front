@@ -129,7 +129,7 @@ const BikeView = () => {
                 {label: 'Total distance', value: bike.totalDistance},
                 {label: 'Total ride time', value: bike.totalRideTime},
                 {label: 'Ride count', value: bike.totalRides},
-                {label: 'First ride', value: bike.productionDate},
+                {label: 'First ride', value: bike.productionDate.substring(0,10),},
               ]}/>
             </section>}
         </div>

@@ -66,7 +66,7 @@ const PartView = () => {
     console.log(part)
 
     const history = <Stats stats={part.history.map((event) => (
-      {label: event.date, value: event.type, description: event.description}
+      {label: event.date.substring(0,10), value: event.type, description: event.description}
     ))}/>
 
     let problems = <></>;

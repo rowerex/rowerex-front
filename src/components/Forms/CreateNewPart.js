@@ -71,7 +71,7 @@ const CreateNewPart = (props) => {
                 onChange={event => setSelectedType(event.value)}/>
       <Dropdown value={selectedModel} isRequired={true} options={modelOptions} name="Model"
                 onChange={event => setSelectedModel(event.value)}/>
-      <Input isRequired={true} name="Name" ref={nameRef}/>
+      <Input isRequired={true} name="description" ref={nameRef}/>
       <Input isRequired={true} name="Purchase date" type="date" ref={productionDateRef}/>
 
       <Button size="big" type="submit">

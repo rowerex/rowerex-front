@@ -12,6 +12,7 @@ import DetachPart from "../components/Modals/DetachPart";
 import NewListElement from "../components/UI/ListElement/NewListElement";
 import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
+import displayName from "../services/displayName";
 
 const BikeView = () => {
   const {bikeId} = useParams();
@@ -65,14 +66,14 @@ const BikeView = () => {
         link={`/parts/${part.id}`}
         image={partImage}
         key={part.id}
-        title={part.name}
-        label={part.modelName}
+        title={displayName(part.modelName, part.id)}
+        label={part.type}
         problem={part.hasAProblem}
         buttons={[
           <Button variant="detach" onClick={() => {
             setSelectedPart({
               id: part.id,
-              name: part.name
+              name: displayName(part.modelName, part.id)
             })
             openDetachPartModalHandler();
           }}>Detach</Button>]}
@@ -84,14 +85,14 @@ const BikeView = () => {
         link={`/parts/${part.id}`}
         image={partImage}
         key={part.id}
-        title={part.name}
-        label={part.modelName}
+        title={displayName(part.modelName, part.id)}
+        label={part.type}
         problem={part.hasAProblem}
         buttons={[
           <Button variant="detach" onClick={() => {
             setSelectedPart({
               id: part.id,
-              name: part.name
+              name: displayName(part.modelName, part.id)
             })
             openDetachPartModalHandler();
           }}>Detach</Button>]}
@@ -105,6 +106,7 @@ const BikeView = () => {
         </HeaderBig>
         <div className={classes.container}>
           <section id="partsWithProblems">
+            <h3>Parts with active reminders </h3>
             <ul>
               {partsWithProblems}
             </ul>
@@ -113,6 +115,7 @@ const BikeView = () => {
                         onSecondClick={handleInfoClick}/>
           {bikeDetailsSection === "parts" && <section id="parts">
             <Button size="big" variant="add" onClick={openInstallPartModalHandler}>Install part</Button>
+            <h3>All parts</h3>
 
             <ul>
               {parts}
@@ -120,6 +123,8 @@ const BikeView = () => {
           </section>}
           {bikeDetailsSection === "info" &&
             <section id="info">
+              <h3>Bike info</h3>
+
               <Stats stats={[
                 {label: 'Total distance', value: bike.totalDistance},
                 {label: 'Total ride time', value: bike.totalRideTime},

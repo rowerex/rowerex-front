@@ -11,6 +11,7 @@ import PartsContext from "../store/PartsContext";
 import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
 import Problem from "../components/UI/Problem/Problem";
+import displayName from "../services/displayName";
 
 const PartView = () => {
   const {partId} = useParams();
@@ -79,8 +80,9 @@ const PartView = () => {
     return (
       <>
         <HeaderBig color="black" image={Image} alt="image of a part" label={part.partType}
-                   description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`} reminders={part.problems.length} link={ part.bikeId === null ? `/parts` :`/bikes/${part.bikeId}`}>
-          {part.modelName}
+                   description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`}
+                   reminders={part.problems.length} link={part.bikeId === null ? `/parts` : `/bikes/${part.bikeId}`}>
+          {displayName(part.modelName, part.id)}
         </HeaderBig>
         <div className={classes.container}>
           <section id="problems">
@@ -98,6 +100,9 @@ const PartView = () => {
           {partDetailsSection === "info" &&
             <section id="info">
               <Stats stats={[
+                {label: 'Model', value: part.modelName},
+                {label: 'Type', value: part.partType},
+                {label: 'Description', value: part.name},
                 {
                   label: 'Distance since service',
                   value: part.distanceSinceService + ' / ' + (part.distanceServiceInterval ?? '-')
@@ -126,6 +131,7 @@ const PartView = () => {
             title="Service Part"
             onClose={closeModalHandler}
           >
+            <p>Enter service data of <strong>{displayName(part.modelName, part.id)}</strong></p>
             <ServicePart partId={part.id} onSuccess={closeModalHandler}/>
           </Modal>
 

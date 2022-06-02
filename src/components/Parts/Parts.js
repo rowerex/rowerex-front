@@ -3,6 +3,7 @@ import image from "../../assets/icons/list-element-part.svg";
 import PartsContext from "../../store/PartsContext";
 import useHttp from "../../hooks/useHttp";
 import NewListElement from "../UI/ListElement/NewListElement";
+import displayName from "../../services/displayName";
 
 const Parts = () => {
   const {parts, partsDispatcher} = useContext(PartsContext)
@@ -31,7 +32,7 @@ const Parts = () => {
         id={part.id}
         key={part.id}
         image={image}
-        title={part.modelName}
+        title={displayName(part.modelName, part.id)}
         label={part.partType}
         problem={part.hasAProblem}
       />

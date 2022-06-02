@@ -9,7 +9,7 @@ import useHttp from "../hooks/useHttp";
 import Modal from "../components/UI/Modal/Modal";
 import InstallPart from "../components/Modals/InstallPart";
 import DetachPart from "../components/Modals/DetachPart";
-import NewListElement from "../components/UI/ListElement/NewListElement";
+import ListElement from "../components/UI/ListElement/ListElement";
 import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
 import displayName from "../services/displayName";
@@ -62,7 +62,7 @@ const BikeView = () => {
 
   if (bike.parts) {
     const partsWithProblems = bike.parts.filter((part) => (part.hasAProblem === true)).map((part) => (
-      <NewListElement
+      <ListElement
         link={`/parts/${part.id}`}
         image={partImage}
         key={part.id}
@@ -70,18 +70,18 @@ const BikeView = () => {
         label={part.type}
         problem={part.hasAProblem}
         buttons={[
-          <Button variant="detach" onClick={() => {
+          <Button variant="detach" size="icon" onClick={() => {
             setSelectedPart({
               id: part.id,
               name: displayName(part.modelName, part.id)
             })
             openDetachPartModalHandler();
-          }}>Detach</Button>]}
+          }}></Button>]}
       />)
     );
 
     const parts = bike.parts.map((part) => (
-      <NewListElement
+      <ListElement
         link={`/parts/${part.id}`}
         image={partImage}
         key={part.id}
@@ -89,13 +89,13 @@ const BikeView = () => {
         label={part.type}
         problem={part.hasAProblem}
         buttons={[
-          <Button variant="detach" onClick={() => {
+          <Button variant="detach" size="icon" onClick={() => {
             setSelectedPart({
               id: part.id,
               name: displayName(part.modelName, part.id)
             })
             openDetachPartModalHandler();
-          }}>Detach</Button>]}
+          }}></Button>]}
       />)
     );
 

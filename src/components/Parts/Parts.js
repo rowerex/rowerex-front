@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react";
 import image from "../../assets/icons/list-element-part.svg";
 import PartsContext from "../../store/PartsContext";
 import useHttp from "../../hooks/useHttp";
-import NewListElement from "../UI/ListElement/NewListElement";
+import ListElement from "../UI/ListElement/ListElement";
 import displayName from "../../services/displayName";
 
 const Parts = () => {
@@ -27,7 +27,7 @@ const Parts = () => {
     return <p>Loading parts...</p>;
   }
   const partList = parts.partsList.map((part) => (
-      <NewListElement
+      <ListElement
         link={`/parts/${part.id}`}
         id={part.id}
         key={part.id}

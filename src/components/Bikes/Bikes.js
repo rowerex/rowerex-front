@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react";
 import image from "../../assets/icons/list-element-bike.svg";
 import BikesContext from "../../store/BikesContext";
 import useHttp from "../../hooks/useHttp";
-import NewListElement from "../UI/ListElement/NewListElement";
+import ListElement from "../UI/ListElement/ListElement";
 
 const Bikes = () => {
   const {bikes, bikesDispatcher} = useContext(BikesContext)
@@ -26,7 +26,7 @@ const Bikes = () => {
     return <> <p>Loading bikes...</p></>;
   }
   console.log(bikes);
-  const bikeList = bikes.bikesList.map((bike) => (<NewListElement
+  const bikeList = bikes.bikesList.map((bike) => (<ListElement
     link={`/bikes/${bike.id}`}
     id={bike.id}
     key={bike.id}

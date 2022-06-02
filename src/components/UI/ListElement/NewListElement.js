@@ -26,7 +26,7 @@ const NewListElement = (props) => {
             exact="true"
             to={props.link}
           >
-            <h3>{props.title}</h3>
+            <h4>{props.title}</h4>
             <p className={classes.label}>{props.label}</p>
 
           </NavLink>

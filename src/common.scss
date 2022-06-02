@@ -47,13 +47,11 @@ h2 {
 }
 
 h3 {
-
-  font-style: normal;
+  text-align: center;
   font-weight: 900;
-  font-size: 16px;
-  line-height: 20px;
-  margin: 0;
-  padding: 0 0 4px 0;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0 0 24px;
 
 }
 
@@ -62,6 +60,9 @@ h4 {
   font-size: 16px;
   line-height: 20px;
   margin: 0;
+  font-style: normal;
+
+  padding: 0 0 4px 0;
 }
 
 p {

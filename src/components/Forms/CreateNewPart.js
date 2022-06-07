@@ -2,20 +2,26 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 import Dropdown from "../UI/Input/Dropdown";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Buttons/Button";
-import useTypes from "../../services/useTypes";
 import useHttp from "../../hooks/useHttp";
 import PartsContext from "../../store/PartsContext";
 
 const CreateNewPart = (props) => {
-  const {isLoading, error, sendRequest} = useHttp();
+  const {isLoading, error, sendRequest: sendNewPart} = useHttp();
+  const {sendRequest: getTypes} = useHttp();
+  const {sendRequest: getModels} = useHttp();
   const { partsDispatcher} = useContext(PartsContext)
   const [selectedType, setSelectedType] = useState(null);
   const [selectedModel, setSelectedModel] = useState("");
 
   const nameRef = useRef(null);
+  const [types, setTypes] = useState([]);
   const [models, setModels] = useState([]);
   const productionDateRef = useRef(null);
-  const [types, typesError, typesLoading] = useTypes(); //todo ?? refactor to useHttp?
+
+  useEffect(() => {
+      getTypes({path: "/types"}, setTypes);
+  }, [])
+
   const typeOptions = types.map((type) => {
     const option = {};
     option.label = type.name;
@@ -43,14 +49,14 @@ const CreateNewPart = (props) => {
       productionDate: productionDateRef.current.value,
     };
 
-    sendRequest({
+    sendNewPart({
       path: "/parts", method: "POST", body: newPart
     }, addPartHandler);
   };
 
   useEffect(() => {
     if (selectedType !== null) {
-      sendRequest({path: "/models?type=" + selectedType}, setModels);
+      getModels({path: "/models?type=" + selectedType}, setModels);
     }
   }, [selectedType])
 

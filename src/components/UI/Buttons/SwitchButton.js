@@ -4,17 +4,28 @@ import classes from "./SwitchButton.module.scss";
 const SwitchButton = (props) => {
   const [firstButtonClasses, setFirstButtonClasses] = useState(classes.button);
   const [secondButtonClasses, setSecondButtonClasses] = useState(classes.button_inactive);
+  const [thirdButtonClasses, setThirdButtonClasses] = useState(classes.button_inactive);
+
 
   const handleFirstOptionClick = () => {
     setFirstButtonClasses(classes.button);
     setSecondButtonClasses(classes.button_inactive)
+    setThirdButtonClasses(classes.button_inactive);
     props.onFirstClick();
   }
 
   const handleSecondOptionClick = () => {
-    setFirstButtonClasses(classes.button_inactive);
     setSecondButtonClasses(classes.button)
+    setFirstButtonClasses(classes.button_inactive);
+    setThirdButtonClasses(classes.button_inactive);
     props.onSecondClick();
+  }
+
+  const handleThirdOptionClick = () => {
+    setThirdButtonClasses(classes.button)
+    setFirstButtonClasses(classes.button_inactive);
+    setSecondButtonClasses(classes.button_inactive);
+    props.onThirdClick();
   }
 
   return (
@@ -33,6 +44,14 @@ const SwitchButton = (props) => {
       >
         {props.secondOption}
       </button>
+      {props.thirdOption &&
+        <button
+          type={props.type || "button"}
+          className={thirdButtonClasses}
+          onClick={handleThirdOptionClick}
+        >
+          {props.thirdOption}
+        </button>}
     </div>
   );
 };

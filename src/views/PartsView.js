@@ -23,6 +23,8 @@ const PartsView = () => {
       <Button size="big" variant="add" onClick={openModalHandler}>
         Create part
       </Button>
+
+      <Parts/>
       {modalIsOpen === true && (
         <Modal
           title="Create new Part"
@@ -31,7 +33,6 @@ const PartsView = () => {
           <CreateNewPart onSuccess={closeModalHandler}/>
         </Modal>
       )}
-      <Parts/>
     </div>
   );
 };

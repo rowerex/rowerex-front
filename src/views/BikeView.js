@@ -79,7 +79,6 @@ const BikeView = () => {
           }}></Button>]}
       />)
     );
-
     const parts = bike.parts.map((part) => (
       <ListElement
         link={`/parts/${part.id}`}
@@ -105,12 +104,12 @@ const BikeView = () => {
           {bike.name}
         </HeaderBig>
         <div className={classes.container}>
-          <section id="partsWithProblems">
+          {partsWithProblems.length > 0 && <section id="partsWithProblems">
             <h3>Parts with active reminders </h3>
             <ul>
               {partsWithProblems}
             </ul>
-          </section>
+          </section>}
           <SwitchButton firstOption="Parts" secondOption="Info" onFirstClick={handlePartsClick}
                         onSecondClick={handleInfoClick}/>
           {bikeDetailsSection === "parts" && <section id="parts">

@@ -95,10 +95,13 @@ const PartView = () => {
                         onSecondClick={handleInfoClick}/>
           {partDetailsSection === "history" &&
             <section id="history">
+              <h3>Part history</h3>
+
               {history} </section>}
 
           {partDetailsSection === "info" &&
             <section id="info">
+              <h3>Part info</h3>
               <Stats stats={[
                 {label: 'Model', value: part.modelName},
                 {label: 'Type', value: part.partType},

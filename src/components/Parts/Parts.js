@@ -5,26 +5,42 @@ import useHttp from "../../hooks/useHttp";
 import ListElement from "../UI/ListElement/ListElement";
 import displayName from "../../services/displayName";
 import SwitchButton from "../UI/Buttons/SwitchButton";
+import Dropdown from "../UI/Input/Dropdown";
 
 const Parts = () => {
   const {parts, partsDispatcher} = useContext(PartsContext)
-  const {isLoading, error, sendRequest} = useHttp();
+  const {isLoading, error, sendRequest: getParts} = useHttp();
+  const {sendRequest: getTypes} = useHttp();
+  const [types, setTypes] = useState([]);
+  const [selectedType, setSelectedType] = useState(null);
+
   const [locationFilter, setLocationFilter] = useState("shelf");
   const [activeRemindersFilter, setActiveRemindersFilter] = useState(false);
+
+  useEffect(() => {
+    getTypes({path: "/types"}, setTypes);
+  }, [])
+  types.unshift({label: "all", value: "all"});
+  const typeOptions = types.map((type) => {
+    const option = {};
+    option.label = type.name;
+    option.value = type.id;
+    return option;
+  })
 
   useEffect(() => {
     const updatePartList = parts => {
       partsDispatcher({type: "FETCH_PARTS_SUCCESS", parts: parts})
     }
     if (parts.invalidated) {
-      sendRequest({path: '/parts'},
+      getParts({path: '/parts'},
         updatePartList
       )
     }
   }, [parts])
 
   const handleShelfClick = () => {
-  setLocationFilter("shelf");
+    setLocationFilter("shelf");
   }
 
   const handleInstalledClick = () => {
@@ -50,36 +66,50 @@ const Parts = () => {
 
   if (locationFilter != null) {
     if (locationFilter === "shelf") {
-      partsToShow = partsToShow.filter((part)=> (part.bikeId === null))
+      partsToShow = partsToShow.filter((part) => (part.bikeId === null))
     }
     if (locationFilter === "installed") {
-      partsToShow = partsToShow.filter((part)=> (part.bikeId != null))
+      partsToShow = partsToShow.filter((part) => (part.bikeId != null))
     }
   }
 
   if (activeRemindersFilter) {
-    partsToShow = partsToShow.filter((part)=> (part.hasAProblem === true))
+    partsToShow = partsToShow.filter((part) => (part.hasAProblem === true))
+  }
+
+  if (selectedType) {
+    partsToShow = partsToShow.filter((part) => (part.partType === selectedType))
   }
 
   const partList = partsToShow.map((part) => (
-      <ListElement
-        link={`/parts/${part.id}`}
-        id={part.id}
-        key={part.id}
-        image={image}
-        title={displayName(part.modelName, part.id)}
-        label={part.partType}
-        problem={part.hasAProblem}
-      />
+    <ListElement
+      link={`/parts/${part.id}`}
+      id={part.id}
+      key={part.id}
+      image={image}
+      title={displayName(part.modelName, part.id)}
+      label={part.partType}
+      problem={part.hasAProblem}
+    />
   ));
-  return <>      <SwitchButton firstOption="On Shelf" secondOption="installed" thirdOption="all "
-                               onFirstClick={handleShelfClick}
-                               onSecondClick={handleInstalledClick} onThirdClick={handleAllClick}/>
-    <input type="checkbox" id="activeReminders" name="activeReminders" checked={activeRemindersFilter} onChange={handleReminderChange}/>
-    <label htmlFor="activeReminders">only with active reminders</label>
-
+  return <>
+    <SwitchButton firstOption="On Shelf"
+                  secondOption="installed"
+                  thirdOption="all "
+                  onFirstClick={handleShelfClick}
+                  onSecondClick={handleInstalledClick}
+                  onThirdClick={handleAllClick}/>
+    <label htmlFor="activeReminders">
+      <input type="checkbox"
+             id="activeReminders"
+             name="activeReminders"
+             checked={activeRemindersFilter}
+             onChange={handleReminderChange}/>
+      only with active reminders
+    </label>
+    <Dropdown value={selectedType} name="Type" options={typeOptions}
+              onChange={event => setSelectedType(event.value)}/>
     <ul>{partList}</ul>
-    ;
   </>
 }
 

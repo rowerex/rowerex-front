@@ -6,6 +6,8 @@ import ListElement from "../UI/ListElement/ListElement";
 import displayName from "../../services/displayName";
 import SwitchButton from "../UI/Buttons/SwitchButton";
 import Dropdown from "../UI/Input/Dropdown";
+import Checkbox from "../UI/Input/Checkbox";
+import classes from "./Parts.module.scss";
 
 const Parts = () => {
   const {parts, partsDispatcher} = useContext(PartsContext)
@@ -18,9 +20,12 @@ const Parts = () => {
   const [activeRemindersFilter, setActiveRemindersFilter] = useState(false);
 
   useEffect(() => {
-    getTypes({path: "/types"}, setTypes);
+    const loadTypes = (types) => {
+      setTypes([{id: "Show all", name: "all"}, ...types])
+    }
+    getTypes({path: "/types"}, loadTypes);
   }, [])
-  types.unshift({label: "all", value: "all"});
+
   const typeOptions = types.map((type) => {
     const option = {};
     option.label = type.name;
@@ -99,17 +104,14 @@ const Parts = () => {
                   onFirstClick={handleShelfClick}
                   onSecondClick={handleInstalledClick}
                   onThirdClick={handleAllClick}/>
-    <label htmlFor="activeReminders">
-      <input type="checkbox"
-             id="activeReminders"
-             name="activeReminders"
-             checked={activeRemindersFilter}
-             onChange={handleReminderChange}/>
-      only with active reminders
-    </label>
-    <Dropdown value={selectedType} name="Type" options={typeOptions}
+    <Checkbox id="activeReminders"
+              name="activeReminders"
+              checked={activeRemindersFilter}
+              onChange={handleReminderChange}> only with active reminders
+    </Checkbox>
+    <Dropdown value={selectedType} name="Type" options={typeOptions} placeholder="Select part type..."
               onChange={event => setSelectedType(event.value)}/>
-    <ul>{partList}</ul>
+    <ul className={classes.list}>{partList}</ul>
   </>
 }
 

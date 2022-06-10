@@ -9,6 +9,7 @@
   margin: 0 24px;
   border: 1px solid $dark-gray;
   border-radius: 4px;
+
   &:focus {
     border: 2px solid $dark-gray;
     outline: none;
@@ -29,9 +30,70 @@
 
 .wrapper {
   position: relative;
-  padding: 30px 0 8px ;
+  padding: 30px 0 8px;
 }
 
 .react-select-container {
   border: none;
+}
+
+.checkboxLabel {
+  @extend .content;
+  display: block;
+  position: relative;
+  padding: 3px 0 0 56px;
+  margin-bottom: 20px;;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @extend .input;
+  width: 24px;
+  height: 24px;
+
+  &:focus {
+    border: 2px solid $dark-gray;
+    outline: none
+  }
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkboxLabel input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkboxLabel .checkmark:after {
+  left: 6px;
+  top: 3px;
+  width: 9px;
+  height: 16px;
+  border: solid $black;
+  border-width: 0 4px 4px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }

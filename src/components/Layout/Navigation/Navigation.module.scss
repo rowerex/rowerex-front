@@ -28,6 +28,7 @@
   letter-spacing: 0.5px;
   color: $white;
   padding: 16px 0 0;
+  min-width: 55px;
 
   &_active {
     @extend .navigationItem;

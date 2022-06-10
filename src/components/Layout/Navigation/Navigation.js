@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as BikeIcon } from "../../../assets/icons/menu-bike.svg";
 import { ReactComponent as PartIcon } from "../../../assets/icons/menu-part.svg";
+import { ReactComponent as HistoryIcon } from "../../../assets/icons/menu-history.svg";
 import { ReactComponent as UserIcon } from "../../../assets/icons/menu-user.svg";
 
 import classes from "./Navigation.module.scss";
@@ -31,6 +32,16 @@ const Navigation = () => {
           to="/parts"
         >
           <PartIcon /> <p>Parts</p>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${classes.navigationItem_active}`
+              : `${classes.navigationItem}`
+          }
+          to="/history"
+        >
+          <HistoryIcon /> <p>History</p>
         </NavLink>
 
         <NavLink

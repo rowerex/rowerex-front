@@ -13,6 +13,7 @@ import RegisterView from "./views/RegisterView";
 import UserVIew from "./views/UserView";
 import TokenContext from "./store/TokenContext";
 import LogoHeader from "./components/Layout/LogoHeader/LogoHeader";
+import HistoryView from "./views/HistoryView";
 
 function App() {
     const {token, setToken} = useContext(TokenContext)
@@ -41,6 +42,7 @@ function App() {
                 <Route exact path="/register" element={token ? <Navigate to={"/"} replace={true}/> : <RegisterView />}/>
                 <Route exact path="/" element={!token ? <Navigate to={"/login"} replace={true}/> : <BikesView/>}/>
                 <Route exact path="/parts" element={!token ? <Navigate to={"/login"} replace={true}/> : <PartsView/>}/>
+                <Route exact path="/history" element={!token ? <Navigate to={"/login"} replace={true}/> : <HistoryView/>}/>
                 <Route exact path="/user" element={!token ? <Navigate to={"/login"} replace={true}/> : <UserVIew/>}/>
                 <Route exact path="/bikes/:bikeId"
                        element={!token ? <Navigate to={"/login"} replace={true}/> : <BikeView/>}/>

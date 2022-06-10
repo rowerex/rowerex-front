@@ -18,9 +18,9 @@
 
 .statsValue {
   @extend .content;
+  padding: 0;
 }
 
 .statsDescription {
-  position: relative;
-  top: -20px;
+ padding-bottom: 16px;
 }

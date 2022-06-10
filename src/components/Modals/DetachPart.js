@@ -35,7 +35,7 @@ const DetachPart = (props) => {
       path: "/parts/" + props.partId + "/retire",
       method: "POST",
       body: {
-        removeTime: dateRef.current.value //@todo retireTime?
+        retireTime: dateRef.current.value
       }
     }, retirePartHandler);
   }

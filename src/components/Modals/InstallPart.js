@@ -45,7 +45,7 @@ const InstallPart = (props) => {
 
     sendPart({
       path: "/parts/" + selectedPartId + "/install/" + props.bikeId,
-      method: "POST",
+      method: "POST", //@todo add 'installTime' in body
     }, installPartHandler);
   }
 

@@ -27,7 +27,7 @@ const InstallPart = (props) => {
       }
       getPartsList({
         method: "GET",
-        path: "/parts",
+        path: "/view/installable-parts",
       }, loadParts);
     }
   }, [getPartsList, partsListIsValid])

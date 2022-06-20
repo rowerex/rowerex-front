@@ -34,8 +34,8 @@ services:
     environment:
       SERVER_NAME: api.velog.local
       STRAVA_REDIRECT_URI: http://app.velog.local/connected
-      STRAVA_CLIENT_ID: 15104
-      STRAVA_CLIENT_SECRET: 93aeeb840e85c19a751c1c22ad7ea9b23f7e9b40
+      STRAVA_CLIENT_ID: 82875
+      STRAVA_CLIENT_SECRET: 3b0c87b5fd44b6988cf6d38ff76ecf759fe15bed
 
   rowerex-database:
     container_name: rowerex-database

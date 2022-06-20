@@ -1,12 +1,18 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import useHttp from "../hooks/useHttp";
 import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Buttons/Button";
 import {useNavigate} from "react-router-dom";
 import classes from "./LoginView.module.scss";
+import UserContext from "../store/UserContext";
+import PartsContext from "../store/PartsContext";
+import BikesContext from "../store/BikesContext";
 
 const LoginView = ({setToken}) => {
   const {isLoading, error, sendRequest: sendLoginRequest} = useHttp();
+  const {user, userDispatcher} = useContext(UserContext);
+  const {partsDispatcher} = useContext(PartsContext);
+  const {bikesDispatcher} = useContext(BikesContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -14,6 +20,9 @@ const LoginView = ({setToken}) => {
 
   const loginUserHandler = (token) => {
     setToken(token);
+    userDispatcher({type: "INVALIDATE_USER"});
+    partsDispatcher({type: "INVALIDATE_PARTS"});
+    bikesDispatcher({type: "INVALIDATE_BIKES"});
     navigate("/");
   }
 

@@ -50,7 +50,7 @@ const ConnectWithStrava = () => {
     return (
         <>
             <p>
-                It looks like you don’t have any bikes. Connect to Strava to import
+                It looks like you're not connected to Strava. Connect to Strava to import
                 your bikes.
             </p>
             {authorizationUrl && <Button size="big" state={buttonState} onClick={handleButtonClick}> {buttonContent}</Button>}

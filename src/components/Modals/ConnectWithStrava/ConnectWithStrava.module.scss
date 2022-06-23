@@ -1,0 +1,9 @@
+.stravaButton {
+  display: block;
+  margin: 16px auto;
+  cursor: pointer;
+  color: #FC4C02;
+  &:hover, :active {
+color: #CC4200
+  }
+}

@@ -6,6 +6,7 @@ import classes from './ListView.module.scss';
 import useHttp from "../hooks/useHttp";
 import PartsContext from "../store/PartsContext";
 import BikesContext from "../store/BikesContext";
+import {ReactComponent as Strava} from "../assets/strava/api_logo_pwrdBy_strava_horiz_gray.svg";
 
 const UserVIew = () => {
   const {isLoading, error, sendRequest: getRides} = useHttp();
@@ -38,7 +39,8 @@ const UserVIew = () => {
         User
       </h2>
       <Button size="big" onClick={handleLogoutClick}>Logout</Button>
-      <Button size="big" onClick={handleImportClick}>Import rides from strava</Button>
+      <Button size="big" onClick={handleImportClick}>Import rides from Strava</Button>
+      <Strava className={classes.strava}/>
     </div>
   );
 };

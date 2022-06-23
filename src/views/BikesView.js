@@ -45,7 +45,7 @@ const BikesView = () => {
       </Button>
       {connectModalIsOpen === true && (
         <Modal
-          title="Connect with Strava"
+          title="Strava permissions"
           onClose={closeConnectModalHandler}>
           <ConnectWithStrava onSuccess={closeConnectModalHandler}/>
         </Modal>

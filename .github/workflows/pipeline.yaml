@@ -25,7 +25,18 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
+        name: Build development image
+        run: >
+          docker buildx build
+          --cache-from=ghcr.io/rowerex/frontend:latest
+          --target development --tag ghcr.io/rowerex/frontend:development .
+      -
+        name: Run linter
+        run: docker run --rm ghcr.io/rowerex/frontend:development npx eslint --no-ignore .
+      -
         name: Build production image
+        # temporary workaround until eslint errors are fixed
+        if: success() || failure()
         run: >
           docker buildx build
           --cache-from=ghcr.io/rowerex/frontend:latest

@@ -2,10 +2,10 @@ FROM node:14-alpine AS development
 ENV NODE_ENV development
 # Add a work directory
 WORKDIR /app
+RUN npm install -g npm@8.3.1
 # Cache and Install dependencies
 COPY package.json .
 COPY package-lock.json .
-RUN npm install -g npm@8.3.1
 RUN npm ci
 # Copy app files
 COPY . .

@@ -5,6 +5,7 @@ WORKDIR /app
 # Cache and Install dependencies
 COPY package.json .
 COPY package-lock.json .
+RUN npm install -g npm@8.3.1
 RUN npm ci
 # Copy app files
 COPY . .

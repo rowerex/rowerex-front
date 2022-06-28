@@ -26,10 +26,14 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build production image
-        run: docker-compose -f prod.yml build
+        run: >
+          docker buildx build
+          --cache-from=ghcr.io/rowerex/frontend:latest
+          --cache-to=type=inline
+          --target prod --tag ghcr.io/rowerex/frontend:latest .
       -
         name: Push to registry
-        run: docker-compose -f prod.yml push app
+        run: docker push ghcr.io/rowerex/frontend:latest
       - 
         name: Push tag to registry
         run: >

@@ -13,6 +13,7 @@ services:
       - 3000:3000
     environment:
       REACT_APP_BACKENDURL: http://api.velog.local/api
+    user: "node:node"
 
   proxy:
     depends_on:

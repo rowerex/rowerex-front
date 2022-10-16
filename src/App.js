@@ -1,4 +1,5 @@
 import {Routes, Route, Navigate} from "react-router-dom";
+import ReactGA from 'react-ga';
 import "./App.scss";
 import Navigation from "./components/Layout/Navigation/Navigation";import BikesView from "./views/BikesView";
 import PartsView from "./views/PartsView";
@@ -13,11 +14,17 @@ import RegisterView from "./views/RegisterView";
 import UserVIew from "./views/UserView";
 import TokenContext from "./store/TokenContext";
 import LogoHeader from "./components/Layout/LogoHeader/LogoHeader";
+const TRACKING_ID = "G-JB23VNT158";
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
     const {token, setToken} = useContext(TokenContext)
     const {user, userDispatcher} = useContext(UserContext);
     const {isLoading, error, sendRequest} = useHttp();
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname + window.location.search);
+    }, []);
 
     useEffect(() => {
         const updateUser = user => {

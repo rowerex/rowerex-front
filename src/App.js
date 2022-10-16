@@ -1,5 +1,5 @@
 import {Routes, Route, Navigate} from "react-router-dom";
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import "./App.scss";
 import Navigation from "./components/Layout/Navigation/Navigation";import BikesView from "./views/BikesView";
 import PartsView from "./views/PartsView";
@@ -23,7 +23,7 @@ function App() {
     const {isLoading, error, sendRequest} = useHttp();
 
     useEffect(() => {
-        ReactGA.pageview(window.location.pathname + window.location.search);
+        ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search });
     }, []);
 
     useEffect(() => {

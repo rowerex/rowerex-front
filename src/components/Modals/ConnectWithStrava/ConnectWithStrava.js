@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
 import useToken from "../../../services/useToken";
 import useHttp from "../../../hooks/useHttp";
 import { ReactComponent as StravaButton } from "../../../assets/strava/btn_strava_connectwith_orange.svg";
 import classes from "./ConnectWithStrava.module.scss";
+const TRACKING_ID = "G-JB23VNT158";
+ReactGA.initialize(TRACKING_ID);
 
 const ConnectWithStrava = () => {
   const { sendRequest: getStravaURL } = useHttp();
@@ -13,6 +16,12 @@ const ConnectWithStrava = () => {
     const enableStravaConnection = (data) => {
       setAuthorizationUrl(data.authorizationUrl);
     };
+      ReactGA.event({
+          category: "Strava",
+          action: "connect-opened",
+          label: "Opened Connect with Strava",
+          transport: "xhr",
+      });
     getStravaURL(
       {
         method: "GET",
@@ -27,7 +36,14 @@ const ConnectWithStrava = () => {
   }, [getStravaURL]);
 
   const handleButtonClick = () => {
-    window.open(authorizationUrl, "_self");
+      ReactGA.event({
+          category: "Strava",
+          action: "connect-clicked",
+          label: "Clicked Connect with Strava button",
+          transport: "xhr",
+      });
+
+      window.open(authorizationUrl, "blank");
   };
 
   return (

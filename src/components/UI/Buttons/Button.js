@@ -36,8 +36,8 @@ const Button = (props) => {
     <button
       type={props.type || "button"}
       className={buttonClasses}
-      onClick={props.onClick}
-      disabled={props.disabled}
+      onClick={props.state === 'disabled' ? () => {} : props.onClick}
+      disabled={props.state === 'disabled'}
     >
       {props.variant === "service" && <ServiceIcon className={classes.icon} />}
       {props.variant === "detach" && <DetachIcon  />}

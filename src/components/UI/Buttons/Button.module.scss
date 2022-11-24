@@ -52,6 +52,11 @@
   &_disabled {
     background: rgba(31, 31, 31, 0.12);
     color: #636363;
+    cursor: not-allowed;
+    &:hover, :active {
+      background: rgba(31, 31, 31, 0.12);
+      color: #636363;
+    }
   }
 
   &_error {

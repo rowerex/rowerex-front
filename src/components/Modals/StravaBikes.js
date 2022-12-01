@@ -4,14 +4,14 @@ import useHttp from "../../hooks/useHttp";
 
 import classes from "./StravaBikes.module.scss";
 import BikesContext from "../../store/BikesContext";
+import StatefulButton from "../UI/Buttons/StatefulButton";
 
 const StravaBikes = (props) => {
     const {isLoading: loadingBikes, error: bikesError, sendRequest: getBikes} = useHttp();
     const {isLoading: loadingAddBike, error: addBikeError, sendRequest: addBike} = useHttp();
     const {bikesDispatcher} = useContext(BikesContext);
 
-    const [bikes, setBikes] = useState({});
-    const [pendingChanges, setPendingChanges] = useState(false);
+    const [bikes, setBikes] = useState([]);
     let bikesList = <p> It seems like you don't have any bikes added to Strava. Add your bikes in Strava app.</p>
 
 
@@ -24,11 +24,10 @@ const StravaBikes = (props) => {
             method: "GET",
             path: "/strava/bikes",
         }, loadBikes);
-        setPendingChanges(false);
-    }, [getBikes, pendingChanges])
+    }, [getBikes])
 
     const handleAddClick = (bikeId) => {
-        addBike({
+        return addBike({
                 method: "POST",
                 path: "/strava/bikes/" + bikeId + '/import',
             }, bikeAdded
@@ -36,7 +35,6 @@ const StravaBikes = (props) => {
     }
 
     const bikeAdded = () => {
-        setPendingChanges(true);
         bikesDispatcher({type: "INVALIDATE_BIKES"});
     }
 
@@ -48,7 +46,7 @@ const StravaBikes = (props) => {
                         {bike.alreadyImported && <Button state="disabled" value={bike.id}
                                                          onClick={() => handleAddClick(bike.id)}>Added</Button>}
                         {!bike.alreadyImported &&
-                            <Button variant="add" value={bike.id} onClick={() => handleAddClick(bike.id)}>Add</Button>}
+                            <StatefulButton variant="add" value={bike.id} onClick={() => handleAddClick(bike.id)} successLabel={"Added"}>Add</StatefulButton>}
                     </li>
                 ))}
             </ul>
@@ -56,10 +54,10 @@ const StravaBikes = (props) => {
     }
     let content = bikesList;
     if (loadingBikes) {
-        content = <p>Loading bikes</p>;
+        content = <p>Loading bikes...</p>;
     }
     if (bikesError) {
-        content = <p>Something went wrong...</p>
+        content = <p>Something went wrong: {bikesError.error}</p>
     }
 
     return (

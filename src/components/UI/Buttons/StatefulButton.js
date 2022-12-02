@@ -13,10 +13,11 @@ const StatefulButton = (props) => {
   let [inProgress, setInProgress] = useState(false);
   let [error, setError] = useState(false);
   let [success, setSuccess] = useState(false);
+  let [disabled, setDisabled] = useState(false);
 
   let buttonClasses = `${classes.button}`+ " " +`${props.classes}` ;
 
-  if (props.state === 'disabled' || success) {
+  if (disabled) {
       buttonClasses += " " + `${classes.button_disabled}`;
   }
   switch (props.size) {
@@ -38,6 +39,8 @@ const StatefulButton = (props) => {
         .then(() => {
           setInProgress(false);
           setSuccess(true);
+          setDisabled(props.disableOnSuccess);
+          setReady(!props.disableOnSuccess)
         });
   }
 
@@ -45,8 +48,8 @@ const StatefulButton = (props) => {
     <button
       type={props.type || "button"}
       className={buttonClasses}
-      onClick={(props.state === 'disabled' || !ready) ? () => {} : () => {action()}}
-      disabled={props.state === 'disabled' || success}
+      onClick={!ready ? () => {} : () => {action()}}
+      disabled={disabled}
     >
       {ready && props.variant === "service" && <ServiceIcon className={classes.icon} />}
       {ready && props.variant === "detach" && <DetachIcon />}
@@ -54,11 +57,16 @@ const StatefulButton = (props) => {
       {ready && props.variant === "retire" && <RetireIcon className={classes.icon} />}
       {ready && props.variant === "close" && <CloseIcon />}
 
-      {inProgress &&  <InProgressAction className={classes.iconRotating + " " + classes.icon} />}
-      {error &&  'error!'}
+      {inProgress && <InProgressAction className={classes.iconRotating + " " + classes.icon} />}
+      {success && !inProgress && '✔ '}
+      {error && 'error!'}
       {success ? props.successLabel : props.children}
     </button>
   );
+};
+
+StatefulButton.defaultProps = {
+  disableOnSuccess: true
 };
 
 export default StatefulButton;

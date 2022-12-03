@@ -19,7 +19,7 @@ const ListElement = (props) => {
         />
       </NavLink>
       <div className={classes.wrapper}>
-        {props.problem ? <BellActive/> : <BellInactive/>}
+        {props.problem ? <BellActive className={classes.bell}/> : <BellInactive className={classes.bell}/>}
 
           <NavLink className={classes.listElementContent}
             exact="true"

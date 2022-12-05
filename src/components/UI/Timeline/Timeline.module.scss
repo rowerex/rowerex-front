@@ -18,20 +18,20 @@
 
   li::before {
     position: absolute;
-    left: -12.5px;
+    left: -14px;
     top: 0;
     content: " ";
     border: 2px solid #696969;
     border-radius: 500%;
-    height: 25px;
-    width: 25px;
+    height: 26px;
+    width: 26px;
     background: white;
   }
 
   li div {
     position: absolute;
-    left: -12.5px;
-    top: 0;
+    left: -13px;
+    top: 1px;
   }
   li div svg{
     color: #636363;

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { ReactComponent as ServiceIcon } from "../../../assets/icons/button-service.svg";
-import { ReactComponent as DetachIcon } from "../../../assets/icons/detachicon.svg";
+import { ReactComponent as DetachIcon } from "../../../assets/icons/button-link.svg";
 import { ReactComponent as AddIcon } from "../../../assets/icons/button-add.svg";
 import { ReactComponent as RetireIcon } from "../../../assets/icons/button-retire.svg";
 import { ReactComponent as CloseIcon } from "../../../assets/icons/close.svg";

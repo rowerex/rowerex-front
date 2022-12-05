@@ -12,6 +12,7 @@ import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
 import Problem from "../components/UI/Problem/Problem";
 import displayName from "../services/displayName";
+import Timeline from "../components/UI/Timeline/Timeline";
 
 const PartView = () => {
   const {partId} = useParams();
@@ -65,8 +66,8 @@ const PartView = () => {
   if (part) {
     console.log(part)
 
-    const history = <Stats stats={part.history.map((event) => (
-      {label: event.date.substring(0,10), value: event.type, description: event.description}
+    const history = <Timeline events={part.history.map((event) => (
+      {date: event.date.substring(0,10), label: event.type, description: event.description}
     ))}/>
 
     let problems = <></>;

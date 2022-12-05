@@ -40,7 +40,7 @@ const ServicePart = (props) => {
   return (
     <form onSubmit={submitHandler}>
       <Input isRequired={true} name="Service date" type="date" ref={serviceDateRef}/>
-      <Input isRequired={true} name="Description" ref={descriptionRef} type="textarea"/>
+      <Input isRequired={true} name="Description" ref={descriptionRef} type="textarea" maxLength={1024}/>
       <Button size="big" type="submit">
         {buttonContent}
       </Button>

@@ -3,7 +3,6 @@ version: "3.8"
 services:
   rowerex-frontend:
     container_name: rowerex-front
-    image: rowerex-front:dev-latest
     build:
       context: .
       target: development

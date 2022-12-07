@@ -64,15 +64,13 @@ const UserVIew = () => {
       <h2>
         Strava
       </h2>
+      <StatefulButton size="big" onClick={handleImportClick} successLabel={"Imported"} disableOnSuccess={false}>Import rides from Strava</StatefulButton>
       {!stravaStatus ? <p>Loading...</p> : <>
         <ul>
-          <li>Import status: {stravaStatus.status}</li>
-          <li>All imported rides: {stravaStatus.importedActivitiesCount}</li>
-          {(stravaStatus.importedActivitiesCount > 0) && <li>Oldest ride: {stravaStatus.oldestActivity.date.substring(0,10)} {stravaStatus.oldestActivity.name}</li>}
-          {(stravaStatus.importedActivitiesCount > 0) && <li>Latest ride: {stravaStatus.latestActivity.date.substring(0,10)} {stravaStatus.latestActivity.name}</li>}
+          <li>All imported rides: <b>{stravaStatus.importedActivitiesCount}</b></li>
+          {(stravaStatus.importedActivitiesCount > 0) && <li>From <b>{stravaStatus.oldestActivity.date.substring(0,10)}</b> to <b>{stravaStatus.latestActivity.date.substring(0,10)}</b></li>}
         </ul>
       </> }
-      <StatefulButton size="big" onClick={handleImportClick} successLabel={"Imported"} disableOnSuccess={false}>Import rides from Strava</StatefulButton>
       <Strava className={classes.strava}/>
     </div>
   );

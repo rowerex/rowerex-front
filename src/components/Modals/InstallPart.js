@@ -67,7 +67,7 @@ const InstallPart = (props) => {
     return (
       <>
         <p>Select a part to install to <strong>{props.bikeName}</strong></p>
-        <Button priority="secondary" size="big" onClick={openCreateNewPartModalHandler}>Create new part </Button>
+        <Button size="big" onClick={openCreateNewPartModalHandler}>Create new part</Button>
         <p>or</p>
         <form>
           <Dropdown name="Select part" isRequired="true" options={partOptions}

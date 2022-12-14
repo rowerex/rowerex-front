@@ -8,7 +8,6 @@ import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
 import Modal from "../components/UI/Modal/Modal";
 import InstallPart from "../components/Modals/InstallPart";
-import DetachPart from "../components/Modals/DetachPart";
 import ListElement from "../components/UI/ListElement/ListElement";
 import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
@@ -19,7 +18,6 @@ const BikeView = () => {
   const {isLoading, error, sendRequest: getBike} = useHttp();
   const [bike, setBike] = useState({});
   const [installPartModalIsOpen, setInstallPartModalIsOpen] = useState(false);
-  const [detachPartModalIsOpen, setDetachPartModalIsOpen] = useState(false);
   const [selectedPart, setSelectedPart] = useState({});
   const [bikeIsValid, setBikeIsValid] = useState(false);
   const [bikeDetailsSection, setBikeDetailsSection] = useState("parts");
@@ -45,14 +43,6 @@ const BikeView = () => {
     setBikeIsValid(false);
   }
 
-  const openDetachPartModalHandler = () => {
-    setDetachPartModalIsOpen(true);
-  }
-  const closeDetachPartModalHandler = () => {
-    setDetachPartModalIsOpen(false);
-    setBikeIsValid(false);
-  }
-
   const handlePartsClick = () => {
     setBikeDetailsSection("parts");
   }
@@ -69,14 +59,6 @@ const BikeView = () => {
         title={displayName(part.modelName, part.id)}
         label={part.type}
         problem={part.hasAProblem}
-        buttons={[
-          <Button variant="detach" size="icon" onClick={() => {
-            setSelectedPart({
-              id: part.id,
-              name: displayName(part.modelName, part.id)
-            })
-            openDetachPartModalHandler();
-          }}></Button>]}
       />)
     );
     const parts = bike.parts.map((part) => (
@@ -87,14 +69,6 @@ const BikeView = () => {
         title={displayName(part.modelName, part.id)}
         label={part.type}
         problem={part.hasAProblem}
-        buttons={[
-          <Button variant="detach" size="icon" onClick={() => {
-            setSelectedPart({
-              id: part.id,
-              name: displayName(part.modelName, part.id)
-            })
-            openDetachPartModalHandler();
-          }}></Button>]}
       />)
     );
 
@@ -142,17 +116,6 @@ const BikeView = () => {
                          onSuccess={closeInstallPartModalHandler}/>
           </Modal>
         )}
-
-        {detachPartModalIsOpen === true && (
-          <Modal
-            title="Detach part"
-            onClose={closeDetachPartModalHandler}
-          >
-            <DetachPart partId={selectedPart.id} partName={selectedPart.name}
-                        onSuccess={closeDetachPartModalHandler}/>
-          </Modal>
-        )}
-
       </>
     );
   } else {

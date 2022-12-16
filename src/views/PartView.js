@@ -5,7 +5,6 @@ import Stats from "../components/UI/Stats/Stats";
 import {useParams} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
 import Button from "../components/UI/Buttons/Button";
-import Modal from "../components/UI/Modal/Modal";
 import ServicePart from "../components/Forms/ServicePart";
 import PartsContext from "../store/PartsContext";
 import classes from "./ElementView.module.scss";
@@ -13,12 +12,16 @@ import SwitchButton from "../components/UI/Buttons/SwitchButton";
 import Problem from "../components/UI/Problem/Problem";
 import displayName from "../services/displayName";
 import Timeline from "../components/UI/Timeline/Timeline";
+import RetirePart from "../components/Modals/RetirePart";
 
 const PartView = () => {
   const {partId} = useParams();
   const {isLoading, error, sendRequest: getPart} = useHttp();
   const [part, setPart] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [servicePartModalOpen, setServicePartModalOpen] = useState(false);
+  const [retireModalOpen, setRetireModalOpen] = useState(false);
+  const [installModalOpen, setInstallModalOpen] = useState(false);
+  const [removeModalOpen, setRemoveModalOpen] = useState(false);
   const [partIsInvalidated, setPartIsInvalidated] = useState(false);
 
   const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
@@ -26,12 +29,21 @@ const PartView = () => {
   const [isRetired, setIsRetired] = useState(false);
   const [partDetailsSection, setPartDetailsSection] = useState("history");
 
-  const closeModalHandler = () => {
-    setModalIsOpen(false);
+  const closeServiceModal = () => {
+    setServicePartModalOpen(false);
     setPartIsInvalidated(true);
   };
-  const openModalHandler = () => {
-    setModalIsOpen(true);
+  const closeRetireModal = () => {
+    setRetireModalOpen(false);
+    setPartIsInvalidated(true);
+  };
+  const closeInstallModal = () => {
+    setInstallModalOpen(false);
+    setPartIsInvalidated(true);
+  };
+  const closeRemoveModal = () => {
+    setRemoveModalOpen(false);
+    setPartIsInvalidated(true);
   };
 
   useEffect(() => {
@@ -90,13 +102,13 @@ const PartView = () => {
             {problems}
           </section>
           <section id={classes.actions}>
-            <Button size="big" variant="service" onClick={openModalHandler}>
+            <Button size="big" variant="service" onClick={() => setServicePartModalOpen(true)}>
               Service
             </Button>
-            <Button size="big" variant="detach" onClick={openModalHandler}>
+            <Button size="big" variant="detach" onClick={() => setInstallModalOpen(true)}>
               Install / Remove
             </Button>
-            <Button size="big" variant="retire" onClick={openModalHandler}>
+            <Button size="big" variant="retire" onClick={() => setRetireModalOpen(true)}>
               Retire
             </Button>
           </section>
@@ -133,17 +145,24 @@ const PartView = () => {
                 {label: 'Total ride time', value: part.totalRideTime + ' / ' + (part.rideTimeDurability ?? '-')},
                 {label: 'Age', value: part.totalTime + ' / ' + (part.timeDurability ?? '-')},
               ]}/>
-              <Button size="big" onClick={retire}>{isRetired ? "Retired" : "Retire"}</Button>
             </section>
           }
         </div>
 
-        {modalIsOpen === true && (
+        {servicePartModalOpen === true && (
           <ServicePart
             modelName={part.modelName}
             partId={part.id}
-            onSuccess={closeModalHandler}
-            onClose={closeModalHandler}
+            onSuccess={closeServiceModal}
+            onClose={closeServiceModal}
+          />
+        )}
+        {retireModalOpen === true && (
+          <RetirePart
+            partName={part.modelName}
+            partId={part.id}
+            onSuccess={closeRetireModal}
+            onClose={closeRetireModal}
           />
         )}
       </>

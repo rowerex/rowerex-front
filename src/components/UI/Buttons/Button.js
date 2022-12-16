@@ -3,7 +3,7 @@ import { ReactComponent as ServiceIcon } from "../../../assets/icons/button-serv
 import { ReactComponent as DetachIcon } from "../../../assets/icons/button-link.svg";
 import { ReactComponent as AddIcon } from "../../../assets/icons/button-add.svg";
 import { ReactComponent as RetireIcon } from "../../../assets/icons/button-retire.svg";
-import {ReactComponent as CloseIcon} from "../../../assets/icons/close.svg";
+import { ReactComponent as CloseIcon } from "../../../assets/icons/close.svg";
 
 import classes from "./Button.module.scss";
 
@@ -40,7 +40,7 @@ const Button = (props) => {
       disabled={props.state === 'disabled'}
     >
       {props.variant === "service" && <ServiceIcon className={classes.icon} />}
-      {props.variant === "detach" && <DetachIcon  />}
+      {props.variant === "detach" && <DetachIcon className={classes.icon} />}
       {props.variant === "add" && <AddIcon className={classes.icon} />}
       {props.variant === "retire" && <RetireIcon className={classes.icon} />}
       {props.variant === "close" && <CloseIcon />}

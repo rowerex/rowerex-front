@@ -93,7 +93,7 @@ const PartView = () => {
     return (
       <>
         <HeaderBig color="black" image={Image} alt="image of a part" label={part.partType}
-                   description={part.bikeName ? `installed to ${part.bikeName}` : `on shelf`}
+                   description={part.bikeName ? `installed to ${part.bikeName}` : (part.status === 'retired' ? 'retired' : 'on shelf')}
                    reminders={part.problems.length} link={part.bikeId === null ? `/parts` : `/bikes/${part.bikeId}`}>
           {displayName(part.modelName, part.id)}
         </HeaderBig>
@@ -101,17 +101,20 @@ const PartView = () => {
           <section id="problems">
             {problems}
           </section>
-          <section id={classes.actions}>
+          {part.status !== 'retired' && (<>
             <Button size="big" variant="service" onClick={() => setServicePartModalOpen(true)}>
               Service
             </Button>
             <Button size="big" variant="detach" onClick={() => setInstallModalOpen(true)}>
-              Install / Remove
+              Install
+            </Button>
+            <Button size="big" variant="detach" onClick={() => setRemoveModalOpen(true)}>
+              Remove
             </Button>
             <Button size="big" variant="retire" onClick={() => setRetireModalOpen(true)}>
               Retire
             </Button>
-          </section>
+          </>)}
           <SwitchButton firstOption="History" secondOption="Info" onFirstClick={handleHistoryClick}
                         onSecondClick={handleInfoClick}/>
           {partDetailsSection === "history" &&

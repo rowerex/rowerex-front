@@ -67,7 +67,7 @@ const PartView = () => {
     console.log(part)
 
     const history = <Timeline events={part.history.map((event) => (
-      {date: event.date.substring(0,10), label: event.type, description: event.description}
+      {date: event.date.substring(0, 10), label: event.type, description: event.description}
     ))}/>
 
     let problems = <></>;
@@ -89,9 +89,17 @@ const PartView = () => {
           <section id="problems">
             {problems}
           </section>
-          <Button size="big" variant="service" onClick={openModalHandler}>
-            Service
-          </Button>
+          <section id={classes.actions}>
+            <Button size="big" variant="service" onClick={openModalHandler}>
+              Service
+            </Button>
+            <Button size="big" variant="detach" onClick={openModalHandler}>
+              Install / Remove
+            </Button>
+            <Button size="big" variant="retire" onClick={openModalHandler}>
+              Retire
+            </Button>
+          </section>
           <SwitchButton firstOption="History" secondOption="Info" onFirstClick={handleHistoryClick}
                         onSecondClick={handleInfoClick}/>
           {partDetailsSection === "history" &&
@@ -131,14 +139,12 @@ const PartView = () => {
         </div>
 
         {modalIsOpen === true && (
-          <Modal
-            title="Service Part"
+          <ServicePart
+            modelName={part.modelName}
+            partId={part.id}
+            onSuccess={closeModalHandler}
             onClose={closeModalHandler}
-          >
-            <p>Enter service data of <strong>{displayName(part.modelName, part.id)}</strong></p>
-            <ServicePart partId={part.id} onSuccess={closeModalHandler}/>
-          </Modal>
-
+          />
         )}
       </>
     );

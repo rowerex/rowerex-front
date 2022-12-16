@@ -2,6 +2,8 @@ import React, {useRef} from "react";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Buttons/Button";
 import useHttp from "../../hooks/useHttp";
+import Modal from "../UI/Modal/Modal";
+import displayName from "../../services/displayName";
 
 const ServicePart = (props) => {
   const {isLoading, error, sendRequest} = useHttp();
@@ -22,7 +24,7 @@ const ServicePart = (props) => {
     };
 
     sendRequest({
-      path: "/parts/"+props.partId+"/service", method: "POST", body: newServiceEntry
+      path: "/parts/" + props.partId + "/service", method: "POST", body: newServiceEntry
     }, serviceHandler);
   };
 
@@ -38,13 +40,19 @@ const ServicePart = (props) => {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <Input isRequired={true} name="Service date" type="date" ref={serviceDateRef}/>
-      <Input isRequired={true} name="Description" ref={descriptionRef} type="textarea" maxLength={1024}/>
-      <Button size="big" type="submit">
-        {buttonContent}
-      </Button>
-    </form>
+    <Modal
+      title="Service Part"
+      onClose={props.onClose}
+    >
+      <p>Enter service data of <strong>{displayName(props.modelName, props.partId)}</strong></p>
+      <form onSubmit={submitHandler}>
+        <Input isRequired={true} name="Service date" type="date" ref={serviceDateRef}/>
+        <Input isRequired={true} name="Description" ref={descriptionRef} type="textarea" maxLength={1024}/>
+        <Button size="big" type="submit">
+          {buttonContent}
+        </Button>
+      </form>
+    </Modal>
   );
 };
 

@@ -107,12 +107,12 @@ const PartView = () => {
             <Button size="big" variant="service" onClick={() => setServicePartModalOpen(true)}>
               Service
             </Button>
-            <Button size="big" variant="detach" onClick={() => setInstallModalOpen(true)}>
+            {part.bikeName === null && (<Button size="big" variant="detach" onClick={() => setInstallModalOpen(true)}>
               Install
-            </Button>
-            <Button size="big" variant="detach" onClick={() => setRemoveModalOpen(true)}>
+            </Button>)}
+            {part.bikeName !== null && (<Button size="big" variant="detach" onClick={() => setRemoveModalOpen(true)}>
               Remove
-            </Button>
+            </Button>)}
             <Button size="big" variant="retire" onClick={() => setRetireModalOpen(true)}>
               Retire
             </Button>

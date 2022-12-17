@@ -4,6 +4,7 @@ import useHttp from "../../hooks/useHttp";
 import PartsContext from "../../store/PartsContext";
 import classes from "./DetachPart.module.scss";
 import Input from "../UI/Input/Input";
+import Modal from "../UI/Modal/Modal";
 
 const DetachPart = (props) => {
   const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
@@ -28,34 +29,19 @@ const DetachPart = (props) => {
     props.onSuccess();
   }
 
-  const retire = (e) => {
-    e.preventDefault();
-
-    sendPart({
-      path: "/parts/" + props.partId + "/retire",
-      method: "POST",
-      body: {
-        retireTime: dateRef.current.value
-      }
-    }, retirePartHandler);
-  }
-
-  const retirePartHandler = () => {
-    partsDispatcher({type: "INVALIDATE_PARTS"});
-    props.onSuccess();
-  }
-
   return (
-    <>
-      <p>Part to detach: <strong>{props.partName} </strong></p>
+    <Modal
+      title="Remove Part"
+      onClose={props.onClose}
+    >
+      <p>Remove <strong>{props.partName}</strong> from <strong>{props.bikeName}</strong></p>
       <form>
         <Input isRequired={true} name="select date" type="date" ref={dateRef}/>
         <div className={classes.sideBySideWrapper}>
-          <Button size="big" type="submit" priority="secondary" variant="retire" onClick={retire}>Retire</Button>
           <Button size="big" type="submit" onClick={putOnShelf}>Put on shelf</Button>
         </div>
       </form>
-    </>
+    </Modal>
   );
 };
 

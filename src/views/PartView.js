@@ -13,6 +13,7 @@ import Problem from "../components/UI/Problem/Problem";
 import displayName from "../services/displayName";
 import Timeline from "../components/UI/Timeline/Timeline";
 import RetirePart from "../components/Modals/RetirePart";
+import DetachPart from "../components/Modals/DetachPart";
 
 const PartView = () => {
   const {partId} = useParams();
@@ -166,6 +167,15 @@ const PartView = () => {
             partId={part.id}
             onSuccess={closeRetireModal}
             onClose={closeRetireModal}
+          />
+        )}
+        {removeModalOpen === true && (
+          <DetachPart
+            partName={part.modelName}
+            bikeName={part.bikeName}
+            partId={part.id}
+            onSuccess={closeRemoveModal}
+            onClose={closeRemoveModal}
           />
         )}
       </>

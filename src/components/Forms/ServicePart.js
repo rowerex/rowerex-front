@@ -3,7 +3,7 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Buttons/Button";
 import useHttp from "../../hooks/useHttp";
 import Modal from "../UI/Modal/Modal";
-import displayName from "../../services/displayName";
+import displayPartName from "../../services/displayPartName";
 
 const ServicePart = (props) => {
   const {isLoading, error, sendRequest} = useHttp();
@@ -44,9 +44,9 @@ const ServicePart = (props) => {
       title="Service Part"
       onClose={props.onClose}
     >
-      <p>Enter service data of <strong>{displayName(props.modelName, props.partId)}</strong></p>
+      <p>Enter service data of <strong>{displayPartName(props.modelName, props.partId)}</strong></p>
       <form onSubmit={submitHandler}>
-        <Input isRequired={true} name="Service date" type="date" ref={serviceDateRef}/>
+        <Input name="Service date" type="date" ref={serviceDateRef}/>
         <Input isRequired={true} name="Description" ref={descriptionRef} type="textarea" maxLength={1024}/>
         <Button size="big" type="submit">
           {buttonContent}

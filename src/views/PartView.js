@@ -10,10 +10,11 @@ import PartsContext from "../store/PartsContext";
 import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
 import Problem from "../components/UI/Problem/Problem";
-import displayName from "../services/displayName";
+import displayPartName from "../services/displayPartName";
 import Timeline from "../components/UI/Timeline/Timeline";
 import RetirePart from "../components/Modals/RetirePart";
 import DetachPart from "../components/Modals/DetachPart";
+import ChooseBikeToInstallPart from "../components/Modals/ChooseBikeToInstallPart";
 
 const PartView = () => {
   const {partId} = useParams();
@@ -96,7 +97,7 @@ const PartView = () => {
         <HeaderBig color="black" image={Image} alt="image of a part" label={part.partType}
                    description={part.bikeName ? `installed to ${part.bikeName}` : (part.status === 'retired' ? 'retired' : 'on shelf')}
                    reminders={part.problems.length} link={part.bikeId === null ? `/parts` : `/bikes/${part.bikeId}`}>
-          {displayName(part.modelName, part.id)}
+          {displayPartName(part.modelName, part.id)}
         </HeaderBig>
         <div className={classes.container}>
           <section id="problems">
@@ -176,6 +177,14 @@ const PartView = () => {
             partId={part.id}
             onSuccess={closeRemoveModal}
             onClose={closeRemoveModal}
+          />
+        )}
+        {installModalOpen === true && (
+          <ChooseBikeToInstallPart
+            partName={part.modelName}
+            partId={part.id}
+            onSuccess={closeInstallModal}
+            onClose={closeInstallModal}
           />
         )}
       </>

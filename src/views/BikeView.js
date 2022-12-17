@@ -11,7 +11,7 @@ import InstallPart from "../components/Modals/InstallPart";
 import ListElement from "../components/UI/ListElement/ListElement";
 import classes from "./ElementView.module.scss";
 import SwitchButton from "../components/UI/Buttons/SwitchButton";
-import displayName from "../services/displayName";
+import displayPartName from "../services/displayPartName";
 
 const BikeView = () => {
   const {bikeId} = useParams();
@@ -56,7 +56,7 @@ const BikeView = () => {
         link={`/parts/${part.id}`}
         image={partImage}
         key={part.id}
-        title={displayName(part.modelName, part.id)}
+        title={displayPartName(part.modelName, part.id)}
         label={part.type}
         problem={part.hasAProblem}
       />)
@@ -66,7 +66,7 @@ const BikeView = () => {
         link={`/parts/${part.id}`}
         image={partImage}
         key={part.id}
-        title={displayName(part.modelName, part.id)}
+        title={displayPartName(part.modelName, part.id)}
         label={part.type}
         problem={part.hasAProblem}
       />)

@@ -6,7 +6,7 @@ import PartsContext from "../../store/PartsContext";
 import Modal from "../UI/Modal/Modal";
 import CreateNewPart from "../Forms/CreateNewPart";
 import Input from "../UI/Input/Input";
-import displayName from "../../services/displayName";
+import displayPartName from "../../services/displayPartName";
 
 const InstallPart = (props) => {
   const {partsListIsLoading, partsListIsError, sendRequest: getPartsList} = useHttp();
@@ -34,7 +34,7 @@ const InstallPart = (props) => {
 
   const partOptions = partsList.map((part) => {
     const option = {};
-    option.label = displayName(part.modelName, part.id);
+    option.label = displayPartName(part.modelName, part.id);
     option.value = part.id;
     return option;
   })

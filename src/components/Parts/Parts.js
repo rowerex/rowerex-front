@@ -3,7 +3,7 @@ import image from "../../assets/icons/list-element-part.svg";
 import PartsContext from "../../store/PartsContext";
 import useHttp from "../../hooks/useHttp";
 import ListElement from "../UI/ListElement/ListElement";
-import displayName from "../../services/displayName";
+import displayPartName from "../../services/displayPartName";
 import SwitchButton from "../UI/Buttons/SwitchButton";
 import Dropdown from "../UI/Input/Dropdown";
 import Checkbox from "../UI/Input/Checkbox";
@@ -92,7 +92,7 @@ const Parts = () => {
       id={part.id}
       key={part.id}
       image={image}
-      title={displayName(part.modelName, part.id)}
+      title={displayPartName(part.modelName, part.id)}
       label={part.partType}
       problem={part.hasAProblem}
     />

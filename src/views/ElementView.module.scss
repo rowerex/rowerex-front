@@ -10,3 +10,9 @@
   min-height: calc(100vh - 375px);
   z-index: 0;
 }
+.actions {
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 20px;
+}

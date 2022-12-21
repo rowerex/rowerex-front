@@ -78,7 +78,6 @@ const PartView = () => {
   }
 
   if (part) {
-    console.log(part)
 
     const history = <Timeline events={part.history.map((event) => (
       {date: event.date.substring(0, 10), label: event.type, description: event.description}
@@ -103,20 +102,20 @@ const PartView = () => {
           <section id="problems">
             {problems}
           </section>
-          {part.status !== 'retired' && (<>
-            <Button size="big" variant="service" onClick={() => setServicePartModalOpen(true)}>
+          {part.status !== 'retired' && (<section id="actions" className={classes.actions}>
+            <Button size="big-inline" variant="service" onClick={() => setServicePartModalOpen(true)}>
               Service
             </Button>
-            {part.bikeName === null && (<Button size="big" variant="detach" onClick={() => setInstallModalOpen(true)}>
+            {part.bikeName === null && (<Button size="big-inline" variant="detach" onClick={() => setInstallModalOpen(true)}>
               Install
             </Button>)}
-            {part.bikeName !== null && (<Button size="big" variant="detach" onClick={() => setRemoveModalOpen(true)}>
+            {part.bikeName !== null && (<Button size="big-inline" variant="detach" onClick={() => setRemoveModalOpen(true)}>
               Remove
             </Button>)}
-            <Button size="big" variant="retire" onClick={() => setRetireModalOpen(true)}>
+            <Button size="big-inline" variant="retire" onClick={() => setRetireModalOpen(true)}>
               Retire
             </Button>
-          </>)}
+          </section>)}
           <SwitchButton firstOption="History" secondOption="Info" onFirstClick={handleHistoryClick}
                         onSecondClick={handleInfoClick}/>
           {partDetailsSection === "history" &&

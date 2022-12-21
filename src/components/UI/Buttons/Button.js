@@ -24,6 +24,9 @@ const Button = (props) => {
     case "big":
       buttonClasses += " " + `${classes.button_big}`;
       break;
+    case "big-inline":
+      buttonClasses += " " + `${classes.button_bigInline}`;
+      break;
     case "fab":
       buttonClasses += " " + `${classes.button_fab}`;
       break;

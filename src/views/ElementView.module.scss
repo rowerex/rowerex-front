@@ -6,7 +6,7 @@
   margin-bottom: 24px;
   position: relative;
   top: -48px;
-  padding: 72px 0 48px;
+  padding: 72px 0 30px;
   min-height: calc(100vh - 407px);
   z-index: 0;
 }
@@ -15,4 +15,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 20px;
+}
+
+section h3 {
+  margin: 30px 0;
 }

@@ -8,7 +8,6 @@ import Button from "../components/UI/Buttons/Button";
 import ServicePart from "../components/Forms/ServicePart";
 import PartsContext from "../store/PartsContext";
 import classes from "./ElementView.module.scss";
-import SwitchButton from "../components/UI/Buttons/SwitchButton";
 import Problem from "../components/UI/Problem/Problem";
 import displayPartName from "../services/displayPartName";
 import Timeline from "../components/UI/Timeline/Timeline";
@@ -29,7 +28,6 @@ const PartView = () => {
   const {sendPartIsLoading, sendPartIsError, sendRequest: sendPart} = useHttp();
   const {partsDispatcher} = useContext(PartsContext)
   const [isRetired, setIsRetired] = useState(false);
-  const [partDetailsSection, setPartDetailsSection] = useState("history");
 
   const closeServiceModal = () => {
     setServicePartModalOpen(false);
@@ -69,12 +67,6 @@ const PartView = () => {
   const retirePartHandler = () => {
     partsDispatcher({type: "INVALIDATE_PARTS"});
     setIsRetired(true);
-  }
-  const handleHistoryClick = () => {
-    setPartDetailsSection("history");
-  }
-  const handleInfoClick = () => {
-    setPartDetailsSection("info");
   }
 
   if (part) {
@@ -116,8 +108,7 @@ const PartView = () => {
               Retire
             </Button>
           </section>)}
-          <SwitchButton firstOption="History" secondOption="Info" onFirstClick={handleHistoryClick}
-                        onSecondClick={handleInfoClick}/>
+
             <section id="history">
               <h3>Part history</h3>
 

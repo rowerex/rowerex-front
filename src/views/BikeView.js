@@ -10,7 +10,6 @@ import Modal from "../components/UI/Modal/Modal";
 import InstallPart from "../components/Modals/InstallPart";
 import ListElement from "../components/UI/ListElement/ListElement";
 import classes from "./ElementView.module.scss";
-import SwitchButton from "../components/UI/Buttons/SwitchButton";
 import displayPartName from "../services/displayPartName";
 
 const BikeView = () => {
@@ -43,13 +42,6 @@ const BikeView = () => {
     setBikeIsValid(false);
   }
 
-  const handlePartsClick = () => {
-    setBikeDetailsSection("parts");
-  }
-  const handleInfoClick = () => {
-    setBikeDetailsSection("info");
-  }
-
   if (bike.parts) {
     const partsWithProblems = bike.parts.filter((part) => (part.hasAProblem === true)).map((part) => (
       <ListElement
@@ -79,32 +71,28 @@ const BikeView = () => {
         </HeaderBig>
         <div className={classes.container}>
           {partsWithProblems.length > 0 && <section id="partsWithProblems">
-            <h3>Parts with active reminders </h3>
             <ul>
               {partsWithProblems}
             </ul>
           </section>}
-          <SwitchButton firstOption="Parts" secondOption="Info" onFirstClick={handlePartsClick}
-                        onSecondClick={handleInfoClick}/>
-          {bikeDetailsSection === "parts" && <section id="parts">
+          <section id="info">
+            <h3>Bike info</h3>
+
+            <Stats stats={[
+              {label: 'Total distance', value: bike.totalDistance},
+              {label: 'Total ride time', value: bike.totalRideTime},
+              {label: 'Ride count', value: bike.totalRides},
+              {label: 'First ride', value: bike.productionDate.substring(0, 10),},
+            ]}/>
+          </section>
+          <section id="parts">
             <Button size="big" variant="add" onClick={openInstallPartModalHandler}>Install part</Button>
             <h3>All parts</h3>
 
             <ul>
               {parts}
             </ul>
-          </section>}
-          {bikeDetailsSection === "info" &&
-            <section id="info">
-              <h3>Bike info</h3>
-
-              <Stats stats={[
-                {label: 'Total distance', value: bike.totalDistance},
-                {label: 'Total ride time', value: bike.totalRideTime},
-                {label: 'Ride count', value: bike.totalRides},
-                {label: 'First ride', value: bike.productionDate.substring(0,10),},
-              ]}/>
-            </section>}
+          </section>
         </div>
 
         {installPartModalIsOpen === true && (

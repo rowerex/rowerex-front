@@ -2,7 +2,7 @@
 
 .timeLineList {
   padding: 0 0 0 30px;
-  margin: 25px 0;
+  margin: 35px 0 25px;
   position: relative;
 
   li {
@@ -14,6 +14,7 @@
   }
   li:last-child {
     border-left: 2px solid white;
+    padding: 0 0 15px 30px;
   }
 
   li::before {

@@ -66,9 +66,9 @@ const InstallPart = (props) => {
 
     return (
       <>
-        <p>Select a part to install to <strong>{props.bikeName}</strong></p>
+        <p>Select part to install to <strong>{props.bikeName}</strong></p>
         <Button size="big" onClick={openCreateNewPartModalHandler}>Create new part</Button>
-        <p>or</p>
+        <p>or choose shelved part</p>
         <form>
           <Dropdown name="Select part" isRequired="true" options={partOptions}
                     onChange={event => setSelectedPartId(event.value)}/>

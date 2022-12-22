@@ -118,13 +118,11 @@ const PartView = () => {
           </section>)}
           <SwitchButton firstOption="History" secondOption="Info" onFirstClick={handleHistoryClick}
                         onSecondClick={handleInfoClick}/>
-          {partDetailsSection === "history" &&
             <section id="history">
               <h3>Part history</h3>
 
-              {history} </section>}
+              {history} </section>
 
-          {partDetailsSection === "info" &&
             <section id="info">
               <h3>Part info</h3>
               <Stats stats={[
@@ -133,24 +131,23 @@ const PartView = () => {
                 {label: 'Description', value: part.name},
                 {
                   label: 'Distance since service',
-                  value: part.distanceSinceService + ' / ' + (part.distanceServiceInterval ?? '-')
+                  value: part.distanceSinceService + (part.distanceServiceInterval ? ' / ' + part.distanceServiceInterval : '')
                 },
                 {
                   label: 'Ride time since service',
-                  value: part.rideTimeSinceService + ' / ' + (part.rideTimeServiceInterval ?? '-')
+                  value: part.rideTimeSinceService + (part.rideTimeServiceInterval ? ' / ' + part.rideTimeServiceInterval : '')
                 },
                 {
                   label: 'Time since service',
-                  value: part.timeSinceLastService + ' / ' + (part.timeServiceInterval ?? '-')
+                  value: part.timeSinceLastService + (part.timeServiceInterval ? ' / ' + part.timeServiceInterval : '')
                 },
               ]}/>
               <Stats stats={[
-                {label: 'Total distance', value: part.totalDistance + ' / ' + (part.distanceDurability ?? '-')},
-                {label: 'Total ride time', value: part.totalRideTime + ' / ' + (part.rideTimeDurability ?? '-')},
-                {label: 'Age', value: part.totalTime + ' / ' + (part.timeDurability ?? '-')},
+                {label: 'Total distance', value: part.totalDistance + (part.distanceDurability ?' / ' + part.distanceDurability : '')},
+                {label: 'Total ride time', value: part.totalRideTime + (part.rideTimeDurability ?' / ' + part.rideTimeDurability : '')},
+                {label: 'Age', value: part.totalTime + (part.timeDurability ?' / ' + part.timeDurability : '')},
               ]}/>
             </section>
-          }
         </div>
 
         {servicePartModalOpen === true && (

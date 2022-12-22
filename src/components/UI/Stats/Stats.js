@@ -7,9 +7,7 @@ const Stats = (props) => {
       {
         props.stats ? props.stats.map((stat, index) => (
           <div key={`timeline-item-${index}`} className={classes.statItem}>
-            <p className={classes.statsLabel}>{stat.label}</p>
-            <p className={classes.statsValue}>{stat.value}</p>
-            <p className={classes.statsDescription}>{stat.description}</p>
+            <div className={classes.statsLabel}>{stat.label}</div><div className={classes.statsValue}>{stat.value}</div>
           </div>
         )) : null
       }

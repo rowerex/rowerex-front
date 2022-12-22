@@ -2,25 +2,18 @@
 
 .stats {
   margin: 24px 48px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
 .statItem {
-  flex: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .statsLabel {
-  @extend .label_gray;
   padding-bottom: 6px;
 }
 
 .statsValue {
   @extend .content;
-}
-
-.statsDescription {
-  position: relative;
-  top: -20px;
+  text-align: right;
 }
